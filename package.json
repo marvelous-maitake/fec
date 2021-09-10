@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "transpile": "npx webpack --config webpack.config.js --mode development -w"
   },
   "repository": {
     "type": "git",
