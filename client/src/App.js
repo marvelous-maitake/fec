@@ -33,20 +33,20 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    const id = this.state.product_id;
-    Promise.all([
-      this.getProductInfo(id),
-      this.getProductStyles(id)
-    ])
-    .then(([product_info, product_styles]) => {
-      console.log('In then...');
-      this.setState({
-        'product_id': product_info.id,
-        product_info,
-        product_styles
-      });
-      return product_info;
-    })
+    // const id = this.state.product_id;
+    // Promise.all([
+    //   this.getProductInfo(id),
+    //   this.getProductStyles(id)
+    // ])
+    // .then(([product_info, product_styles]) => {
+    //   console.log('In then...');
+    //   this.setState({
+    //     'product_id': product_info.id,
+    //     product_info,
+    //     product_styles
+    //   });
+    //   return product_info;
+    // })
 
     // this.getRelatedProducts(this.state.product_id);
     // this.getListReviews({'product_id': this.state.product_id, "sort": "newest"});
@@ -57,7 +57,7 @@ class App extends React.Component {
 
   render = () => (
     <div className="App">
-      <div className='Navbar'>
+      {/*<div className='Navbar'>
         Navbar
       </div>
       <div className='Announcement'>Announcement</div>
@@ -73,7 +73,7 @@ class App extends React.Component {
         </div>
       </div>
       <div className='QandA'>Questions and Answers</div>
-      <div className='RatingsAndReviews' >Ratings and Reviews</div>
+      <div className='RatingsAndReviews' >Ratings and Reviews</div> */}
     </div>
   );
 }
