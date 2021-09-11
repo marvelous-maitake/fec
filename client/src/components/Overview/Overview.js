@@ -1,41 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ImageGallery from './ImageGallery/ImageGallery.js';
+import Details from './Details/Details.js';
+import ProductTile from './ProductTile/ProductTile.js';
+import Wrapper from './Wrapper.js';
 
-export default function Overview({product_info, product_styles}) {
-  if (product_styles.results === undefined) {
-    return (<div className='Overview'>Hold</div>);
-  }
-  const styles = product_styles.results;
-  let styleIndex = 0;
-  for (var i = 0; i < styles.length; i++) {
-    if (styles[i]['default?']) {
-      styleIndex = i;
-    }
-  }
+
+export default function Overview({ product_id, getInfo, getStyles }) {
+
+  const [info, setInfo] = useState([]);
+  const [styles, setStyles] = useState([]);
+  const [currStyle, setCurrStyle] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    Promise.all([
+      getInfo(product_id),
+      getStyles(product_id)
+    ])
+    .then(([info, styles]) => {
+      setInfo(info);
+      setStyles(styles);
+      const def = (s) => {
+        let styleIndex = 0;
+        for (var i = 0; i < s.length; i++) {
+          if (s[i]['default?']) {
+            styleIndex = i;
+            break;
+          }
+        }
+        return styleIndex;
+      };
+      setCurrStyle(def(styles.results));
+      setLoaded(true);
+    });
+  }, []);
 
   return(
     <div className='Overview'>
-      <div className='ImageGallery' style={{
-        backgroundImage: `url(${product_styles.results[styleIndex].photos[0].url})`}}>
-      </div>
-      <div className='ProductTile pad'>
-        <div className='Reviews'>***** <a href='.RatingsAndReviews'>Read all reviews</a></div>
-        <h4>{product_info.category}</h4>
-        <h1>{product_info.name}</h1>
-        <p><strong>STYLE > </strong>{product_styles.results[styleIndex].name}</p>
-        <div className='pad'>
-          {product_styles.results.map((style, index) => {
-            const imageUrl = style.photos[0].thumbnail_url;
-            return (<img
-              key={style.style_id}
-              className='round-thumbnail'
-              src={imageUrl}
-              alt={style.name}
-              ></img>)
-          })}
-        </div>
-      </div>
+      <Wrapper>
+        <ImageGallery photos={loaded ? styles.results[currStyle].photos : [{0: {thumbnail: '', url: ''}}]}/>
+        <ProductTile />
+      </Wrapper>
+      <Details slogan={info.slogan} description={info.description}/>
     </div>
   )
 
 }
-
