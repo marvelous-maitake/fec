@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import {
   getProductInfo,
   getProductStyles,
@@ -12,6 +13,8 @@ import {
 
 import Overview from './components/Overview/Overview.js';
 import Navbar from './components/Navbar/Navbar.js';
+import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews.js';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +39,7 @@ class App extends React.Component {
         </div>
       </div>
       <div className='QandA'>Questions and Answers</div>
-      <div className='RatingsAndReviews' >Ratings and Reviews</div>
+      <RatingsAndReviews id={this.state.product_id} />
     </div>
   );
 }

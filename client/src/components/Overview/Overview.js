@@ -32,13 +32,14 @@ export default function Overview({ product_id, getInfo, getStyles }) {
       };
       setCurrStyle(def(styles.results));
       setLoaded(true);
-    });
+    })
+    .catch((err) => console.log('error in promises', err));
   }, []);
 
   return(
     <div className='Overview'>
       <Wrapper>
-        <ImageGallery photos={loaded ? styles.results[currStyle].photos : [{0: {thumbnail: '', url: ''}}]}/>
+        <ImageGallery photos={loaded ? styles.results[currStyle].photos : [{thumbnail: '', url: ''}]}/>
         <ProductTile />
       </Wrapper>
       <Details slogan={info.slogan} description={info.description}/>
