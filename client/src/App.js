@@ -12,6 +12,7 @@ import {
 
 import Overview from './components/Overview/Overview.js';
 import Details from './components/Details/Details.js';
+import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -33,31 +34,31 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    // const id = this.state.product_id;
-    // Promise.all([
-    //   this.getProductInfo(id),
-    //   this.getProductStyles(id)
-    // ])
-    // .then(([product_info, product_styles]) => {
-    //   console.log('In then...');
-    //   this.setState({
-    //     'product_id': product_info.id,
-    //     product_info,
-    //     product_styles
-    //   });
-    //   return product_info;
-    // })
+    const id = this.state.product_id;
+    Promise.all([
+      this.getProductInfo(id),
+      this.getProductStyles(id)
+    ])
+    .then(([product_info, product_styles]) => {
+      console.log('In then...');
+      this.setState({
+        'product_id': product_info.id,
+        product_info,
+        product_styles
+      });
+      return product_info;
+    })
 
-    // this.getRelatedProducts(this.state.product_id);
-    // this.getListReviews({'product_id': this.state.product_id, "sort": "newest"});
-    // this.getReviewMeta(this.state.product_id);
-    // this.getListQuestions({'product_id': this.state.product_id});
-    // this.getListAnswers(338919);
+    this.getRelatedProducts(this.state.product_id);
+    this.getListReviews({'product_id': this.state.product_id, "sort": "newest"});
+    this.getReviewMeta(this.state.product_id);
+    this.getListQuestions({'product_id': this.state.product_id});
+    this.getListAnswers(338919);
   }
 
   render = () => (
     <div className="App">
-      {/*<div className='Navbar'>
+      <div className='Navbar'>
         Navbar
       </div>
       <div className='Announcement'>Announcement</div>
@@ -73,7 +74,7 @@ class App extends React.Component {
         </div>
       </div>
       <div className='QandA'>Questions and Answers</div>
-      <div className='RatingsAndReviews' >Ratings and Reviews</div> */}
+      <RatingsAndReviews id={this.state.product_id}/>
     </div>
   );
 }
