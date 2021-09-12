@@ -99,9 +99,9 @@ export default function ProductTile({ info, styles, currStyle, setCurrStyle }) {
       <p><strong>Style ></strong> {styles[currStyle].name}</p>
 
       <Thumbnails>
-        {photos.map((url, index) => (
+        {photos.map((url, index) =>
           (<Thumbnail key={index} id={index} src={url} onClick={(e) => handleThumbnailClick(e)}/>)
-        ))}
+        )}
       </Thumbnails>
 
       <form onSubmit={(e) => handleSubmit(e)}>

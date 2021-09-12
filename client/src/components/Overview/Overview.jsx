@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ImageGallery from './ImageGallery/ImageGallery.js';
-import ProductTile from './ProductTile/ProductTile.js';
+import ImageGallery from './ImageGallery/ImageGallery.jsx';
+import ProductTile from './ProductTile/ProductTile.jsx';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
