@@ -32,6 +32,7 @@ module.exports = {
   },
   resolve: {
     modules: ["node_modules",path.resolve(__dirname, "app")],
-    extensions: [".jsx", ".js", ".json", ".css"]
+    extensions: [".jsx", ".js", ".json", ".css"],
+    alias: { react: path.resolve('./node_modules/react') }
   }
 }
