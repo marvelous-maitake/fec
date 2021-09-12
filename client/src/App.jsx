@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import {
   getProductInfo,
   getProductStyles,
@@ -11,9 +10,9 @@ import {
   getListAnswers
 } from './helpers/apiHelpers.js';
 
-import Overview from './components/Overview/Overview.js';
-import Navbar from './components/Navbar/Navbar.js';
-import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews.js';
+import Overview from './components/Overview/Overview';
+import Navbar from './components/Navbar/Navbar';
+import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class App extends React.Component {
           <div>Related Products Carousel</div>
         </div>
         <div className='YourOutfit'>
-          <div>Your Outfit Carousel</div>
+          <div data-testid="App">Your Outfit Carousel</div>
         </div>
       </div>
       <div className='QandA'>Questions and Answers</div>

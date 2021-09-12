@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ImageGallery from './ImageGallery/ImageGallery.js';
-import Details from './Details/Details.js';
-import ProductTile from './ProductTile/ProductTile.js';
-import Wrapper from './Wrapper.js';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Details from './Details/Details';
+import ProductTile from './ProductTile/ProductTile';
+import Wrapper from './Wrapper';
 
 
 export default function Overview({ product_id, getInfo, getStyles }) {
