@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import ImageGallery from './ImageGallery/ImageGallery';
-import Details from './Details/Details';
-import ProductTile from './ProductTile/ProductTile';
-import Wrapper from './Wrapper';
+import ImageGallery from './ImageGallery/ImageGallery.js';
+import ProductTile from './ProductTile/ProductTile.js';
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+  margin: auto;
+  width: 90%;
+  height: 80vh;
+  gap: 4%;
+`;
 
 export default function Overview({ product_id, getInfo, getStyles }) {
 
@@ -11,6 +17,7 @@ export default function Overview({ product_id, getInfo, getStyles }) {
   const [styles, setStyles] = useState([]);
   const [currStyle, setCurrStyle] = useState([]);
   const [loaded, setLoaded] = useState(false);
+
 
   useEffect(() => {
     Promise.all([
@@ -39,10 +46,9 @@ export default function Overview({ product_id, getInfo, getStyles }) {
   return(
     <div className='Overview'>
       <Wrapper>
-        <ImageGallery photos={loaded ? styles.results[currStyle].photos : [{thumbnail: '', url: ''}]}/>
-        <ProductTile />
+        {loaded ? (<ImageGallery photos={styles.results[currStyle].photos}/>) : (<div></div>)}
+        {loaded ? (<ProductTile info={info} styles={styles.results} currStyle={currStyle} setCurrStyle={setCurrStyle}/>) : (<div></div>)}
       </Wrapper>
-      <Details slogan={info.slogan} description={info.description}/>
     </div>
   )
 
