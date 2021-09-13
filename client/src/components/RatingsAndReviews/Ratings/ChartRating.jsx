@@ -31,9 +31,9 @@ export default function ChartRating({ratings}) {
   }
 
   return (
-      ['1', '2', '3', '4', 5].map(star => (
+      ['1', '2', '3', '4', '5'].map(star => (
         <Container>
-        5 Stars
+        {star} Stars
           <OuterBar>
             <InnerBar size={getPercent(ratings, star)}></InnerBar>
           </OuterBar>
