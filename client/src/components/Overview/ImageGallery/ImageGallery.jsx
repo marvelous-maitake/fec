@@ -5,7 +5,7 @@ const Gallery = styled.div`
   flex: 3;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 2%;
-  border-radius: 25px;
+  border-radius: 10px;
   max-height: 80vh;
   width: 65vw;
   height: 80 vw;

@@ -4,11 +4,19 @@ import ProductTile from './ProductTile/ProductTile.jsx';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  margin: auto;
-  width: 90%;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 80vh;
+  grid-template-areas:
+    "ImageGallery ProductTile"
   height: 80vh;
   gap: 4%;
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 4%;
+    border-radius: 10px;
+  }
 `;
 
 export default function Overview({ product_id, getInfo, getStyles }) {
