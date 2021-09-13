@@ -30,39 +30,14 @@ export default function ChartRating({ratings}) {
     return String(Math.round((ratings[rate] || 0) / max * 100)) + '%'
   }
 
-
   return (
-    <>
-      <Container>
+      ['1', '2', '3', '4', 5].map(star => (
+        <Container>
         5 Stars
-        <OuterBar>
-          <InnerBar size={getPercent(ratings, '5')}></InnerBar>
-        </OuterBar>
-      </Container>
-      <Container>
-        4 Stars
-        <OuterBar>
-          <InnerBar size={getPercent(ratings, '4')}></InnerBar>
-        </OuterBar>
-      </Container>
-      <Container>
-        3 Stars
-        <OuterBar>
-          <InnerBar size={getPercent(ratings, '3')}></InnerBar>
-        </OuterBar>
-      </Container>
-      <Container>
-        2 Stars
-        <OuterBar>
-          <InnerBar size={getPercent(ratings, '2')}></InnerBar>
-        </OuterBar>
-      </Container>
-      <Container>
-        1 Stars
-        <OuterBar>
-          <InnerBar size={getPercent(ratings, '1')}></InnerBar>
-        </OuterBar>
-      </Container>
-    </>
+          <OuterBar>
+            <InnerBar size={getPercent(ratings, star)}></InnerBar>
+          </OuterBar>
+        </Container>
+      ))
   )
 }
