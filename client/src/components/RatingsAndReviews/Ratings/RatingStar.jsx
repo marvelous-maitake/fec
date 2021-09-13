@@ -1,13 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledSpan = styled.span`
+const Rating = styled.div`
   font-size: 40px;
+  display: inline;
 `
 
-const StyledS = styled.span`
-  font-size: 15px;
-  height: 50%
+const Total = styled.div`
+  font-size: 80%;
+  display: block;
+`
+
+const Filled = styled.span`
+  color: black;
+`
+
+const Empty = styled.span`
+  color: #dedede;
 `
 
 export default function RatingStar({ratings}) {
@@ -18,15 +27,17 @@ export default function RatingStar({ratings}) {
       total += (Number(k) * Number(ratings[k]))
       count += Number(ratings[k])
     }
-    return total / count;
+    return [total, total / count];
   }
 
-  const average = getAverage(ratings);
+  const [total, average] = getAverage(ratings);
 
   return (
     <div>
-      <StyledSpan>{Math.round(average * 10) / 10}  </StyledSpan>
-      <StyledS>{'★'.repeat(Math.round(average))+'☆'.repeat(5 - Math.round(average))}</StyledS>
+      <Rating>{Math.round(average * 10) / 10}  </Rating>
+      <span><Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
+      <Total><strong>{total}</strong> ratings</Total>
+      </span>
     </div>
   )
 }
