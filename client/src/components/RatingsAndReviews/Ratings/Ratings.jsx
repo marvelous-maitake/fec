@@ -4,7 +4,6 @@ import axios from 'axios';
 import RatingStar from './RatingStar';
 import ChartRating from './ChartRating';
 import Characteristics from './Characteristics'
-import {API_KEY} from '../../../config/config';
 
 const Wrapper = styled.div`
   padding-right: 40px;
@@ -14,7 +13,7 @@ export default function Ratings({id}) {
   const [meta, setMeta] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/meta?product_id=${id}`, {headers: {'content-type': 'application/json', 'authorization': API_KEY}})
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/meta?product_id=${id}`)
       .then(res => setMeta(res.data))
       .catch(err => console.log(err));
   }, [id])
