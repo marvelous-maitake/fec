@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
 
 const addParams = (url, params) => {
-  console.log(params);
+  // console.log(params);
   if (params === undefined) {
     return url;
   }
@@ -13,7 +13,7 @@ const addParams = (url, params) => {
   for (const key in params) {
     url+= key + '=' + params[key] + '&';
   }
-  console.log(url);
+  // console.log(url);
   return url.slice(0, -1);
 }
 

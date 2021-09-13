@@ -44,8 +44,8 @@ class App extends React.Component {
       <div className='QandA'>
         <QAwidget
           product_id={this.state.product_id}
-          getListQuestions={this.getListQuestions}
           getListAnswers={this.getListAnswers}
+          getListQuestions={this.getListQuestions}
         />
       </div>
       <RatingsAndReviews id={this.state.product_id} />

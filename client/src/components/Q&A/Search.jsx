@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
-const Search = () => {
+const Input = styled.input`
+  box-sizing: border-box;
+  width: 90%;
+  border: solid #000000 2px;
+  padding: 5px;
+  margin: 5px;
+`;
+
+const Search = ({ searchInput, handleSearchInput }) => {
   return (
     <div className="qa-search">
       <form className="qa-search-form">
-        <input
+        <Input
           className="qa-search-bar"
           placeholder="HAVE A  QUESTION? SEARCH FOR ANSWERS..."
+          onChange={e => handleSearchInput(e.target.value)}
         />
       </form>
     </div>

@@ -1,7 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful.jsx';
 import Answer from './Answer.jsx';
+
+// const Helpful = styled.helpful`
+//   font-size: 10px;
+// `;
 
 const Question = ({ question }) => {
 
@@ -28,11 +33,6 @@ const Question = ({ question }) => {
           />
         ))}
       </div>
-      {/* <button className="more-answers-btn">
-        <strong>
-          MORE ANSWERED QUESTIONS
-        </strong>
-      </button> */}
     </div>
 
   )
