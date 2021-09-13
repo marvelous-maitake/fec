@@ -39,7 +39,7 @@ const Middle = styled.div`
 `
 
 export default function Istic({type, value}) {
-  const attribitues = {
+  const attributes = {
     Fit: ['Too small', 'Perfect', 'Too large'],
     Length: ['Too short', 'Perfect', 'Too long'],
     Comfort: ['Poor', 'Okay', 'Perfect'],
@@ -54,9 +54,9 @@ export default function Istic({type, value}) {
         <Arrow rating={String(Number(value) / 5 * 100 - 3) + '%'}>▼</Arrow>
       </Container>
       <div>
-        <Left>{attribitues[type][0]}</Left>
-        <Middle>{attribitues[type][1]}</Middle>
-        <Right>{attribitues[type][2]}</Right>
+        <Left>{attributes[type][0]}</Left>
+        <Middle>{attributes[type][1]}</Middle>
+        <Right>{attributes[type][2]}</Right>
       </div>
    </Cont>
   )
