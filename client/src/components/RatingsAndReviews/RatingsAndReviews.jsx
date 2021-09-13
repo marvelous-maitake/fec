@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Ratings from './Ratings/Ratings';
 import Reviews from './Reviews/Reviews';
-import {API_KEY} from '../../config/config';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  font-family: "Open Sans", sans-serif;
+  font-size: 90%;
+  padding: 20px;
+`
+
+const Title = styled.h2`
+  font-weight: normal;
+`
+
 const RatingsDiv = styled.div`
-  width: 33%;
+  width: 25%;
   float: left;
 `;
 
 const ReviewsDiv = styled.div`
-  width: 67%;
+  width: 75%;
   float: right;
 `;
 
 export default function RatingsAndReviews({id}) {
-  const [sortBy, setSortBy] = useState('relevant');
-  const [reviews, setReviews] = useState(null)
-
-  useEffect(() => {
-    axios.get(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews?sort=${sortBy}&product_id=${id}`,
-      {headers: {'content-type': 'application/json', 'authorization': API_KEY}})
-        .then(res => setReviews(res.data.results))
-        .catch(err => console.error(err))
-  }, [sortBy])
-
   return (
-    <>
+    <Wrapper>
+      <Title>RATINGS & REVIEWS</Title>
       <RatingsDiv>
-        {reviews && <Ratings id={id}/>}
+        <Ratings id={id}/>
       </RatingsDiv>
       <ReviewsDiv>
-        {reviews && <Reviews reviews={reviews} sortBy={sortBy} setSortBy={setSortBy}/>}
+        <Reviews id={id}/>
       </ReviewsDiv>
-    </>
+    </Wrapper>
   )
 }

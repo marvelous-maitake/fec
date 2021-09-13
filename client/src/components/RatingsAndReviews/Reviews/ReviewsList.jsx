@@ -3,6 +3,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 import Helpful from './Helpful';
 import StarsGraphic from './StarsGraphic';
+import Images from './Images';
 
 const Review = styled.div`
   border-bottom: solid black 1px;
@@ -11,12 +12,11 @@ const Review = styled.div`
 
 const PostInfo = styled.span`
   float: right;
-  color: grey;
-  font-size: 15px;
+  font-size: 80%;
 `;
 
 const Response = styled.div`
-  background-color: #ddd;
+  background-color: #dedede;
   padding: 3px 12px 3px 12px;
   margin: 5px 0px 20px 0px;
 `
@@ -32,11 +32,12 @@ export default function ReviewsList({sortBy, setSortBy, reviews}) {
         </div>
         <h3>{review.summary}</h3>
         <p>{review.body}</p>
+        <Images review={review} />
         {review.response && <Response>
           <p><strong>Response:</strong></p>
           <p>{review.response}</p>
         </Response>}
-          <Helpful review={review}/>
+          <Helpful review={review} />
       </Review>
     ))}
     </>

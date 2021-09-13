@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  padding-top: 40px;
   font-weight: bold;
+  font-size: 120%
 `
 
-export default function SortForm({reviews, sortBy, setSortBy}) {
+export default function SortForm({reviews, setSortBy}) {
 
   function handleSortChange(e) {
     setSortBy(e.target.value);
