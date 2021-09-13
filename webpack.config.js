@@ -34,5 +34,6 @@ module.exports = {
     modules: ["node_modules",path.resolve(__dirname, "app")],
     extensions: [".jsx", ".js", ".json", ".css"],
     alias: { react: path.resolve('./node_modules/react') }
-  }
+  },
+  devtool: 'source-map'
 }

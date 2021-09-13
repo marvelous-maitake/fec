@@ -18,7 +18,6 @@ export default function Overview({ product_id, getInfo, getStyles }) {
   const [currStyle, setCurrStyle] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
-
   useEffect(() => {
     Promise.all([
       getInfo(product_id),
@@ -43,7 +42,7 @@ export default function Overview({ product_id, getInfo, getStyles }) {
     .catch((err) => console.log('error in promises', err));
   }, []);
 
-  return(
+  return (
     <div className='Overview'>
       <Wrapper>
         {loaded ? (<ImageGallery photos={styles.results[currStyle].photos}/>) : (<div></div>)}
