@@ -1,4 +1,6 @@
 import {API_KEY} from '../config/config.js';
+// import fetch from 'node-fetch';
+import axios from 'axios';
 
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
 
@@ -35,6 +37,7 @@ export async function getListProducts(params) {
 //Params: e.g. (12345)
   //product_id: Required ID of the Product requested
 export async function getProductInfo(product_id) {
+  console.log(fetch.toString());
   let url = API_URL + '/products/' + product_id;
   const response = await fetch(url, {
     method: 'GET',
