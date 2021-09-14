@@ -30,6 +30,7 @@ const Question = ({ question }) => {
               key={answer.id}
             />
         ))}
+        <button><strong>SHOW MORE ANSWERS</strong></button>
       </div>
     </div>
 
