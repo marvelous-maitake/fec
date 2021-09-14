@@ -14,6 +14,7 @@ import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
 import QAwidget from './components/Q&A/QAwidget.jsx';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
+import QAwidget from './components/Q&A/QAwidget';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class App extends React.Component {
       current_selection: {},
       your_outfit: {}
     };
-
     this.getListQuestions = getListQuestions.bind(this);
     this.getListAnswers = getListAnswers.bind(this);
   }
@@ -43,10 +43,17 @@ class App extends React.Component {
       </div>
       <div className='QandA'>
         <QAwidget
+<<<<<<< HEAD
           product_id={this.state.product_id}
           getListAnswers={this.getListAnswers}
           getListQuestions={this.getListQuestions}
         />
+=======
+            product_id={this.state.product_id}
+            getListAnswers={this.getListAnswers}
+            getListQuestions={this.getListQuestions}
+          />
+>>>>>>> origin
       </div>
       <RatingsAndReviews id={this.state.product_id} />
     </div>
