@@ -23,8 +23,6 @@ class App extends React.Component {
       current_selection: {},
       your_outfit: {}
     };
-    this.getListQuestions = getListQuestions.bind(this);
-    this.getListAnswers = getListAnswers.bind(this);
   }
 
   render = () => (
@@ -43,8 +41,8 @@ class App extends React.Component {
       <div className='QandA'>
         <QAwidget
             product_id={this.state.product_id}
-            getListAnswers={this.getListAnswers}
-            getListQuestions={this.getListQuestions}
+            getListAnswers={getListAnswers}
+            getListQuestions={getListQuestions}
           />
       </div>
       <RatingsAndReviews id={this.state.product_id} />
