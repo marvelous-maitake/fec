@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {API_KEY} from '../../../config/config';
 
 
 const Button = styled.button`
@@ -18,13 +17,13 @@ export default function helpful({review}) {
   const [helpfulCount, setCount] = useState(review.helpfulness)
 
   function handleClick(e) {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/${review.review_id}/helpful`, null, {headers: { 'authorization': API_KEY}})
+    axios.put(`/reviews/${review.review_id}/helpful`, null)
       .then(() => setCount(helpfulCount => helpfulCount + 1))
       .catch(err => console.log(err));
   }
 
   function handleReport(e) {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/${review.review_id}/report`, null, {headers: { 'authorization': API_KEY}})
+    axios.put(`/reviews/${review.review_id}/report`, null)
       .then(res => console.log(res))
       .catch(err => console.error(err))
   }

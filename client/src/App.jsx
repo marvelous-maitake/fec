@@ -3,16 +3,6 @@ import { ThemeProvider } from "styled-components";
 
 import { lightTheme, darkTheme, GlobalStyles } from "./theme/theme";
 
-import {
-  getProductInfo,
-  getProductStyles,
-  getRelatedProducts,
-  getListReviews,
-  getReviewMeta,
-  getListQuestions,
-  getListAnswers
-} from './helpers/apiHelpers.js';
-
 import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
@@ -27,6 +17,11 @@ class App extends React.Component {
       your_outfit: {}
     };
     this.toggleTheme = this.toggleTheme.bind(this);
+    this.changeProdId = this.changeProdId.bind(this);
+  }
+
+  changeProdId(product_id) {
+    this.setState({product_id});
   }
 
   toggleTheme() {
@@ -39,8 +34,8 @@ class App extends React.Component {
       <>
         <GlobalStyles />
         <div className="App">
-          <Navbar toggleTheme={this.toggleTheme} />
-          <Overview product_id={this.state.product_id} getInfo={getProductInfo} getStyles={getProductStyles}/>
+          <Navbar toggleTheme={this.toggleTheme} searchFunc={this.changeProdId}/>
+          <Overview product_id={this.state.product_id}/>
           <div className='Carousels'>
             <div>Carousels</div>
             <div className='RelatedProducts'>

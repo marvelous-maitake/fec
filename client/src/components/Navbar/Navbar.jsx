@@ -8,9 +8,13 @@ const Nav = styled.nav`
   z-index: 12;
 `;
 
-function Navbar({ toggleTheme, searchProductId }) {
+function Navbar({ toggleTheme, searchFunc }) {
 
   const [search, setSearch] = useState('');
+
+  const searchProduct = () => {
+    searchFunc(search);
+  }
 
   return (
     <Nav>
@@ -24,7 +28,7 @@ function Navbar({ toggleTheme, searchProductId }) {
           placeholder="Search by Product Id"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button>Search</button>
+        <button onClick={searchProduct}>Search</button>
       </div>
     </Nav>
   );
