@@ -1,12 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Qhelpful = styled.div`
+  font-size: 10px;
+`;
 
 const QuestionHelpful = ({ helpfulness }) => (
-  <div className="question-helpfulness">
-    Helpful?
-    <div className="helpful-yes-btn">
-      Yes({`${helpfulness}`})
-    </div>
-  </div>
+  <Qhelpful className="question-helpfulness">
+    Helpful? Yes({`${helpfulness}`})
+  </Qhelpful>
 )
 
 export default QuestionHelpful;

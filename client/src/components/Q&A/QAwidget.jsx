@@ -20,7 +20,7 @@ const QAwidget = ( props ) => {
         // console.log('Here is the questions: ', questions);
       })
       .catch(console.log)
-  })
+  }, [])
 
   const handleSearchInput = (searchInput) => {
     if (searchInput.length >= 3) {
