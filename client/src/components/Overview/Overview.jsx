@@ -37,7 +37,6 @@ export default function Overview({ product_id }) {
         break;
       }
     }
-    console.log(styleIndex);
     return styleIndex;
   };
 
@@ -64,19 +63,6 @@ export default function Overview({ product_id }) {
     .catch(err => console.log('Error in promises...', err));
   }, [product_id]);
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     getInfo(product_id),
-  //     getStyles(product_id)
-  //   ])
-  //   .then(([info, styles]) => {
-  //     setInfo(info);
-  //     setStyles(styles);
-  //     setCurrStyle(def(styles.results));
-  //     setLoaded(true);
-  //   })
-  //   .catch((err) => console.log('error in promises', err));
-  // }, []);
   return (
     <div className='Overview'>
         {currStyle !== null ? (<Modal show={show} onClose={showModal}/>) : <div></div>}

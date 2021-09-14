@@ -13,7 +13,7 @@ export default function Ratings({id}) {
   const [meta, setMeta] = useState(null);
 
   useEffect(() => {
-    axios.get(`reviews/meta?product_id=${id}`)
+    axios.get(`/reviews/meta?product_id=${id}`)
       .then(res => setMeta(res.data))
       .catch(err => console.log(err));
   }, [id])
@@ -24,8 +24,8 @@ export default function Ratings({id}) {
     return Math.round(((t / (t + f)) * 100));
   }
 
-  if (meta && Object.keys(meta.ratings).length !== 0) {
-    return (
+  return (meta !== null && Object.keys(meta.ratings).length !== 0) ?
+    (
       <Wrapper>
         <RatingStar ratings={meta.ratings}/>
         <br></br>
@@ -34,7 +34,6 @@ export default function Ratings({id}) {
         <ChartRating ratings={meta.ratings}/>
         <Characteristics characteristics={meta.characteristics}/>
       </Wrapper>
-    );
-  }
-  return <h1>No Ratings Yet</h1>
+    ):
+    (<h1>No Ratings Yet</h1>);
 }

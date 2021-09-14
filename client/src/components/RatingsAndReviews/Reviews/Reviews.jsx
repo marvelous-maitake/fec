@@ -7,24 +7,24 @@ import axios from 'axios';
 export default function Reviews({id}) {
   const [sortBy, setSortBy] = useState('relevant');
   const [reviews, setReviews] = useState(null);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [allReviews, setAllReviews] = useState(null);
 
   function getMoreReviews() {
-    const newReviews = allReviews.slice(0, reviews.length + 2);
-    setReviews(newReviews)
+    axios.get(
+      `/reviews?sort=${sortBy}&count=2&page=${page}&product_id=${id}`)
+        .then(res => setReviews([...reviews, ...res.data.results]))
+        .catch(err => console.error(err));
+    setPage(page + 1)
   }
 
   useEffect(() => {
-    setPage(2);
+    setReviews(null);
     axios.get(
       `/reviews?sort=${sortBy}&count=2&page=1&product_id=${id}`)
         .then(res => setReviews(res.data.results))
-        .catch(err => console.error(err))
-    axios.get(
-      `/reviews?sort=${sortBy}&count=100000&page=1&product_id=${id}`)
-        .then(res => setAllReviews(res.data.results))
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
+    setPage(2)
   }, [sortBy])
 
   return (

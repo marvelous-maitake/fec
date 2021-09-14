@@ -15,11 +15,17 @@ const PostInfo = styled.span`
   font-size: 80%;
 `;
 
+const Recommend = styled.div`
+  font-size: 80%;
+  text-align: right;
+  font-weight: bold;
+`
+
 const Response = styled.div`
   background-color: #dedede;
   padding: 3px 12px 3px 12px;
   margin: 5px 0px 20px 0px;
-`
+`;
 
 export default function ReviewsList({sortBy, setSortBy, reviews}) {
   return (
@@ -33,6 +39,7 @@ export default function ReviewsList({sortBy, setSortBy, reviews}) {
         <h3>{review.summary}</h3>
         <p>{review.body}</p>
         <Images review={review} />
+        {review.recommend && <Recommend>✓ I recommend this product</Recommend>}
         {review.response && <Response>
           <p><strong>Response:</strong></p>
           <p>{review.response}</p>
