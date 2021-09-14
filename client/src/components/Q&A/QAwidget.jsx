@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search';
 import QuestionList from './QuestionList';
@@ -7,20 +8,20 @@ const QuestionAndAnswer = styled.div`
  background-color: #F7F6F2;
 `;
 
-const QAwidget = ( props ) => {
+const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
 
   useEffect(() => {
-    props.getListQuestions({page: 1, count: 5, product_id: props.product_id})
+    axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
       .then((response) => {
-        setQuestions(response.results.sort((a, b) => (a.helpness - b.helpness)))
-        // console.log('Here is the questions: ', questions);
+        setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
+        // console.log('Here is the questions: ', response);
       })
       .catch(console.log)
-  }, [])
+  }, [product_id])
 
   const handleSearchInput = (searchInput) => {
     if (searchInput.length >= 3) {
@@ -52,7 +53,7 @@ const QAwidget = ( props ) => {
         />
       </div>
       <QuestionList
-        product_id={props.product_id}
+        product_id={product_id}
         searchInput={searchInput}
         questions={questions}
       />
