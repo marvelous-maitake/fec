@@ -1,4 +1,4 @@
-var API_KEY = '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';
+var API_KEY = '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';
 
 module.exports = { API_KEY };
 
