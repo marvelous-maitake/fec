@@ -65,7 +65,6 @@ const QAwidget = ( { product_id } ) => {
       <button
         className="more-answer-btn"
         onClick={() => setAnswserCounter(answerCounter + 1)}
-        fontSize="10px"
       ><strong>
         LOAD MORE ANSWERS
         </strong>

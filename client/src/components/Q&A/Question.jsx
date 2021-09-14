@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
 
-// const Helpful = styled.helpful`
-//   font-size: 10px;
-// `;
-
 const Question = ({ question, answerCounter }) => {
 
   // create an answer array

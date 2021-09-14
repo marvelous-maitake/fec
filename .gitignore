@@ -1,4 +1,4 @@
 node_modules
 client/dist/bundle.js
-client/src/config
 client/dist/bundle.js.map
+client/src/config/config.js

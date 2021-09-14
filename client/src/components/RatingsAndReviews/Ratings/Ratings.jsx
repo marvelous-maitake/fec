@@ -13,7 +13,7 @@ export default function Ratings({id}) {
   const [meta, setMeta] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/meta?product_id=${id}`)
+    axios.get(`/reviews/meta?product_id=${id}`)
       .then(res => setMeta(res.data))
       .catch(err => console.log(err));
   }, [id])
