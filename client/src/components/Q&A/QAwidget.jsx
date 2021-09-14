@@ -14,7 +14,7 @@ const QAwidget = ( props ) => {
 
 
   useEffect(() => {
-    props.getListQuestions({page: 1, count: 5, product_id: props.product_id})
+    props.getListQuestions({page: 1, count: 10, product_id: props.product_id})
       .then((response) => {
         setQuestions(response.results.sort((a, b) => (a.helpness - b.helpness)))
         // console.log('Here is the questions: ', questions);
