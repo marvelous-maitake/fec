@@ -12,7 +12,9 @@ import {
 
 import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
+import QAwidget from './components/Q&A/QAwidget.jsx';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
+import QAwidget from './components/Q&A/QAwidget';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class App extends React.Component {
       current_selection: {},
       your_outfit: {}
     };
+
   }
 
   render = () => (
@@ -37,7 +40,13 @@ class App extends React.Component {
           <div data-testid="App">Your Outfit Carousel</div>
         </div>
       </div>
-      <div className='QandA'>Questions and Answers</div>
+      <div className='QandA'>
+        <QAwidget
+          product_id={this.state.product_id}
+          getListAnswers={getListAnswers}
+          getListQuestions={getListQuestions}
+        />
+      </div>
       <RatingsAndReviews id={this.state.product_id} />
     </div>
   );
