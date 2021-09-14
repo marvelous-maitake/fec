@@ -11,8 +11,9 @@ const QuestionAndAnswer = styled.div`
 const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
+  const [answerCounter, setAnswserCounter] = useState(1)
   const [searchInput, setSearchInput] = useState('');
-
+  const [counter, setCounter] = useState(2);
 
   useEffect(() => {
     axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
@@ -23,6 +24,7 @@ const QAwidget = ( { product_id } ) => {
       .catch(console.log)
   }, [product_id])
 
+  // handle search input
   const handleSearchInput = (searchInput) => {
     if (searchInput.length >= 3) {
       setSearchInput(searchInput);
@@ -43,6 +45,7 @@ const QAwidget = ( { product_id } ) => {
     console.log('here is the new Q list: ', questions);
   }
 
+
   return (
     <QuestionAndAnswer>
       <h4 className="qa-header">QUESTIONS & ANSWERS</h4>
@@ -56,12 +59,34 @@ const QAwidget = ( { product_id } ) => {
         product_id={product_id}
         searchInput={searchInput}
         questions={questions}
+        counter={counter}
+        answerCounter = {answerCounter}
       />
-      <button className="add-question-btn">
+      <button
+        className="more-answer-btn"
+        onClick={() => setAnswserCounter(answerCounter + 1)}
+        fontSize="10px"
+      ><strong>
+        LOAD MORE ANSWERS
+        </strong>
+      </button>
+      <button
+        className="load-more-questions-btn"
+        onClick={() => setCounter(counter + 1)}
+      >
+        <strong>
+          SHOW MORE QUESTIONS
+        </strong>
+      </button>
+      <button
+        className="add-question-btn"
+      >
         <strong>
           ADD A QUESTION +
         </strong>
       </button>
+
+
     </QuestionAndAnswer>
   )
 }

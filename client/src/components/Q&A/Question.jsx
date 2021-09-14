@@ -8,7 +8,7 @@ import Answer from './Answer';
 //   font-size: 10px;
 // `;
 
-const Question = ({ question }) => {
+const Question = ({ question, answerCounter }) => {
 
   // create an answer array
   let answerKey = Object.keys(question.answers);
@@ -27,7 +27,7 @@ const Question = ({ question }) => {
       </span>
       <div className="answer-list">
         {answerList
-          .slice(0, 2)
+          .slice(0, answerCounter)
           .map(answer => (
           <Answer
             answerObj={answer}
