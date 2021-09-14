@@ -10,9 +10,13 @@ export default function Images({review}) {
   const [image, setImage] = useState(null);
 
   function onClick(e) {
-    setViewer(!e.target.active);
-    e.target.active = !e.target.active;
-    setImage(e.target.src);
+    if (image === e.target.src) {
+      setViewer(false);
+      setImage(null);
+    } else {
+      setViewer(true);
+      setImage(e.target.src)
+    }
   }
 
   return (
