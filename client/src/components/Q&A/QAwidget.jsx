@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search';
 import QuestionList from './QuestionList';
+import AddQuestion from './AddQuestion';
 
 const QuestionAndAnswer = styled.div`
  background-color: #F7F6F2;
@@ -14,12 +15,13 @@ const QAwidget = ( { product_id } ) => {
   const [answerCounter, setAnswserCounter] = useState(1)
   const [searchInput, setSearchInput] = useState('');
   const [counter, setCounter] = useState(2);
+  const [addQuestion, setAddQuestion] = useState(false)
 
   useEffect(() => {
     axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
       .then((response) => {
         setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
-        // console.log('Here is the questions: ', response);
+        console.log(response)
       })
       .catch(console.log)
   }, [product_id])
@@ -31,6 +33,7 @@ const QAwidget = ( { product_id } ) => {
       filterQList(searchInput);
     } else {
       setSearchInput('')
+
     }
   }
 
@@ -41,10 +44,13 @@ const QAwidget = ( { product_id } ) => {
         return qObj
       };
     });
-    setQuestions(newQlist);
-    console.log('here is the new Q list: ', questions);
+    setQuestionsToView(newQlist);
   }
 
+  // handle add question btn click
+  const handleAddQuestionClick = (e) => {
+    setAddQuestion(!addQuestion);
+  }
 
   return (
     <QuestionAndAnswer>
@@ -79,13 +85,13 @@ const QAwidget = ( { product_id } ) => {
       </button>
       <button
         className="add-question-btn"
+        onClick={handleAddQuestionClick}
       >
         <strong>
           ADD A QUESTION +
         </strong>
       </button>
-
-
+      {addQuestion && <AddQuestion />}
     </QuestionAndAnswer>
   )
 }

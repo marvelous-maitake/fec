@@ -36,7 +36,7 @@ const AddQuestion = () => {
           <textarea
             className="question-body"
             value={questionBody}
-            maxlENGTH="1000"
+            maxLength="1000"
             onChange={handleQuestionBodyChange}
           >
           </textarea>
@@ -61,6 +61,7 @@ const AddQuestion = () => {
             onChange={handleEmailChange}
           />
         </p>
+        <button type="submit">Submit</button>
       </form>
     </div>
   )
