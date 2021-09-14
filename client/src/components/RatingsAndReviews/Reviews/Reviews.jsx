@@ -2,7 +2,6 @@ import React, { useEffect, useState} from 'react';
 import ReviewsList from './ReviewsList';
 import SortForm from './SortForm';
 import AddReview from './AddReview';
-import {API_KEY} from '../../../config/config';
 import axios from 'axios';
 
 export default function Reviews({id}) {
@@ -19,13 +18,11 @@ export default function Reviews({id}) {
   useEffect(() => {
     setPage(2);
     axios.get(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews?sort=${sortBy}&count=2&page=1&product_id=${id}`,
-      {headers: {'content-type': 'application/json', 'authorization': API_KEY}})
+      `/reviews?sort=${sortBy}&count=2&page=1&product_id=${id}`)
         .then(res => setReviews(res.data.results))
         .catch(err => console.error(err))
     axios.get(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews?sort=${sortBy}&count=100000&page=1&product_id=${id}`,
-      {headers: {'content-type': 'application/json', 'authorization': API_KEY}})
+      `/reviews?sort=${sortBy}&count=100000&page=1&product_id=${id}`)
         .then(res => setAllReviews(res.data.results))
         .catch(err => console.error(err))
   }, [sortBy])
