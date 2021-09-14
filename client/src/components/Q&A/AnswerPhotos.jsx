@@ -4,13 +4,15 @@ const AnswerPhotos = ( { answer } ) => (
   <div className="answer-photos">
     {answer.photos.map( (photo, index) => {
       return (
-        <div className="photo" key={index}>
+        <span className="photo" key={index}>
           <img
             src={photo}
+            style={{margin: "5px"}}
             height='75'
             width='75'
+
           />
-        </div>
+        </span>
       )
     })}
   </div>
