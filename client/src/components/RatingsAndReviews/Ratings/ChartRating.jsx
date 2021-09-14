@@ -2,50 +2,42 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  padding-bottom: 10px;
+`
+
+const OuterBar = styled.div`
   width: 100%;
-  background-color: #ddd;
+  background-color: #dedede;
 `;
 
-const Bar = styled.div`
-  padding-top: 4px;
-  padding-bottom: 4px;
+const InnerBar = styled.div`
+  padding-top: 3px;
+  padding-bottom: 3px;
   width: ${props => props.size};
-  background-color: #3a3a3a;
+  background-color: black;
 `;
 
 export default function ChartRating({ratings}) {
 
   function getPercent(ratings, rate) {
-    let total = 0;
+    let max = 0;
     for (let k in ratings) {
-      total += Number(ratings[k]);
+      let count = Number(ratings[k])
+      if (count > max) {
+        max = count
+      }
     }
-    return String(Math.round(ratings[rate] / total * 100)) + '%'
+    return String(Math.round((ratings[rate] || 0) / max * 100)) + '%'
   }
 
-
   return (
-    <div style={{paddingRight: '40px'}}>
-      5 Stars
-      <Container>
-        <Bar size={getPercent(ratings, '5')}></Bar>
-      </Container>
-      4 Stars
-      <Container>
-        <Bar size={getPercent(ratings, '4')}></Bar>
-      </Container>
-      3 Stars
-      <Container>
-        <Bar size={getPercent(ratings, '3')}></Bar>
-      </Container>
-      2 Stars
-      <Container>
-        <Bar size={getPercent(ratings, '2')}></Bar>
-      </Container>
-      1 Stars
-      <Container>
-        <Bar size={getPercent(ratings, '1')}></Bar>
-      </Container>
-    </div>
+      ['5', '4', '3', '2', '1'].map(star => (
+        <Container key={star}>
+        {star} Stars
+          <OuterBar>
+            <InnerBar size={getPercent(ratings, star)}></InnerBar>
+          </OuterBar>
+        </Container>
+      ))
   )
 }
