@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
 
+// const Helpful = styled.helpful`
+//   font-size: 10px;
+// `;
+
 const Question = ({ question }) => {
 
   // create an answer array
@@ -25,13 +29,13 @@ const Question = ({ question }) => {
         {answerList
           .slice(0, 2)
           .map(answer => (
-            <Answer
-              answerObj={answer}
-              key={answer.id}
-            />
+          <Answer
+            answerObj={answer}
+            key={answer.id}
+          />
         ))}
-        <button><strong>SHOW MORE ANSWERS</strong></button>
       </div>
+
     </div>
 
   )

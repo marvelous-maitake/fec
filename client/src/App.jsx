@@ -13,7 +13,7 @@ import {
 import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
-import QAwidget from './components/Q&A/QAwidget';
+import QAwidget from './components/Q&A/QAwidget'
 
 class App extends React.Component {
   constructor(props) {

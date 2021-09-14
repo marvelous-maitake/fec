@@ -17,6 +17,9 @@ const QuestionList = ({ product_id, questions, searchInput }) => (
           />
       ))
     }
+    <div>
+      <button><strong>MORE ANSWERS</strong></button>
+    </div>
   </div>
 )
 
