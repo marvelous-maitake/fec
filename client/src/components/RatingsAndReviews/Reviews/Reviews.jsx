@@ -31,7 +31,7 @@ export default function Reviews({id}) {
       <>
         {reviews && <SortForm reviews={reviews} sortBy={sortBy} setSortBy={val => setSortBy(val)} />}
         {reviews && <ReviewsList reviews={reviews} sortBy={sortBy} />}
-        {reviews && <AddReview getMore={getMoreReviews} reviews={reviews} setReviews={setReviews} />}
+        {reviews && <AddReview getMore={getMoreReviews} reviews={reviews} setReviews={setReviews} id={id}/>}
       </>
   )
 }
