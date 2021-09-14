@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const StyledRelatedProductCard = styled.div`
+  height: 200px;
+  width: 150px;
+  overflow: hidden;
 `
 
 const StyledPreviewImage = styled.img`
-  max-height: 200px;
-  max-width: 150px;
+  height: 200px;
+  width: auto;
 `
 
 export default function RelatedProductCard({ product_id }) {

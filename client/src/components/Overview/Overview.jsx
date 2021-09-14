@@ -50,5 +50,4 @@ export default function Overview({ product_id, getInfo, getStyles }) {
       </Wrapper>
     </div>
   )
-
 }
