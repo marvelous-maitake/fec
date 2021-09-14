@@ -20,7 +20,7 @@ const axiosConfig = {
 app.get('/*', (req, res) => {
   axios.get(`${API_URL}${req.url}`, axiosConfig)
   .then((response) => {
-    console.log('GET Success', response.data);
+    console.log('GET Success');
     res.send(response.data);
   })
   .catch((error) => {

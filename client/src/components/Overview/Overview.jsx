@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
+import Modal from './Modal.jsx';
 import ProductTile from './ProductTile/ProductTile.jsx';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -25,6 +26,8 @@ export default function Overview({ product_id }) {
   const [styles, setStyles] = useState(null);
   const [info, setInfo] = useState(null);
   const [currStyle, setCurrStyle] = useState(null);
+  const [show, setShow] = useState(false);
+
 
   const defaultStyle = (s) => {
     let styleIndex = 0;
@@ -36,6 +39,10 @@ export default function Overview({ product_id }) {
     }
     console.log(styleIndex);
     return styleIndex;
+  };
+
+  const showModal = (e) => {
+    setShow(!show);
   };
 
   useEffect(() => {
@@ -53,7 +60,6 @@ export default function Overview({ product_id }) {
       setInfo(info);
       setStyles(styles.results);
       setCurrStyle(defaultStyle(styles));
-
     })
     .catch(err => console.log('Error in promises...', err));
   }, [product_id]);
@@ -73,11 +79,11 @@ export default function Overview({ product_id }) {
   // }, []);
   return (
     <div className='Overview'>
+        {currStyle !== null ? (<Modal show={show} onClose={showModal}/>) : <div></div>}
       <Wrapper>
         {currStyle !== null ? (<ImageGallery photos={styles[currStyle].photos}/>) : <div></div>}
         {currStyle !== null ? (<ProductTile info={info} styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle}/>) : <div></div>}
       </Wrapper>
     </div>
-  )
-
+  );
 }
