@@ -21,7 +21,7 @@ export default function Images({review}) {
 
   return (
     <>
-      {viewer && <Modal src={image} width="500"/>}
+      {viewer && <Modal src={image} width="100%"/>}
       {review.photos.map(photo => (
         <span key={photo.id}>
           <img onClick={onClick} style={{margin: "5px"}} active={false} src={photo.url}  height="50" width="50" />
