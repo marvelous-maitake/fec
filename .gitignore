@@ -1,5 +1,3 @@
 node_modules
 client/dist/bundle.js
 client/src/config
-client/dist/bundle.js.map
-not sure this is work or not
