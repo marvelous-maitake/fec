@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --env=jsdom",
     "server": "nodemon server.js",
-    "transpile": "npx webpack --config webpack.config.js --mode development -w"
+    "transpile": "npx webpack --config webpack.config.js --mode development -w",
+    "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern dist/"
   },
   "repository": {
     "type": "git",
