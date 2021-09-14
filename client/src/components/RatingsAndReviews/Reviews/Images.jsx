@@ -1,4 +1,9 @@
 import React, {useState} from 'react';
+import styled from 'styled-components';
+
+const Modal = styled.img`
+  display: block;
+`
 
 export default function Images({review}) {
   const [viewer, setViewer] = useState(false);
@@ -12,7 +17,7 @@ export default function Images({review}) {
 
   return (
     <>
-      {viewer && <img src={image} width="500"/>}
+      {viewer && <Modal src={image} width="500"/>}
       {review.photos.map(photo => (
         <span key={photo.id}>
           <img onClick={onClick} style={{margin: "5px"}} active={false} src={photo.url}  height="50" width="50" />
