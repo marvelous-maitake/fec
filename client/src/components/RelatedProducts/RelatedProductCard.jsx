@@ -14,12 +14,12 @@ const StyledPreviewImage = styled.img`
 `
 
 export default function RelatedProductCard({ product_id }) {
-  const [loaded, setLoaded] = useState(false);
   const [previewImage, setPreviewImage] = useState(() => '');
   const [name, setName] = useState(() => '');
   const [category, setCategory] = useState(() => '');
   const [price, setPrice] = useState(() => '');
   const [salePrice, setSalePrice] = useState(() => '');
+  const [isLoaded, setIsLoaded] = useState(() => false);
 
   function getStyles(product_id) {
     return axios.get(`/products/${product_id}/styles`);
@@ -40,16 +40,16 @@ export default function RelatedProductCard({ product_id }) {
       setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
       setPrice(styles.data.results[0].original_price);
       setSalePrice(styles.data.results[0].sale_price);
-      setLoaded(true);
+      setIsLoaded(true);
     })
+    .catch((err) => console.error(err));
   }, [product_id]);
 
   return (
     <StyledRelatedProductCard>
-      {loaded ? (<div>{category}<br></br>
+      {isLoaded && <div>{category}<br></br>
       {name}<br></br>
       ${price}<br></br>
-      <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>) :
-      (<div></div>)}
+      <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>}
     </StyledRelatedProductCard>)
 }
