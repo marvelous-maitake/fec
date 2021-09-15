@@ -25,7 +25,7 @@ export default function Reviews({id}) {
         .then(res => setReviews(res.data.results))
         .catch(err => console.error(err));
     setPage(2)
-  }, [sortBy])
+  }, [sortBy, id])
 
   return (
       <>

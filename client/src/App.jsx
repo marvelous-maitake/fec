@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       theme: 'dark',
-      product_id: 48432,
+      product_id: 48445,
       current_selection: {},
       your_outfit: {}
     };

@@ -15,19 +15,14 @@ export default function IsticsForm({istics}) {
   return (
     <>
     {Object.keys(istics).map(istic => (
-      <div key={istics[istic].id} >
-        <legend>{istic}</legend>
-        <input type="radio" name="istic" id="5"></input>
-        <label htmlFor="5">{attributes[istic][0]}</label>
-        <input type="radio" name="istic" id="4"></input>
-        <label htmlFor="5">{attributes[istic][1]}</label>
-        <input type="radio" name="istic" id="3"></input>
-        <label htmlFor="3">{attributes[istic][2]}</label>
-        <input type="radio" name="istic" id="2"></input>
-        <label htmlFor="5">{attributes[istic][3]}</label>
-        <input type="radio" name="istic" id="1"></input>
-        <label htmlFor="1">{attributes[istic][4]}</label>
-      </div>
+      <>
+      <h2>{istic}</h2>
+      <select name={istic}>
+        {attributes[istic].map(attr => (
+          <option value={attr}>{attr}</option>
+        ))}
+      </select>
+      </>
     ))}
     </>
   )
