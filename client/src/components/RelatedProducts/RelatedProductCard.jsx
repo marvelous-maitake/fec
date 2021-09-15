@@ -14,31 +14,42 @@ const StyledPreviewImage = styled.img`
 `
 
 export default function RelatedProductCard({ product_id }) {
-  const [previewImage, setPreviewImage] = useState(() => {
-    return '';
-  })
+  const [loaded, setLoaded] = useState(false);
+  const [previewImage, setPreviewImage] = useState(() => '');
+  const [name, setName] = useState(() => '');
+  const [category, setCategory] = useState(() => '');
+  const [price, setPrice] = useState(() => '');
+  const [salePrice, setSalePrice] = useState(() => '');
 
-  function getProductImages(product_id) {
-    axios.get(`/products/${product_id}/styles`)
-    .then(results => {
-      setPreviewImage(results.data.results[0].photos[0].thumbnail_url);
-    });
+  function getStyles(product_id) {
+    return axios.get(`/products/${product_id}/styles`);
+  }
+
+  function getProductInfo(product_id) {
+    return axios.get(`/products/${product_id}`);
   }
 
   useEffect(() => {
-    // get category
-    // get name
-    // get price
-    // get star rating
-    // get product images
-    getProductImages(product_id);
-  }, []);
+    Promise.all([
+      getProductInfo(product_id),
+      getStyles(product_id)
+    ])
+    .then(([info, styles]) => {
+      setCategory(info.data.category);
+      setName(info.data.name);
+      setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
+      setPrice(styles.data.results[0].original_price);
+      setSalePrice(styles.data.results[0].sale_price);
+      setLoaded(true);
+    })
+  }, [product_id]);
 
   return (
     <StyledRelatedProductCard>
-      Product #{product_id}<br></br>
-      <StyledPreviewImage src={previewImage}></StyledPreviewImage>
-    </StyledRelatedProductCard>
-  )
-
+      {loaded ? (<div>{category}<br></br>
+      {name}<br></br>
+      ${price}<br></br>
+      <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>) :
+      (<div></div>)}
+    </StyledRelatedProductCard>)
 }
