@@ -8,7 +8,9 @@ import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import RelatedProductsCarousel from './components/RelatedProducts/RelatedProductsCarousel';
-import QAwidget from './components/Q&A/QAwidget'
+import QAwidget from './components/Q&A/QAwidget';
+
+import { ProductContext } from "./contexts/ProductContext";
 
 function App() {
   const [theme, setTheme] = useState(() => 'dark');
@@ -30,6 +32,7 @@ function App() {
       <>
         <GlobalStyles />
         <div className="App">
+          <ProductContext.Provider value={{ productId }}>
           <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
           <RelatedProducts product_id={productId} />
@@ -44,6 +47,7 @@ function App() {
               />
           </div>
           <RatingsAndReviews id={productId} />
+          </ProductContext.Provider>
         </div>
       </>
     </ThemeProvider>

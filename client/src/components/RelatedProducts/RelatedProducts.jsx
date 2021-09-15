@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ProductContext } from '../../contexts/ProductContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import RelatedProductCard from './RelatedProductCard';
@@ -11,24 +12,26 @@ const StyledRelatedProducts = styled.div`
   justify-content: space-evenly;
 `
 
-export default function RelatedProducts({ product_id }) {
+function RelatedProducts() {
+  const { productId } = useContext(ProductContext);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState(() => {
     return [];
   });
 
-  function getRelatedProducts(product_id) {
-    return axios.get(`/products/${product_id}/related`)
+  function getRelatedProducts(productId) {
+    return axios.get(`/products/${productId}/related`)
   }
 
   useEffect(() => {
-    getRelatedProducts(product_id)
+    getRelatedProducts(productId)
     .then(results => {
       setRelatedProducts(results.data);
       setIsLoaded(true);
     })
     .catch(err => console.error(err));
-  }, [product_id]);
+  }, [productId]);
 
   return (
     <div>
@@ -41,3 +44,5 @@ export default function RelatedProducts({ product_id }) {
     </div>
   )
 }
+
+export default RelatedProducts;
