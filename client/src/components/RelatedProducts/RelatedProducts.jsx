@@ -12,7 +12,7 @@ const StyledRelatedProducts = styled.div`
 `
 
 export default function RelatedProducts({ product_id }) {
-  const [loaded, setLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState(() => {
     return [];
   });
@@ -25,7 +25,7 @@ export default function RelatedProducts({ product_id }) {
     getRelatedProducts(product_id)
     .then(results => {
       setRelatedProducts(results.data);
-      setLoaded(true);
+      setIsLoaded(true);
     })
     .catch(err => console.error(err));
   }, [product_id]);
@@ -34,9 +34,9 @@ export default function RelatedProducts({ product_id }) {
     <div>
       <h1>Related Products</h1>
       <StyledRelatedProducts>
-        {loaded ? relatedProducts.map((product) => (
+        {isLoaded && relatedProducts.map((product) => (
           <RelatedProductCard key={product} product_id={product} />
-        )) : (<div></div>)}
+        ))}
       </StyledRelatedProducts>
     </div>
   )

@@ -28,7 +28,6 @@ export default function Overview({ product_id }) {
   const [currStyle, setCurrStyle] = useState(null);
   const [show, setShow] = useState(false);
 
-
   const defaultStyle = (s) => {
     let styleIndex = 0;
     for (var i = 0; i < s.length; i++) {
