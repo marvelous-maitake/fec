@@ -35,7 +35,7 @@ function App() {
           <ProductContext.Provider value={{ productId }}>
           <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
-          <RelatedProducts product_id={productId} />
+          <RelatedProducts />
             <div className='YourOutfit'>
               <div data-testid="App">Your Outfit</div>
             </div>
