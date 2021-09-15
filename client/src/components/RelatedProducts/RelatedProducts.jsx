@@ -9,7 +9,6 @@ const StyledRelatedProducts = styled.div`
   margin: 20px;
   display: flex;
   justify-content: space-evenly;
-  align-items: baseline;
 `
 
 export default function RelatedProducts({ product_id }) {
@@ -37,7 +36,7 @@ export default function RelatedProducts({ product_id }) {
       <StyledRelatedProducts>
         {loaded ? relatedProducts.map((product) => (
           <RelatedProductCard key={product} product_id={product} />
-        )) : (<div>Loading...</div>)}
+        )) : (<div></div>)}
       </StyledRelatedProducts>
     </div>
   )

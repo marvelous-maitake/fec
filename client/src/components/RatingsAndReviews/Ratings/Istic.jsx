@@ -21,21 +21,21 @@ const Right = styled.div`
   width: 33%;
   float: right;
   text-align: right;
-  font-size: 14px;
+  font-size: 80%;
 `
 
 const Left = styled.div`
   width: 33%;
   float: left;
   text-align: left;
-  font-size: 14px;
+  font-size: 80%;
 `
 
 const Middle = styled.div`
   width: 33%;
   float: left;
   text-align: center;
-  font-size: 14px;
+  font-size: 80%;
 `
 
 export default function Istic({type, value}) {

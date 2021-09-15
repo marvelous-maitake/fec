@@ -2,14 +2,38 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ProdTile = styled.div`
-  flex: 2;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  padding: 2%;
-  border-radius: 25px;
+  padding: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
-const Form = styled.form`
+const Thumbnails = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2%;
+
+  .current-style {
+    border: solid green 3px;
+  }
+`;
+
+const Thumbnail = styled.div`
+  border-radius: 50%;
+  width: 5vw;
+  height: 5vw;
+  cursor: pointer;
+  background-image: url(${props => props.src});
+  background-size: cover;
+`;
+
+const CartForm = styled.div`
   display: flex;
+  gap 2%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  justify-content: center;
   align-items: center;
 `;
 
@@ -21,35 +45,9 @@ const Select = styled.select`
   font-size: 14px;
 `;
 
-const Thumbnails = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 2%;
-  margin: 4%;
+const CartBtn = styled.button`
+  margin: auto;
 `;
-
-const ActiveThumbnail = styled.div`
-  height: 80px;
-  border-radius: 50%;
-  float: left;
-  border: solid green 2px;
-  width: 80px;
-  cursor: pointer;
-  background-image: url(${props => props.src});
-  background-size: cover;
-`;
-
-const Thumbnail = styled.div`
-  height: 80px;
-  border-radius: 50%;
-  float: left;
-  width: 80px;
-  cursor: pointer;
-  background-image: url(${props => props.src});
-  background-size: cover;
-`;
-
 export default function ProductTile({ info, styles, currStyle, setCurrStyle }) {
   const [sale, setSale] = useState(styles[currStyle].sale_price ? true : false);
   const [price, setPrice] = useState(sale ? styles[currStyle].sale_price : styles[currStyle].original_price);
@@ -88,23 +86,29 @@ export default function ProductTile({ info, styles, currStyle, setCurrStyle }) {
   }
 
   return (
-    <ProdTile>
-      <p><a href='#RatingsAndReviews'>Read all Reviews</a></p>
-      <p>CATEGORY > <em>{info.category}</em></p>
-      <h1>{info.name}</h1>
-      <p>{info.description}</p>
-      {sale ?
-      (<p><strong style={{color: 'red'}}>${price}</strong> <strike>${styles[currStyle].original_price}</strike></p>) :
-      (<p>${price}</p>) }
-      <p><strong>Style ></strong> {styles[currStyle].name}</p>
+    <ProdTile className='card'>
+      <div className='ProdText card'>
+        <p><a href='#RatingsAndReviews'>Read all Reviews</a></p>
+        <p>CATEGORY > <em>{info.category}</em></p>
+        <h1>{info.name}</h1>
+        <p>{info.description}</p>
+        {sale ?
+        (<p><strong style={{color: 'red'}}>${price}</strong> <strike>${styles[currStyle].original_price}</strike></p>) :
+        (<p>${price}</p>) }
 
-      <Thumbnails>
-        {photos.map((url, index) =>
-          (<Thumbnail key={index} id={index} src={url} onClick={(e) => handleThumbnailClick(e)}/>)
-        )}
-      </Thumbnails>
+      </div>
+      <div className='card'>
+        <div><strong>Style ></strong> {styles[currStyle].name}</div>
+        <Thumbnails>
+          {photos.map((url, index) => (
+            index === currStyle ?
+            (<Thumbnail className='current-style' key={index} id={index} src={url} onClick={(e) => handleThumbnailClick(e)}/>)
+            : (<Thumbnail key={index} id={index} src={url} onClick={(e) => handleThumbnailClick(e)}/>)
+          ))}
+        </Thumbnails>
+      </div>
 
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <CartForm className='card' onSubmit={(e) => handleSubmit(e)}>
         <Select id='sizeSelect' onChange={(e) => handleSize(e)} required>
           <option value="">Select Size</option>
           {Object.keys(skus).map((sku) =>
@@ -116,8 +120,8 @@ export default function ProductTile({ info, styles, currStyle, setCurrStyle }) {
             return(<option value={x} key={x}>{x}</option>);
           })}
         </Select>}
-        <button type='submit'>Add to Cart</button>
-      </form>
+        <CartBtn type='submit'>Add to Cart</CartBtn>
+      </CartForm>
     </ProdTile>
    );
 }
