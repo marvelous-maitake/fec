@@ -6,6 +6,8 @@ import { lightTheme, darkTheme, GlobalStyles } from "./theme/theme";
 import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
+import RelatedProducts from './components/RelatedProducts/RelatedProducts';
+import RelatedProductsCarousel from './components/RelatedProducts/RelatedProductsCarousel';
 import QAwidget from './components/Q&A/QAwidget'
 
 class App extends React.Component {
@@ -37,15 +39,10 @@ class App extends React.Component {
         <div className="App">
           <Navbar toggleTheme={this.toggleTheme} searchFunc={this.changeProdId}/>
           <Overview product_id={this.state.product_id}/>
-          <div className='Carousels'>
-            <div>Carousels</div>
-            <div className='RelatedProducts'>
-              <div>Related Products Carousel</div>
-            </div>
+          <RelatedProducts product_id={this.state.product_id} />
             <div className='YourOutfit'>
-              <div data-testid="App">Your Outfit Carousel</div>
+              <div data-testid="App">Your Outfit</div>
             </div>
-          </div>
           <div className='QandA'>
             <QAwidget
                 product_id={this.state.product_id}
