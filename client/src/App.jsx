@@ -10,7 +10,7 @@ import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import RelatedProductsCarousel from './components/RelatedProducts/RelatedProductsCarousel';
 import QAwidget from './components/Q&A/QAwidget';
 
-import { ProductContext } from "./contexts/ProductContext";
+import { SharedContext } from "./contexts/SharedContext";
 
 function App() {
   const [theme, setTheme] = useState(() => 'dark');
@@ -32,7 +32,7 @@ function App() {
       <>
         <GlobalStyles />
         <div className="App">
-          <ProductContext.Provider value={{ productId }}>
+          <SharedContext.Provider value={{ productId }}>
           <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
           <RelatedProducts />
@@ -47,7 +47,7 @@ function App() {
               />
           </div>
           <RatingsAndReviews id={productId} />
-          </ProductContext.Provider>
+          </SharedContext.Provider>
         </div>
       </>
     </ThemeProvider>

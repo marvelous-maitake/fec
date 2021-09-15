@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ProductContext } from '../../contexts/ProductContext';
+import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import RelatedProductCard from './RelatedProductCard';
@@ -13,7 +13,7 @@ const StyledRelatedProducts = styled.div`
 `
 
 function RelatedProducts() {
-  const { productId } = useContext(ProductContext);
+  const { productId } = useContext(SharedContext);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState(() => {
