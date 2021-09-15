@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-function Navbar() {
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  z-index: 12;
+`;
+
+function Navbar({ toggleTheme, searchFunc }) {
+
+  const [search, setSearch] = useState('');
+
+  const searchProduct = () => {
+    searchFunc(search);
+  }
+
   return (
-    <div className='Navbar'>
-      Navbar
-    </div>
+    <Nav>
+      <div>
+        Logo <button onClick={() => toggleTheme()}>Toggle Theme</button>
+      </div>
+      <div>
+        <input
+          type="text"
+          id="search"
+          placeholder="Search by Product Id"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button onClick={searchProduct}>Search</button>
+      </div>
+    </Nav>
   );
 }
 
