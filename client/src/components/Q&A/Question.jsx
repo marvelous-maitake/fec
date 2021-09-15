@@ -3,8 +3,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
+import AddAnswer from './AddAnswer';
 
 const Question = ({ question, answerCounter }) => {
+  const [addAnswer, setAddAnswer] = useState(false);
 
   // create an answer array
   let answerKey = Object.keys(question.answers);
@@ -19,6 +21,11 @@ const Question = ({ question, answerCounter }) => {
         </strong>
         <QuestionHelpful
           helpfulness={question.question_helpfulness}
+          />
+        <button onClick={() => setAddAnswer(true)}>Add Answer</button>
+        <AddAnswer
+          isPopup={addAnswer}
+          onClose={() => {setAddAnswer(false)}}
         />
       </span>
       <div className="answer-list">
@@ -31,7 +38,6 @@ const Question = ({ question, answerCounter }) => {
           />
         ))}
       </div>
-
     </div>
 
   )

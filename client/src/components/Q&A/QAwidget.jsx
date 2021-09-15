@@ -9,6 +9,10 @@ const QuestionAndAnswer = styled.div`
  background-color: #F7F6F2;
 `;
 
+const Mdoal = styled.div`
+  background-color: #F9F9F9;
+`;
+
 const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
@@ -21,7 +25,7 @@ const QAwidget = ( { product_id } ) => {
     axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
       .then((response) => {
         setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
-        console.log(response)
+        // console.log(response)
       })
       .catch(console.log)
   }, [product_id])
@@ -44,12 +48,7 @@ const QAwidget = ( { product_id } ) => {
         return qObj
       };
     });
-    setQuestionsToView(newQlist);
-  }
-
-  // handle add question btn click
-  const handleAddQuestionClick = (e) => {
-    setAddQuestion(!addQuestion);
+    setQuestions(newQlist);
   }
 
   return (
@@ -85,14 +84,20 @@ const QAwidget = ( { product_id } ) => {
       </button>
       <button
         className="add-question-btn"
-        onClick={handleAddQuestionClick}
+        onClick={ () => setAddQuestion(true)}
       >
         <strong>
           ADD A QUESTION +
         </strong>
       </button>
-      {addQuestion && <AddQuestion />}
+      <AddQuestion
+        open={addQuestion}
+        onClose={() => {setAddQuestion(false)}}
+      />
+
+
     </QuestionAndAnswer>
+
   )
 }
 

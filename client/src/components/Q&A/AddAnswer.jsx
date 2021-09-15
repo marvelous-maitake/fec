@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const AddQuestionModal = styled.div`
+const AddAnswerModal = styled.div`
   position:fixed;
   height: 50vh;
   width: 50vh;
@@ -14,13 +14,12 @@ const AddQuestionModal = styled.div`
   border-radius: 30px;
 `;
 
-const AddQuestion = ({ open, onClose }) => {
-  console.log(open)
-  const [questionBody, setQuestionBody] = useState('');
+const AddAnswer = ({ isPopup, onClose }) => {
+  const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleQuestionBodyChange = (e) => {
+  const handleAnswerBodyChange = (e) => {
     setQuestionBody(e.target.value);
   }
 
@@ -41,8 +40,8 @@ const AddQuestion = ({ open, onClose }) => {
 
   // check validation before submit
   const validationCheck = () => {
-    if (!questionBody) {
-      alert('Please Provide Your Question');
+    if (!answerBody) {
+      alert('Please Provide Your Answer');
 
     } else if (!nickname) {
       alert('Please Provide Your Nickname')
@@ -55,24 +54,24 @@ const AddQuestion = ({ open, onClose }) => {
     }
   }
 
-  if (!open) return null
+  if (!isPopup) return null;
   return (
-    <AddQuestionModal>
-      <div className="add-question-modal">
+    <AddAnswerModal>
+      <div className="add-answer-modal">
         <h1 className="form-header">
-          Ask Your Question
+          Submit Your Answer
         </h1>
         <form
-          className="add-question-form"
+          className="add-answer-form"
           onSubmit={handleFormSubmit}
         >
-          <p className="question-text">
-            <strong>Your Question</strong><span className="req-star">*</span>
+          <p className="answer-text">
+            <strong>Your Answer</strong><span className="req-star">*</span>
             <textarea
-              className="question-body"
-              value={questionBody}
+              className="answer-body"
+              value={answerBody}
               maxLength="1000"
-              onChange={handleQuestionBodyChange}
+              onChange={handleAnswerBodyChange}
             >
             </textarea>
           </p>
@@ -100,8 +99,8 @@ const AddQuestion = ({ open, onClose }) => {
         </form>
         <button onClick={onClose}>Close</button>
       </div>
-    </AddQuestionModal>
-  )
-};
+    </AddAnswerModal>
+  );
+}
 
-export default AddQuestion;
+export default AddAnswer;
