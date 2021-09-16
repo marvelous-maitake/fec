@@ -4,7 +4,17 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const StyledRelatedProductCard = styled.div`
-  text-align:center;
+  text-align: center;
+`
+
+const StyledCardContainer = styled.div`
+  text-align: center;
+  max-width: 210px;
+  background-color: gray;
+  vertical-align: middle;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const StyledThumbnail = styled.div`
@@ -61,17 +71,19 @@ export default function RelatedProductCard({ product_id, setCurrentIndex }) {
   );
 
   return (
-    <StyledRelatedProductCard>
-      {isLoaded && <div onClick={() => {
-        setProductId(product_id);
-      }}>
-        <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}/>
-        <br></br>
-        {salePrice ? <SalePrice /> : <Price />}
-        <br></br>
-        {name}
-        <br></br>
-        {category}
-      </div>}
-    </StyledRelatedProductCard>)
+    <>
+      {isLoaded && <StyledRelatedProductCard>
+        <StyledCardContainer onClick={() => {
+          setProductId(product_id);
+        }}>
+          <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}/>
+          <br></br>
+          {salePrice ? <SalePrice /> : <Price />}
+          <br></br>
+          {name}
+          <br></br>
+          {category}
+        </StyledCardContainer>
+      </StyledRelatedProductCard>}
+    </>)
 }

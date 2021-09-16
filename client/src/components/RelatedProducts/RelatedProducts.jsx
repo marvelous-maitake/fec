@@ -65,11 +65,11 @@ const Arrow = styled.div`
 `
 
 const StyledLeftArrow = styled(Arrow)`
-  left: 10px;
+  left: 5px;
 `
 
 const StyledRightArrow = styled(Arrow)`
-  right: 10px;
+  right: 5px;
 `
 
 const RelatedProducts = () => {
