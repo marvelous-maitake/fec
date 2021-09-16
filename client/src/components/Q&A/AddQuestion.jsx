@@ -15,7 +15,6 @@ const AddQuestionModal = styled.div`
 `;
 
 const AddQuestion = ({ open, onClose }) => {
-  console.log(open)
   const [questionBody, setQuestionBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');

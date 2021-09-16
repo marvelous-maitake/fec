@@ -7,7 +7,6 @@ import AddAnswer from './AddAnswer';
 
 
 const Question = ({ question, answerCounter }) => {
-  console.log('question: ', question);
   const [addAnswer, setAddAnswer] = useState(false);
   const [QHelpfulness, setQHelpfulness] = useState(question.question_helpfulness);
 
