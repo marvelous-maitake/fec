@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Button = styled.button`
   font-size: 12px;
+  margin: 2px;
 `
 
 const SmallFont = styled.div`

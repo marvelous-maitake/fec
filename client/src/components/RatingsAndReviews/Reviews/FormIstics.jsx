@@ -18,14 +18,20 @@ export default function FormIstics({istics, onChange}) {
   return (
     <div>
     {Object.keys(istics).map(istic => (
-      <Characteristic key={istic}>
-      <label htmlFor="istic">{istic}: </label>
-      <select onChange={onChange} id={istic} name={istic} defaultValue="empty" required>
-        <option id ="empty" value="" isdisabled="true" >Select your option</option>
-        {attributes[istic].map(attr => (
-          <option key={attr} value={attr}>{attr}</option>
-        ))}
-      </select>
+      <Characteristic key={istics[istic].id}>
+        <label htmlFor="istic">
+          {istic}:
+        </label>
+        <select onChange={onChange} id={istics[istic].id} name={istic} defaultValue="empty" required>
+          <option id ="empty" value="" isdisabled="true">
+            Select your option
+          </option>
+          {attributes[istic].map((attr, idx) => (
+            <option id={idx} key={attr} value={idx}>
+              {attr}
+            </option>
+          ))}
+        </select>
       </Characteristic>
     ))}
     </div>

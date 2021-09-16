@@ -6,6 +6,9 @@ const Wrapper = styled.div`
 padding-top: 15px;
 padding-bottom: 15px;
 `
+const Button = styled.button`
+  margin: 2px;
+`
 
 export default function({reviews, setReviews, moreReviews, sortBy, getMore, id}) {
 
@@ -22,9 +25,9 @@ export default function({reviews, setReviews, moreReviews, sortBy, getMore, id})
   return (
     <Wrapper>
       {moreReviews
-      ? <button onClick={moreReviewsClick}>More reviews</button>
+      ? <Button onClick={moreReviewsClick}>More reviews</Button>
       : null}
-      <button onClick={toggleForm} >Add review</button>
+      <Button onClick={toggleForm} >Add review</Button>
       {showForm
       ? <NewReviewForm id={id}/>
       : null}
