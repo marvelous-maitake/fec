@@ -33,7 +33,7 @@ const StyledThumbnail = styled.div`
   background-repeat: no-repeat;
 `
 
-export default function RelatedProductCard({ product_id, setCurrentIndex }) {
+export default function RelatedProductCard({ product_id }) {
   const { setProductId } = useContext(SharedContext);
 
   const [previewImage, setPreviewImage] = useState(() => '');

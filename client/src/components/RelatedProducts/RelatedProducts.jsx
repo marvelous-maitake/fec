@@ -65,11 +65,11 @@ const Arrow = styled.div`
 `
 
 const StyledLeftArrow = styled(Arrow)`
-  left: 5px;
+  left: 0px;
 `
 
 const StyledRightArrow = styled(Arrow)`
-  right: 5px;
+  right: 0px;
 `
 
 const RelatedProducts = () => {
@@ -117,7 +117,7 @@ const RelatedProducts = () => {
             <StyledCarouselContentWrapper>
               <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                 {relatedProducts.map((product) => (
-                  <RelatedProductCard key={product} product_id={product} setCurrentIndex={setCurrentIndex} />
+                  <RelatedProductCard key={product} product_id={product} />
                 ))}
               </StyledCarouselContent>
             </StyledCarouselContentWrapper>
