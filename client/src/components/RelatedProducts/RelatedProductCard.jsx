@@ -1,24 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 
 const StyledRelatedProductCard = styled.div`
-  height: 200px;
-  width: 150px;
-  overflow: hidden;
+  text-align: center;
 `
 
-const StyledPreviewImage = styled.img`
-  height: 200px;
-  width: auto;
+const StyledCardContainer = styled.div`
+  text-align: center;
+  max-width: 15vw;
+  min-width: 15vw;
+  vertical-align: middle;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 4%;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`
+
+const StyledThumbnail = styled.div`
+  background-color: gray;
+  height: 13vw;
+  width: 13vw;
+  overflow: hidden;
+  display: inline-block;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 `
 
 export default function RelatedProductCard({ product_id }) {
+  const { setProductId } = useContext(SharedContext);
+
   const [previewImage, setPreviewImage] = useState(() => '');
   const [name, setName] = useState(() => '');
   const [category, setCategory] = useState(() => '');
   const [price, setPrice] = useState(() => '');
-  const [salePrice, setSalePrice] = useState(() => '');
+  const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
 
   function getStyles(product_id) {
@@ -45,11 +67,31 @@ export default function RelatedProductCard({ product_id }) {
     .catch((err) => console.error(err));
   }, [product_id]);
 
+  const Price = () => (
+    <span>${price}</span>
+  );
+
+  const SalePrice = () => (
+    <>
+      <span style={{color: 'red'}}><strong>${salePrice}</strong></span> <s><Price/></s>
+    </>
+  );
+
   return (
-    <StyledRelatedProductCard>
-      {isLoaded && <div>{category}<br></br>
-      {name}<br></br>
-      ${price}<br></br>
-      <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>}
-    </StyledRelatedProductCard>)
+    <>
+      {isLoaded && <StyledRelatedProductCard>
+        <StyledCardContainer onClick={() => {
+          setProductId(product_id);
+        }}>
+          <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
+          </StyledThumbnail>
+          <br></br>
+          {salePrice ? <SalePrice /> : <Price />}
+          <br></br>
+          {name}
+          <br></br>
+          {category}
+        </StyledCardContainer>
+      </StyledRelatedProductCard>}
+    </>)
 }
