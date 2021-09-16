@@ -50,8 +50,13 @@ export default function RelatedProductCard({ product_id }) {
     return axios.get(`/products/${product_id}/styles`);
   }
 
-  function getProductInfo(product_id) {
+  const getProductInfo = (product_id) => {
     return axios.get(`/products/${product_id}`);
+  }
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    console.log(`A star was clicked!`);
   }
 
   useEffect(() => {
@@ -87,7 +92,9 @@ export default function RelatedProductCard({ product_id }) {
           setProductId(product_id);
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            <Star />
+            <div onClick={handleClick}>
+              <Star />
+            </div>
           </StyledThumbnail>
           <br />
           {salePrice ? <SalePrice /> : <Price />}

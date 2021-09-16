@@ -7,6 +7,7 @@ const StyledStar = styled.svg`
   top: 5px;
   width: 1.5vw;
   height: 1.5vw;
+  z-index: 1;
 `
 
 const Star = ({ className }) => (
