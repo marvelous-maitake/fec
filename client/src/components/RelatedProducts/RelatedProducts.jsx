@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import RelatedProductCard from './RelatedProductCard';
@@ -11,33 +12,37 @@ const StyledRelatedProducts = styled.div`
   justify-content: space-evenly;
 `
 
-export default function RelatedProducts({ product_id }) {
-  const [loaded, setLoaded] = useState(false);
+function RelatedProducts() {
+  const { productId } = useContext(SharedContext);
+
+  const [isLoaded, setIsLoaded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState(() => {
     return [];
   });
 
-  function getRelatedProducts(product_id) {
-    return axios.get(`/products/${product_id}/related`)
+  function getRelatedProducts(productId) {
+    return axios.get(`/products/${productId}/related`)
   }
 
   useEffect(() => {
-    getRelatedProducts(product_id)
+    getRelatedProducts(productId)
     .then(results => {
       setRelatedProducts(results.data);
-      setLoaded(true);
+      setIsLoaded(true);
     })
     .catch(err => console.error(err));
-  }, [product_id]);
+  }, [productId]);
 
   return (
     <div>
       <h1>Related Products</h1>
       <StyledRelatedProducts>
-        {loaded ? relatedProducts.map((product) => (
+        {isLoaded && relatedProducts.map((product) => (
           <RelatedProductCard key={product} product_id={product} />
-        )) : (<div></div>)}
+        ))}
       </StyledRelatedProducts>
     </div>
   )
 }
+
+export default RelatedProducts;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from "styled-components";
 
 import { lightTheme, darkTheme, GlobalStyles } from "./theme/theme";
@@ -8,47 +8,44 @@ import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import RelatedProductsCarousel from './components/RelatedProducts/RelatedProductsCarousel';
-import QAwidget from './components/Q&A/QAwidget'
+import QAwidget from './components/Q&A/QAwidget';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      theme: 'dark',
-      product_id: 48445,
-      current_selection: {},
-      your_outfit: {}
-    };
-    this.toggleTheme = this.toggleTheme.bind(this);
-    this.changeProdId = this.changeProdId.bind(this);
+import { SharedContext } from "./contexts/SharedContext";
+
+function App() {
+  const [theme, setTheme] = useState(() => 'dark');
+  const [productId, setProductId] = useState(() => 48445);
+  const [currentSelection, setCurrentSelection] = useState(() => {});
+  const [currentOutfit, setCurrentOutfit] = useState(() => {});
+
+  function changeProdId(product_id) {
+    setProductId(product_id);
   }
 
-  changeProdId(product_id) {
-    this.setState({product_id});
+  function toggleTheme() {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
   }
 
-  toggleTheme() {
-    const newTheme = this.state.theme === 'dark' ? 'light' : 'dark'
-    this.setState({theme: newTheme});
-  }
-
-  render = () => (
-    <ThemeProvider theme={this.state.theme === 'light' ? darkTheme : lightTheme}>
+  return (
+    <ThemeProvider theme={theme === 'light' ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
         <div className="App">
-          <Navbar toggleTheme={this.toggleTheme} searchFunc={this.changeProdId}/>
-          <Overview product_id={this.state.product_id}/>
-          <RelatedProducts product_id={this.state.product_id} />
+          <SharedContext.Provider value={{ productId }}>
+          <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
+          <Overview product_id={productId}/>
+          <RelatedProducts />
             <div className='YourOutfit'>
               <div data-testid="App">Your Outfit</div>
             </div>
           <div className='QandA'>
-            <QAwidget product_id={this.state.product_id}/>
+            <QAwidget
+                product_id={productId}
+              />
           </div>
-          <div>
-            <RatingsAndReviews id={this.state.product_id} />
-          </div>
+          <RatingsAndReviews id={productId} />
+          </SharedContext.Provider>
         </div>
       </>
     </ThemeProvider>
