@@ -47,8 +47,6 @@ const StyledCarouselContent = styled.div`
     flex-shrink: 0;
     flex-grow: 1;
   }
-
-  padding: 20px 50px;
 `
 
 const Arrow = styled.div`
@@ -61,14 +59,17 @@ const Arrow = styled.div`
   border-radius: 24px;
   background-color: white;
   border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 48px;
 `
 
 const StyledLeftArrow = styled(Arrow)`
-  left: 24px;
+  left: 10px;
 `
 
 const StyledRightArrow = styled(Arrow)`
-  right: 24px;
+  right: 10px;
 `
 
 const RelatedProducts = () => {
@@ -109,13 +110,13 @@ const RelatedProducts = () => {
   return (
     <div>
       <h1>Related Products</h1>
-      <StyledCarouselContainer>
+      {isLoaded && <StyledCarouselContainer>
         <StyledCarouselWrapper>
           {currentIndex > 0 &&
           <StyledLeftArrow onClick={prev}>&lt;</StyledLeftArrow>}
             <StyledCarouselContentWrapper>
-              <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * (300 / 4)}%)` }}>
-                {isLoaded && relatedProducts.map((product) => (
+              <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                {relatedProducts.map((product) => (
                   <RelatedProductCard key={product} product_id={product} setCurrentIndex={setCurrentIndex} />
                 ))}
               </StyledCarouselContent>
@@ -123,7 +124,7 @@ const RelatedProducts = () => {
           {currentIndex < (relatedProducts.length - 4) &&
           <StyledRightArrow onClick={next}>&gt;</StyledRightArrow>}
         </StyledCarouselWrapper>
-      </StyledCarouselContainer>
+      </StyledCarouselContainer>}
     </div>
   )
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const StyledRelatedProductCard = styled.div`
+  text-align:center;
 `
 
 const StyledThumbnail = styled.div`
