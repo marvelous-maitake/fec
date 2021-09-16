@@ -20,7 +20,7 @@ const AddAnswer = ({ isPopup, onClose }) => {
   const [email, setEmail] = useState('');
 
   const handleAnswerBodyChange = (e) => {
-    setQuestionBody(e.target.value);
+    setAnswerBody(e.target.value);
   }
 
   const handleNicknameChange = (e) => {
@@ -72,6 +72,7 @@ const AddAnswer = ({ isPopup, onClose }) => {
               value={answerBody}
               maxLength="1000"
               onChange={handleAnswerBodyChange}
+              placeholder="Put your answer here"
             >
             </textarea>
           </p>
@@ -81,7 +82,7 @@ const AddAnswer = ({ isPopup, onClose }) => {
               className="nickname-body"
               type="text"
               vlaue={nickname}
-              placeholder="Exaple:jackson11!"
+              placeholder="Example:jackson11!"
               onChange={handleNicknameChange}
             />
           </p>
@@ -91,11 +92,11 @@ const AddAnswer = ({ isPopup, onClose }) => {
               className="email-body"
               type="text"
               vlaue={email}
-              placeholder="Why did you like the product or not?"
+              placeholder="Why did you like the product or not"
               onChange={handleEmailChange}
             />
           </p>
-          <button type="submit">Submit</button>
+          <button type="submit">Submit Answer</button>
         </form>
         <button onClick={onClose}>Close</button>
       </div>

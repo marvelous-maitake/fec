@@ -5,13 +5,19 @@ import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
 import AddAnswer from './AddAnswer';
 
+
 const Question = ({ question, answerCounter }) => {
+  console.log('question: ', question);
   const [addAnswer, setAddAnswer] = useState(false);
+  const [QHelpfulness, setQHelpfulness] = useState(question.question_helpfulness);
 
   // create an answer array
   let answerKey = Object.keys(question.answers);
   let answerList = answerKey.map(key => question.answers[key]);
 
+  const handleQHelpfulnessClicked = (e) => {
+    console.log('isHelpfull clicked');
+  }
 
   return (
     <div className={question}>
@@ -20,7 +26,8 @@ const Question = ({ question, answerCounter }) => {
           Q: {question.question_body}
         </strong>
         <QuestionHelpful
-          helpfulness={question.question_helpfulness}
+          questionId={question.question_id}
+          helpfulness={QHelpfulness}
           />
         <button onClick={() => setAddAnswer(true)}>Add Answer</button>
         <AddAnswer
