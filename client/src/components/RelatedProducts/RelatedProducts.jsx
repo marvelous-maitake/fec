@@ -110,7 +110,7 @@ const RelatedProducts = () => {
   return (
     <div>
       <h4>RELATED PRODUCTS</h4>
-      {isLoaded && <StyledCarouselContainer>
+      {isLoaded ? <StyledCarouselContainer>
         <StyledCarouselWrapper>
           {currentIndex > 0 &&
           <StyledLeftArrow onClick={prev}>&lt;</StyledLeftArrow>}
@@ -124,7 +124,7 @@ const RelatedProducts = () => {
           {currentIndex < (relatedProducts.length - 4) &&
           <StyledRightArrow onClick={next}>&gt;</StyledRightArrow>}
         </StyledCarouselWrapper>
-      </StyledCarouselContainer>}
+      </StyledCarouselContainer> : <div></div>}
     </div>
   )
 }

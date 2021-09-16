@@ -3,14 +3,16 @@ import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import Star from './Star';
+
 const StyledRelatedProductCard = styled.div`
   text-align: center;
 `
 
 const StyledCardContainer = styled.div`
   text-align: center;
-  max-width: 15vw;
-  min-width: 15vw;
+  max-width: 13vw;
+  min-width: 13vw;
   vertical-align: middle;
   padding: 10px;
   margin-left: auto;
@@ -24,8 +26,8 @@ const StyledCardContainer = styled.div`
 
 const StyledThumbnail = styled.div`
   background-color: gray;
-  height: 13vw;
-  width: 13vw;
+  height: 12vw;
+  width: 12vw;
   overflow: hidden;
   display: inline-block;
   background-size: cover;
@@ -79,19 +81,20 @@ export default function RelatedProductCard({ product_id }) {
 
   return (
     <>
-      {isLoaded && <StyledRelatedProductCard>
+      {isLoaded ? <StyledRelatedProductCard>
         <StyledCardContainer onClick={() => {
           setProductId(product_id);
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
+            <Star color="yellow" />
           </StyledThumbnail>
-          <br></br>
+          <br />
           {salePrice ? <SalePrice /> : <Price />}
-          <br></br>
+          <br />
           {name}
-          <br></br>
+          <br />
           {category}
         </StyledCardContainer>
-      </StyledRelatedProductCard>}
+      </StyledRelatedProductCard> : <div></div>}
     </>)
 }
