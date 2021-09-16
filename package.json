@@ -4,7 +4,7 @@
   "description": "FEC Project",
   "main": "server.js",
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "server": "nodemon server.js",
     "transpile": "npx webpack --config webpack.config.js --mode development -w",
     "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern dist/"
@@ -43,6 +43,7 @@
     "@testing-library/react": "^12.1.0",
     "@testing-library/user-event": "^13.2.1",
     "css-loader": "^6.2.0",
+    "file-loader": "^6.2.0",
     "jest": "^27.1.1",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
