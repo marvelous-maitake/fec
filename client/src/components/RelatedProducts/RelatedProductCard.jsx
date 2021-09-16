@@ -33,6 +33,7 @@ const StyledThumbnail = styled.div`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  position: relative;
 `
 
 export default function RelatedProductCard({ product_id }) {
@@ -86,7 +87,7 @@ export default function RelatedProductCard({ product_id }) {
           setProductId(product_id);
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            <Star color="yellow" />
+            <Star />
           </StyledThumbnail>
           <br />
           {salePrice ? <SalePrice /> : <Price />}
