@@ -4,7 +4,7 @@
   "description": "FEC Project",
   "main": "server.js",
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "server": "nodemon server.js",
     "transpile": "npx webpack --config webpack.config.js --mode development -w",
     "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern dist/"

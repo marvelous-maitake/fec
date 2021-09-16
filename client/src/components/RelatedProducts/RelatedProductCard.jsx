@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -14,11 +15,13 @@ const StyledPreviewImage = styled.img`
 `
 
 export default function RelatedProductCard({ product_id }) {
+  const { setProductId } = useContext(SharedContext);
+
   const [previewImage, setPreviewImage] = useState(() => '');
   const [name, setName] = useState(() => '');
   const [category, setCategory] = useState(() => '');
   const [price, setPrice] = useState(() => '');
-  const [salePrice, setSalePrice] = useState(() => '');
+  const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
 
   function getStyles(product_id) {
@@ -45,11 +48,22 @@ export default function RelatedProductCard({ product_id }) {
     .catch((err) => console.error(err));
   }, [product_id]);
 
+  const SalePrice = () => (
+    <span>${salePrice} <s>${price}</s></span>
+  );
+
+  const Price = () => (
+    <span>${price}</span>
+  );
+
   return (
     <StyledRelatedProductCard>
-      {isLoaded && <div>{category}<br></br>
-      {name}<br></br>
-      ${price}<br></br>
+      {isLoaded && <div onClick={() => setProductId(product_id)}>{category}
+      <br></br>
+      {name}
+      <br></br>
+      {salePrice ? <SalePrice /> : <Price />}
+      <br></br>
       <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>}
     </StyledRelatedProductCard>)
 }

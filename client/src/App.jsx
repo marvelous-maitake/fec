@@ -7,7 +7,6 @@ import Overview from './components/Overview/Overview';
 import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
-import RelatedProductsCarousel from './components/RelatedProducts/RelatedProductsCarousel';
 import QAwidget from './components/Q&A/QAwidget';
 
 import { SharedContext } from "./contexts/SharedContext";
@@ -32,7 +31,7 @@ function App() {
       <>
         <GlobalStyles />
         <div className="App">
-          <SharedContext.Provider value={{ productId }}>
+          <SharedContext.Provider value={{ productId, setProductId }}>
           <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
           <RelatedProducts />

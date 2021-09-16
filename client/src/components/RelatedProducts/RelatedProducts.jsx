@@ -8,8 +8,9 @@ const StyledRelatedProducts = styled.div`
   border: 1px solid gray;
   padding: 20px;
   margin: 20px;
-  display: flex;
-  justify-content: space-evenly;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 `
 
 function RelatedProducts() {
