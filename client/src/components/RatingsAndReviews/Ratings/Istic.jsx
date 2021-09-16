@@ -49,7 +49,9 @@ export default function Istic({type, value}) {
   }
   return (
     <Cont>
-      <div><strong>{type}</strong></div>
+      <div>
+        <strong>{type}</strong>
+      </div>
       <Container>
         <Arrow rating={String(Number(value) / 5 * 100 - 3) + '%'}>▼</Arrow>
       </Container>

@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
-export default function IsticsForm({istics}) {
+const Characteristic = styled.div`
+`
+
+export default function FormIstics({istics, onChange}) {
 
   const attributes = {
     Fit: ['Too small', 'Small', 'Perfect', 'Large', 'Too large'],
@@ -13,17 +16,18 @@ export default function IsticsForm({istics}) {
   }
 
   return (
-    <>
+    <div>
     {Object.keys(istics).map(istic => (
-      <>
-      <h2>{istic}</h2>
-      <select name={istic}>
+      <Characteristic key={istic}>
+      <label htmlFor="istic">{istic}: </label>
+      <select onChange={onChange} id={istic} name={istic} defaultValue="empty" required>
+        <option id ="empty" value="" isdisabled="true" >Select your option</option>
         {attributes[istic].map(attr => (
-          <option value={attr}>{attr}</option>
+          <option key={attr} value={attr}>{attr}</option>
         ))}
       </select>
-      </>
+      </Characteristic>
     ))}
-    </>
+    </div>
   )
 }

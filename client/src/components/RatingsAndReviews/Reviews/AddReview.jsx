@@ -7,7 +7,7 @@ padding-top: 15px;
 padding-bottom: 15px;
 `
 
-export default function({reviews, setReviews, sortBy, getMore, id}) {
+export default function({reviews, setReviews, moreReviews, sortBy, getMore, id}) {
 
   const [showForm, setShowForm] = useState(false);
 
@@ -21,8 +21,13 @@ export default function({reviews, setReviews, sortBy, getMore, id}) {
 
   return (
     <Wrapper>
-      <button onClick={moreReviewsClick}>More reviews</button>   <button onClick={toggleForm} >Add review</button>
-      {showForm && <NewReviewForm id={id}/>}
+      {moreReviews
+      ? <button onClick={moreReviewsClick}>More reviews</button>
+      : null}
+      <button onClick={toggleForm} >Add review</button>
+      {showForm
+      ? <NewReviewForm id={id}/>
+      : null}
     </Wrapper>
   )
 }

@@ -12,7 +12,10 @@ const Empty = styled.span`
 export default function StarsGraphic({review}) {
   return (
     <>
-      <span><Filled>{'★'.repeat(review.rating)}</Filled><Empty>{'★'.repeat(5 - review.rating)}</Empty></span>
+      <span>
+        <Filled>{'★'.repeat(review.rating)}</Filled>
+        <Empty>{'★'.repeat(5 - review.rating)}</Empty>
+      </span>
     </>
   )
 }

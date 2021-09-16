@@ -8,10 +8,14 @@ export default function Reviews({id}) {
   const [sortBy, setSortBy] = useState('relevant');
   const [reviews, setReviews] = useState(null);
   const [allReviews, setAllReviews] = useState(null);
+  const [isMoreReviews, setIsMoreReviews] = useState(true)
 
   function getMoreReviews() {
     const newReviews = allReviews.slice(0, reviews.length + 2);
     setReviews(newReviews);
+    if (reviews.length === allReviews.length) {
+      setIsMoreReviews(false);
+    }
   }
 
   useEffect(() => {
@@ -19,6 +23,7 @@ export default function Reviews({id}) {
       `/reviews?sort=${sortBy}&count=2&page=1&product_id=${id}`)
         .then(res => setReviews(res.data.results))
         .catch(err => console.error(err));
+    setIsMoreReviews(true);
     axios.get(
       `/reviews?sort=${sortBy}&count=1000&page=1&product_id=${id}`)
         .then(res => setAllReviews(res.data.results))
@@ -27,9 +32,15 @@ export default function Reviews({id}) {
 
   return (
       <>
-        {reviews && <SortForm reviews={reviews} sortBy={sortBy} setSortBy={val => setSortBy(val)} />}
-        {reviews && <ReviewsList reviews={reviews} sortBy={sortBy} />}
-        {reviews && <AddReview getMore={getMoreReviews} reviews={reviews} setReviews={setReviews} id={id}/>}
+        {reviews
+        ? <SortForm reviews={reviews} sortBy={sortBy} setSortBy={val => setSortBy(val)} />
+        : null}
+        {reviews
+        ? <ReviewsList reviews={reviews} sortBy={sortBy} />
+        : null}
+        {reviews
+        ? <AddReview getMore={getMoreReviews} reviews={reviews} moreReviews={isMoreReviews} setReviews={setReviews} id={id}/>
+        : null}
       </>
   )
 }

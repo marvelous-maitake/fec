@@ -30,7 +30,10 @@ export default function helpful({review}) {
 
   return (
     <SmallFont>
-      <span>Helpful? <Button onClick={handleClick}>Yes ({helpfulCount})</Button> <Button onClick={handleReport}>Report</Button></span>
+      <span>Helpful?
+        <Button onClick={handleClick}>Yes ({helpfulCount})</Button>
+        <Button onClick={handleReport}>Report</Button>
+      </span>
     </SmallFont>
   )
 }
