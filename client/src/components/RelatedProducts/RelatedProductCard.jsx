@@ -9,8 +9,8 @@ const StyledRelatedProductCard = styled.div`
 
 const StyledCardContainer = styled.div`
   text-align: center;
-  max-width: 210px;
-  min-width: 210px;
+  max-width: 15vw;
+  min-width: 15vw;
   vertical-align: middle;
   padding: 10px;
   margin-left: auto;
@@ -24,8 +24,8 @@ const StyledCardContainer = styled.div`
 
 const StyledThumbnail = styled.div`
   background-color: gray;
-  height: 200px;
-  width: 200px;
+  height: 13vw;
+  width: 13vw;
   overflow: hidden;
   display: inline-block;
   background-size: cover;

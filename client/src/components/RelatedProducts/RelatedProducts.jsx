@@ -109,7 +109,7 @@ const RelatedProducts = () => {
 
   return (
     <div>
-      <h1>Related Products</h1>
+      <h4>RELATED PRODUCTS</h4>
       {isLoaded && <StyledCarouselContainer>
         <StyledCarouselWrapper>
           {currentIndex > 0 &&
