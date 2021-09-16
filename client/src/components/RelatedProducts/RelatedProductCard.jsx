@@ -36,7 +36,7 @@ const StyledThumbnail = styled.div`
   position: relative;
 `
 
-export default function RelatedProductCard({ product_id }) {
+const RelatedProductCard = ({ product_id }) => {
   const { setProductId } = useContext(SharedContext);
 
   const [previewImage, setPreviewImage] = useState(() => '');
@@ -46,7 +46,7 @@ export default function RelatedProductCard({ product_id }) {
   const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
 
-  function getStyles(product_id) {
+  const getStyles = (product_id) => {
     return axios.get(`/products/${product_id}/styles`);
   }
 
@@ -90,6 +90,7 @@ export default function RelatedProductCard({ product_id }) {
       {isLoaded ? <StyledRelatedProductCard>
         <StyledCardContainer onClick={() => {
           setProductId(product_id);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
             <div onClick={handleClick}>
@@ -106,3 +107,5 @@ export default function RelatedProductCard({ product_id }) {
       </StyledRelatedProductCard> : <div></div>}
     </>)
 }
+
+export default RelatedProductCard;
