@@ -7,7 +7,7 @@ const axios = require('axios');
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
-
+app.use(express.json());
 
 //Axios Requests, format right side URL within client-side request as req.url
 const axiosConfig = {
@@ -28,7 +28,7 @@ app.get('/*', (req, res) => {
 });
 
 app.post('/*', (req, res) => {
-  axios.post(`${API_URL}${req.url}`, axiosConfig)
+  axios.post(`${API_URL}${req.url}`, req.body, axiosConfig)
   .then((response) => {
     res.send(response.status);
   })
@@ -38,7 +38,7 @@ app.post('/*', (req, res) => {
 });
 
 app.put('/*', (req, res) => {
-  axios.put(`${API_URL}${req.url}`, axiosConfig)
+  axios.put(`${API_URL}${req.url}`, {}, axiosConfig)
   .then((response) => {
     res.send(response.status);
   })
@@ -51,3 +51,5 @@ app.put('/*', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
+
+

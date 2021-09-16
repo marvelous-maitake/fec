@@ -8,6 +8,7 @@ const QuestionList = ({ product_id, questions, searchInput, counter, answerCount
     {questions.slice(0, counter)
       .map((qObj, index) => (
         <Question
+          product_id={product_id}
           answerCounter={answerCounter}
           question={qObj}
           key={qObj.question_id}

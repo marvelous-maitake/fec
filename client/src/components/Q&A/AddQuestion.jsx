@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 const AddQuestionModal = styled.div`
@@ -14,7 +15,7 @@ const AddQuestionModal = styled.div`
   border-radius: 30px;
 `;
 
-const AddQuestion = ({ open, onClose }) => {
+const AddQuestion = ({ open, onClose, product_id, handleQModalSubmit }) => {
   const [questionBody, setQuestionBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -32,9 +33,21 @@ const AddQuestion = ({ open, onClose }) => {
   }
 
   const handleFormSubmit = (e) => {
+    e.preventDefault();
     if (validationCheck()) {
-      console.log('form sumbit!')
-      // send the data to API
+      const newQObj = {
+        body: questionBody,
+        name: nickname,
+        email: email,
+        product_id: product_id
+      };
+      // console.log('new q obj: ', newQObj);
+      axios.post('/qa/questions', newQObj)
+        .then((res) => {
+          console.log('new Q was sent to API:', res.data)
+        })
+        .catch(console.log)
+      onClose();
     }
   }
 
@@ -42,17 +55,15 @@ const AddQuestion = ({ open, onClose }) => {
   const validationCheck = () => {
     if (!questionBody) {
       alert('Please Provide Your Question');
-
     } else if (!nickname) {
       alert('Please Provide Your Nickname')
-
     } else if (!email) {
       alert('Please Provide Your Email')
-
     } else {
       return true;
     }
   }
+
 
   if (!open) return null
   return (

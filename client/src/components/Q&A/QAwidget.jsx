@@ -51,6 +51,11 @@ const QAwidget = ( { product_id } ) => {
     setQuestions(newQlist);
   }
 
+  // Add-question modal on submit
+  const handleQModalSubmit = () => {
+    setAddQuestion(false)
+  }
+
   return (
     <QuestionAndAnswer>
       <h4 className="qa-header">QUESTIONS & ANSWERS</h4>
@@ -61,7 +66,6 @@ const QAwidget = ( { product_id } ) => {
         />
       </div>
       <QuestionList
-        product_id={product_id}
         searchInput={searchInput}
         questions={questions}
         counter={counter}
@@ -91,6 +95,7 @@ const QAwidget = ( { product_id } ) => {
         </strong>
       </button>
       <AddQuestion
+        product_id={product_id}
         open={addQuestion}
         onClose={() => {setAddQuestion(false)}}
       />
