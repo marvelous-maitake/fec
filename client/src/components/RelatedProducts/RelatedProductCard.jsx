@@ -14,7 +14,7 @@ const StyledPreviewImage = styled.img`
   width: auto;
 `
 
-export default function RelatedProductCard({ product_id }) {
+export default function RelatedProductCard({ product_id, setCurrentIndex }) {
   const { setProductId } = useContext(SharedContext);
 
   const [previewImage, setPreviewImage] = useState(() => '');
@@ -58,7 +58,9 @@ export default function RelatedProductCard({ product_id }) {
 
   return (
     <StyledRelatedProductCard>
-      {isLoaded && <div onClick={() => setProductId(product_id)}>{category}
+      {isLoaded && <div onClick={() => {
+        setProductId(product_id);
+      }}>{category}
       <br></br>
       {name}
       <br></br>
