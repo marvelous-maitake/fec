@@ -10,11 +10,16 @@ const StyledRelatedProductCard = styled.div`
 const StyledCardContainer = styled.div`
   text-align: center;
   max-width: 210px;
-  background-color: gray;
+  min-width: 210px;
   vertical-align: middle;
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 4%;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `
 
 const StyledThumbnail = styled.div`
@@ -62,12 +67,14 @@ export default function RelatedProductCard({ product_id, setCurrentIndex }) {
     .catch((err) => console.error(err));
   }, [product_id]);
 
-  const SalePrice = () => (
-    <span>${salePrice} <s>${price}</s></span>
-  );
-
   const Price = () => (
     <span>${price}</span>
+  );
+
+  const SalePrice = () => (
+    <>
+      <span style={{color: 'red'}}><strong>${salePrice}</strong></span> <s><Price/></s>
+    </>
   );
 
   return (
@@ -76,7 +83,8 @@ export default function RelatedProductCard({ product_id, setCurrentIndex }) {
         <StyledCardContainer onClick={() => {
           setProductId(product_id);
         }}>
-          <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}/>
+          <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
+          </StyledThumbnail>
           <br></br>
           {salePrice ? <SalePrice /> : <Price />}
           <br></br>
