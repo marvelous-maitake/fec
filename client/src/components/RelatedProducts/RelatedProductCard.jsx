@@ -4,14 +4,17 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const StyledRelatedProductCard = styled.div`
-  height: 200px;
-  width: 150px;
-  overflow: hidden;
 `
 
-const StyledPreviewImage = styled.img`
+const StyledThumbnail = styled.div`
+  background-color: gray;
   height: 200px;
-  width: auto;
+  width: 200px;
+  overflow: hidden;
+  display: inline-block;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 `
 
 export default function RelatedProductCard({ product_id, setCurrentIndex }) {
@@ -60,12 +63,14 @@ export default function RelatedProductCard({ product_id, setCurrentIndex }) {
     <StyledRelatedProductCard>
       {isLoaded && <div onClick={() => {
         setProductId(product_id);
-      }}>{category}
-      <br></br>
-      {name}
-      <br></br>
-      {salePrice ? <SalePrice /> : <Price />}
-      <br></br>
-      <StyledPreviewImage src={previewImage}></StyledPreviewImage></div>}
+      }}>
+        <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}/>
+        <br></br>
+        {salePrice ? <SalePrice /> : <Price />}
+        <br></br>
+        {name}
+        <br></br>
+        {category}
+      </div>}
     </StyledRelatedProductCard>)
 }
