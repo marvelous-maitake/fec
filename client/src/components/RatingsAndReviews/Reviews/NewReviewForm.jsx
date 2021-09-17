@@ -31,10 +31,11 @@ export default function NewReviewForm({id}) {
   const [recommended, setRecommended] = useState(true);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [chars, setChars] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
 
   useEffect(() => {
@@ -44,37 +45,46 @@ export default function NewReviewForm({id}) {
   }, [])
 
   function onLoad(e) {
-    const loadedImages = document.getElementById('loaded');
-    loadedImages.src = URL.createObjectURL(e.target.files[0]);
-    loadedImages.width = "50";
-    loadedImages.onload = function() {
-      URL.revokeObjectURL(loadedImages.src)
-    }
+    setImages([]);
+    const thumbnails = document.getElementById('thumbnails');
+    thumbnails.innerHTML = '';
+    let array = [];
+    Array.from(e.target.files).forEach((file, idx) => {
+      const newImg = document.createElement('img');
+      const src = URL.createObjectURL(file);
+      newImg.src = src;
+      newImg.width = "50";
+      thumbnails.appendChild(newImg);
+      array.push(src);
+    })
+    setImages(array)
   }
 
   function onIsticChange(e) {
-    const newObj = {[e.target.id] : e.target.value};
+    const newObj = {[e.target.id] : Number(e.target.value)};
     setChars(chars => ({...chars, ...newObj}))
   }
 
   function handleSubmit(e) {
+    setSubmitted(true)
     e.preventDefault();
-    const src = Array.from(images).map(image => {
-      URL.createObjectURL(image)
-    })
-    setImages(src);
-    console.log('src', src);
-    console.log('rat', rating);
-    console.log('rec', recommended);
-    console.log('tit', title);
-    console.log('bod', body);
-    console.log('username', username);
-    console.log('email', email);
-    console.log('characteristics', chars)
-    console.log('images', images)
+    const params = {
+      product_id: id,
+      rating: rating,
+      summary: title,
+      body: body,
+      recommend: recommended,
+      name: username,
+      email: email,
+      photos: images,
+      characteristics: chars
+    }
+    axios.post('/reviews', params)
+      .then(res => console.log('response from review post', res))
+      .catch(err => console.log('error from review post', err))
   }
 
-  return (
+  return (submitted === false &&
     <Wrapper>
       <h2>Write your review</h2>
       <form onSubmit={handleSubmit}>
@@ -98,7 +108,7 @@ export default function NewReviewForm({id}) {
         <div style={{paddingBottom: '20px'}}>
           <div>
             <label style={{display: 'block'}} htmlFor="title">Title: </label>
-            <input onChange={(e) => setTitle(e.target.value)}style={{display: 'block'}} placeholder="Example: Best purchase ever!" type="text" id="title" size="32" required />
+            <input onChange={(e) => setTitle(e.target.value)} style={{display: 'block'}} placeholder="Example: Best purchase ever!" type="text" id="title" size="32" required />
           </div>
           <Body>
             <label style={{display: 'block'}} htmlFor="body">Review: </label>
@@ -126,4 +136,6 @@ export default function NewReviewForm({id}) {
       </form>
     </Wrapper>
   )
+
+  return <h3>Submitted</h3>
 }

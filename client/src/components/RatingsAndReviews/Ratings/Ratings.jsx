@@ -31,7 +31,7 @@ export default function Ratings({id}) {
           <br></br>
           <div>
             <strong>{getRecommended(meta)}%</strong>
-            of reviews recommend this product
+            <span> of reviews recommend this product</span>
           </div>
           <br></br>
           <ChartRating ratings={meta.ratings}/>
