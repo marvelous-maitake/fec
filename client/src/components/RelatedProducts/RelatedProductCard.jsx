@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
-
 import Star from './Star';
+import Modal from './Modal';
 
 const StyledRelatedProductCard = styled.div`
   text-align: center;
@@ -45,6 +45,7 @@ const RelatedProductCard = ({ product_id }) => {
   const [price, setPrice] = useState(() => '');
   const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
+  const [isModalOpen, setIsModalOpen] = useState(() => false);
 
   const getStyles = (product_id) => {
     return axios.get(`/products/${product_id}/styles`);
@@ -54,9 +55,9 @@ const RelatedProductCard = ({ product_id }) => {
     return axios.get(`/products/${product_id}`);
   }
 
-  const handleClick = (e) => {
+  const handleStarClick = (e) => {
     e.stopPropagation();
-    console.log(`A star was clicked!`);
+    setIsModalOpen(true);
   }
 
   useEffect(() => {
@@ -93,9 +94,20 @@ const RelatedProductCard = ({ product_id }) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            <div onClick={handleClick}>
+            <div onClick={handleStarClick}>
               <Star />
             </div>
+            <div>Modal is: {isModalOpen ? "Open" : "Closed"}</div>
+            {isModalOpen && (
+              <Modal
+                id="modal"
+                isOpen={isModalOpen}
+                onClose={() => setIsModelOpen(false)}
+                class="my-class"
+              >
+                <div className="box-body">I am the content of the modal</div>
+              </Modal>
+            )}
           </StyledThumbnail>
           <br />
           {salePrice ? <SalePrice /> : <Price />}

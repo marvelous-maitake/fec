@@ -9,7 +9,7 @@ import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews'
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import QAwidget from './components/Q&A/QAwidget';
 
-import { SharedContext } from "./contexts/SharedContext";
+import { SharedContext } from './contexts/SharedContext';
 
 function App() {
   const [theme, setTheme] = useState(() => 'dark');
