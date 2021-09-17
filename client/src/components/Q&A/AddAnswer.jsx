@@ -35,8 +35,6 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validationCheck()) {
-      console.log('form sumbit!')
-      // send the data to API
       const newAnswer = {
         body: answerBody,
         name: nickname,

@@ -9,23 +9,44 @@ const QuestionItem = styled.div`
   margin-bottom: 10x
 `;
 
-const QuestionList = ({ product_id, questions, searchInput, counter, answerCounter}) => (
-  <div className="question-list">
-    {questions.slice(0, counter)
-      .map((qObj, index) => (
-        <QuestionItem className="question-item">
-          <div>
-            <Question
-            product_id={product_id}
-            answerCounter={answerCounter}
-            question={qObj}
-            key={qObj.question_id}
-            />
-          </div>
-        </QuestionItem>
-      ))
-    }
-  </div>
-);
+const MoreAnswerBtn = styled.div`
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 15px;
+`;
+
+
+const QuestionList = ({ product_id, questions, searchInput, questionCounter}) => {
+
+  const [answerCounter, setAnswserCounter] = useState(2)
+
+  return (
+    <div className="question-list">
+      <div>
+        {questions.slice(0, questionCounter)
+          .map((qObj, index) => (
+            <QuestionItem className="question-item">
+              <div>
+                <Question
+                product_id={product_id}
+                answerCounter={answerCounter}
+                question={qObj}
+                key={qObj.question_id}
+                />
+              </div>
+            </QuestionItem>
+          ))
+        }
+      </div>
+      <MoreAnswerBtn
+        className="load-more-answer-btn"
+        onClick={() => {setAnswserCounter(answerCounter + 2)}}
+      >
+        <strong>LOAD MORE ANSWERS</strong>
+      </MoreAnswerBtn>
+    </div>
+
+  );
+}
 
 export default QuestionList;

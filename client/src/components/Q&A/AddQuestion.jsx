@@ -41,10 +41,9 @@ const AddQuestion = ({ open, onClose, product_id, handleQModalSubmit }) => {
         email: email,
         product_id: product_id
       };
-      // console.log('new q obj: ', newQObj);
-      axios.post('/qa/questions', newQObj)
+      axios.post(`/qa/questions`, newQObj)
         .then((res) => {
-          console.log('new Q was sent to API:', res.data)
+          console.log(res)
         })
         .catch(console.log)
       onClose();

@@ -28,6 +28,7 @@ app.get('/*', (req, res) => {
 });
 
 app.post('/*', (req, res) => {
+  console.log(req.body);
   axios.post(`${API_URL}${req.url}`, req.body, axiosConfig)
   .then((response) => {
     res.send(response.status);

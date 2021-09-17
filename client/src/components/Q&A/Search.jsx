@@ -12,11 +12,14 @@ const Input = styled.input`
 const Search = ({ searchInput, handleSearchInput }) => {
   return (
     <div className="qa-search">
-      <form className="qa-search-form">
+      <form
+        onChange={e => handleSearchInput(e.target.value)}
+        className="qa-search-form"
+      >
         <Input
           className="qa-search-bar"
           placeholder="HAVE A  QUESTION? SEARCH FOR ANSWERS..."
-          onChange={e => handleSearchInput(e.target.value)}
+
         />
       </form>
     </div>

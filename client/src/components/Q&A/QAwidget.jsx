@@ -16,16 +16,17 @@ const Mdoal = styled.div`
 const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
-  const [answerCounter, setAnswserCounter] = useState(1)
   const [searchInput, setSearchInput] = useState('');
-  const [counter, setCounter] = useState(2);
+  const [questionCounter, setQuestionCounter] = useState(2);
   const [addQuestion, setAddQuestion] = useState(false)
+  const [questionsToView, setQuestionsToView] = useState([])
 
   useEffect(() => {
-    axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
+    axios.get(`/qa/questions?product_id=${product_id}&page=1&count=99`)
       .then((response) => {
         setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
-        // console.log(response)
+        setQuestionsToView(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
+        // console.log('questions: ', response.data.results)
       })
       .catch(console.log)
   }, [product_id])
@@ -34,26 +35,40 @@ const QAwidget = ( { product_id } ) => {
   const handleSearchInput = (searchInput) => {
     if (searchInput.length >= 3) {
       setSearchInput(searchInput);
-      filterQList(searchInput);
+
     } else {
       setSearchInput('')
-
     }
+    filterQList(searchInput);
   }
 
   // filter qustion list
   const filterQList = (searchInput) => {
-    const newQlist = questions.filter( qObj => {
-      if (qObj.question_body.toLowerCase().includes(searchInput.toLowerCase())) {
-        return qObj
-      };
-    });
-    setQuestions(newQlist);
+    if (searchInput) {
+      const newQlist = questions.filter( qObj => {
+        if (qObj.question_body.toLowerCase().includes(searchInput.toLowerCase())) {
+          return qObj
+        };
+      });
+      setQuestionsToView(newQlist);
+    } else {
+      setQuestionsToView(questions)
+    }
   }
 
   // Add-question modal on submit
   const handleQModalSubmit = () => {
     setAddQuestion(false)
+  }
+
+  // handle "SHOW MORE QUESTIONS" button
+  const handleQuestionBtn = (e) => {
+    if (questionCounter === questions.length) {
+      setQuestionCounter(2)
+    } else {
+      setQuestionCounter(questionCounter + 2)
+    }
+    console.log(questionCounter);
   }
 
   return (
@@ -66,30 +81,29 @@ const QAwidget = ( { product_id } ) => {
         />
       </div>
       <QuestionList
+        product_id={product_id}
         searchInput={searchInput}
-        questions={questions}
-        counter={counter}
-        answerCounter = {answerCounter}
+        questions={questionsToView}
+        questionCounter={questionCounter}
       />
-      <button
-        className="more-answer-btn"
-        onClick={() => setAnswserCounter(answerCounter + 1)}
-      ><strong>
-        LOAD MORE ANSWERS
-        </strong>
-      </button>
-      <button
-        className="load-more-questions-btn"
-        onClick={() => setCounter(counter + 1)}
-      >
-        <strong>
-          SHOW MORE QUESTIONS
-        </strong>
-      </button>
+      {questionCounter >= questions.length
+        ? <button
+            className="load-more-questions-btn"
+            onClick={() => {handleQuestionBtn()}}
+          >
+            <strong>COLLAPSE QUESTIONS</strong>
+          </button>
+        : <button
+            className="load-more-questions-btn"
+            onClick={() => {handleQuestionBtn()}}
+          >
+            <strong>SHOW MORE QUESTIONS</strong>
+          </button>
+      }
       <button
         style={{margin: 10}}
         className="add-question-btn"
-        onClick={ () => setAddQuestion(true)}
+        onClick={() => setAddQuestion(true)}
       >
         <strong>
           ADD A QUESTION +

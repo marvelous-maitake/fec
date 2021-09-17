@@ -11,12 +11,8 @@ const Question = ({ question, answerCounter }) => {
   const [QHelpfulness, setQHelpfulness] = useState(question.question_helpfulness);
 
   // create an answer array
-  let answerKey = Object.keys(question.answers);
-  let answerList = answerKey.map(key => question.answers[key]);
-
-  const handleQHelpfulnessClicked = (e) => {
-    console.log('isHelpfull clicked');
-  }
+  const answerKey = Object.keys(question.answers);
+  const answerList = answerKey.map(key => question.answers[key]);
 
   return (
     <div className={question}>
@@ -27,7 +23,7 @@ const Question = ({ question, answerCounter }) => {
         <QuestionHelpful
           questionId={question.question_id}
           helpfulness={QHelpfulness}
-          />
+        />
         <button onClick={() => setAddAnswer(true)}>Add Answer</button>
         <AddAnswer
           questionId={question.question_id}
@@ -37,6 +33,7 @@ const Question = ({ question, answerCounter }) => {
       </span>
       <div className="answer-list">
         {answerList
+          .sort((a, b) => (b.helpfulness - a.helpfulness))
           .slice(0, answerCounter)
           .map(answer => (
           <Answer

@@ -12,12 +12,22 @@ const helpfulnessStyle = {
   cursor: "pointer"
 }
 
+const beforeClickedStyle = {
+  textDecoration: "underline",
+  cursor: "pointer"
+}
+
+const afterClickedStyle = {
+  fontWeight: "bold",
+  cursor: "pointer"
+}
+
 const QuestionHelpful = ({ helpfulness, questionId }) => {
   const [QHelpfulness, setQHelpfulness] = useState(helpfulness)
   const [isHelpful, setIsHelpful] = useState(false)
+  const [isQsReported, setIsQsReported] = useState(false);
 
   const handleQHelpfulnessClicked = (e) => {
-    console.log('isHelpful clicked', questionId);
     setIsHelpful(!isHelpful);
     isHelpful ? setQHelpfulness(QHelpfulness - 1) : setQHelpfulness(QHelpfulness + 1);
     if (!isHelpful) {
@@ -27,13 +37,23 @@ const QuestionHelpful = ({ helpfulness, questionId }) => {
     }
   };
 
+  const handleIsQsReportedClicked = (e) => {
+    setIsQsReported(true);
+    axios.put(`/qa/questions/${questionId}/report`)
+      .then((res) => {console.log('Question is reported with ID: ', questionId)})
+      .catch(console.log)
+  };
+
   return (
     <Qhelpful className="question-helpfulness">
-      <div>
         <span>Helpful?</span>
         <span> | </span>
         <span className="q-helpfulness" style={helpfulnessStyle} onClick={handleQHelpfulnessClicked}> Yes({QHelpfulness})</span>
-      </div>
+        <span> | </span>
+        {
+          isQsReported ? <span style={afterClickedStyle} className="question-not-report">  Reported  </span>
+                      : <span style={beforeClickedStyle} className = "question-reported" onClick = {handleIsQsReportedClicked}> Report </span>
+        }
     </Qhelpful>
   );
 };
