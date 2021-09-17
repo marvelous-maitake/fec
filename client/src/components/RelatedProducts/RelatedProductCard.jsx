@@ -97,7 +97,6 @@ const RelatedProductCard = ({ product_id }) => {
             <div onClick={handleStarClick}>
               <Star />
             </div>
-            <div>Modal is: {isModalOpen ? "Open" : "Closed"}</div>
             {isModalOpen && (
               <Modal
                 id="modal"

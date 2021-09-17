@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, createRef } from "react";
 import ReactDom from "react-dom";
 import PropTypes from "prop-types";
 
@@ -7,29 +7,40 @@ import StyledModal from "./Modal.css";
 const modalRoot = document.getElementById("modal-root");
 
 const Modal = (props) => {
-
   props = props || {
     id: "",
     modalClass: "",
     modalSize: "md"
-  }
-
-  const background = React.createRef();
-
-  const mounted = React.useRef();
+  };
 
   const [fadeType, setFadeType] = useState(() => null);
+  const background = createRef();
+
+  const isMounted = useRef();
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      window.addEventListener("keydown", onEscKeyDown, false);
+      setTimeout(() => setFadeType("in"), 0);
+    } else {
+      if (!props.isOpen && prevProps.isOpen) {
+        setFadeType("out");
+      }
+    }
+    return window.removeEventListener("keydown", onEscKeyDown, false);
+  });
+
+  const transitionEnd = e => {
+    if (e.propertyName !== "opacity" || fadeType === "in") return;
+
+    if (fadeType === "out") {
+      props.onClose();
+    }
+  };
 
   const onEscKeyDown = e => {
     if (e.key !== "Escape") return;
     setFadeType("out");
-  };
-
-  const transitionEnd = e => {
-    if (e.propertyName !== "opacity" || this.state.fadeType === "in") return;
-    if (fadeType === "out") {
-      props.onClose();
-    }
   };
 
   const handleClick = e => {
@@ -37,33 +48,19 @@ const Modal = (props) => {
     setFadeType("out");
   };
 
-  useEffect(() => {
-    if (!mounted.current) {
-      window.addEventListener("keydown", onEscKeyDown, false);
-      setTimeout(() => setFadeType("in"), 0);
-      return () => {
-        window.removeEventListener("keydown", onEscKeyDown, false);
-      }
-      mounted.current = true;
-    } else {
-      if (!props.isOpen && prevProps.isOpen) {
-        setFadeType("out");
-      }
-    }
-  })
-
   return ReactDom.createPortal(
     <StyledModal
-        id={props.id}
-        className={`wrapper ${props.class}`}
-        role="dialog"
-        size={props.size}
-        onTransitionEnd={transitionEnd}
-        fadeType={fadeType}
+      id={props.id}
+      className={`wrapper ${"size-" + props.modalSize} fade-${
+        fadeType
+      } ${props.modalClass}`}
+      role="dialog"
+      modalSize={props.modalSize}
+      onTransitionEnd={transitionEnd}
     >
       <div className="box-dialog">
         <div className="box-header">
-          <h4 className="box-title">Title Of Modal</h4>
+          <h4 className="box-title">Pure React Modal</h4>
           <button onClick={handleClick} className="close">
             ×
           </button>
@@ -82,7 +79,7 @@ const Modal = (props) => {
       />
     </StyledModal>,
     modalRoot
- );
+  );
 }
 
 export default Modal;
