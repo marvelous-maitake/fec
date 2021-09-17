@@ -30,6 +30,7 @@ const Question = ({ question, answerCounter }) => {
           />
         <button onClick={() => setAddAnswer(true)}>Add Answer</button>
         <AddAnswer
+          questionId={question.question_id}
           isPopup={addAnswer}
           onClose={() => {setAddAnswer(false)}}
         />

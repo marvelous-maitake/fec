@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 const AddAnswerModal = styled.div`
@@ -14,7 +15,7 @@ const AddAnswerModal = styled.div`
   border-radius: 30px;
 `;
 
-const AddAnswer = ({ isPopup, onClose }) => {
+const AddAnswer = ({ isPopup, onClose, questionId }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -32,9 +33,22 @@ const AddAnswer = ({ isPopup, onClose }) => {
   }
 
   const handleFormSubmit = (e) => {
+    e.preventDefault();
     if (validationCheck()) {
       console.log('form sumbit!')
       // send the data to API
+      const newAnswer = {
+        body: answerBody,
+        name: nickname,
+        email: email,
+        // photo: photo
+      };
+      axios.post(`/qa/questions/${questionId}/answers`, newAnswer)
+      .then((res) => {
+        console.log('new answer was sent to API:', res.data)
+      })
+      .catch(console.log)
+      onClose();
     }
   }
 
@@ -42,13 +56,10 @@ const AddAnswer = ({ isPopup, onClose }) => {
   const validationCheck = () => {
     if (!answerBody) {
       alert('Please Provide Your Answer');
-
     } else if (!nickname) {
       alert('Please Provide Your Nickname')
-
     } else if (!email) {
       alert('Please Provide Your Email')
-
     } else {
       return true;
     }
