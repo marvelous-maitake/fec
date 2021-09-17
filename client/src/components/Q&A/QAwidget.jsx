@@ -87,6 +87,7 @@ const QAwidget = ( { product_id } ) => {
         </strong>
       </button>
       <button
+        style={{margin: 10}}
         className="add-question-btn"
         onClick={ () => setAddQuestion(true)}
       >

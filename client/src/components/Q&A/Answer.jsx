@@ -36,9 +36,9 @@ const Answer = ({ answerObj }) => {
   return (
     <div className="answer-container">
       <div className="answer-item">
-        <p className="answer-body">
+        <div className="answer-body">
           A: {answerObj.body}
-        </p>
+        </div>
         <span>
           by {answerObj.answerer_name}, {moment(answerObj.date).utc().format('MMMM D, YYYY')} <span> | </span>
         </span>
