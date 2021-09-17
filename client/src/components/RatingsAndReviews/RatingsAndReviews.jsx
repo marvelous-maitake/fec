@@ -14,12 +14,12 @@ const Title = styled.h2`
 `
 
 const RatingsDiv = styled.div`
-  width: 25%;
+  width: 20%;
   float: left;
 `;
 
 const ReviewsDiv = styled.div`
-  width: 75%;
+  width: 80%;
   float: right;
 `;
 

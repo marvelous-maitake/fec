@@ -24,16 +24,18 @@ export default function Ratings({id}) {
     return Math.round(((t / (t + f)) * 100));
   }
 
-  return (meta !== null && Object.keys(meta.ratings).length !== 0) ?
-    (
-      <Wrapper>
-        <RatingStar ratings={meta.ratings}/>
-        <br></br>
-        <div><strong>{getRecommended(meta)}%</strong> of reviews recommend this product</div>
-        <br></br>
-        <ChartRating ratings={meta.ratings}/>
-        <Characteristics characteristics={meta.characteristics}/>
-      </Wrapper>
-    ):
-    (<h1>No Ratings Yet</h1>);
+  return (
+    meta !== null && Object.keys(meta.ratings).length !== 0)
+      ? <Wrapper>
+          <RatingStar ratings={meta.ratings}/>
+          <br></br>
+          <div>
+            <strong>{getRecommended(meta)}%</strong>
+            <span> of reviews recommend this product</span>
+          </div>
+          <br></br>
+          <ChartRating ratings={meta.ratings}/>
+          <Characteristics characteristics={meta.characteristics}/>
+        </Wrapper>
+      : <h1>No Ratings Yet</h1>;
 }
