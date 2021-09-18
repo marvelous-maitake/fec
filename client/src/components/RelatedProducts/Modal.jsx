@@ -7,12 +7,6 @@ import StyledModal from "./Modal.css";
 const modalRoot = document.getElementById("modal-root");
 
 const Modal = (props) => {
-  props = props || {
-    id: "",
-    modalClass: "",
-    modalSize: "md"
-  };
-
   const [fadeType, setFadeType] = useState(() => null);
   const background = createRef();
 

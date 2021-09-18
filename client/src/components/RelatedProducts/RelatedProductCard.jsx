@@ -99,10 +99,11 @@ const RelatedProductCard = ({ product_id }) => {
             </div>
             {isModalOpen && (
               <Modal
-                id="modal"
+                id="comparisonModal"
                 isOpen={isModalOpen}
                 onClose={() => setIsModelOpen(false)}
-                class="my-class"
+                modalClass="my-class"
+                modalSize="lg"
               >
                 <div className="box-body">I am the content of the modal</div>
               </Modal>
