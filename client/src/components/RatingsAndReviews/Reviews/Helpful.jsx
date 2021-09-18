@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Button = styled.button`
   font-size: 12px;
+  margin: 2px;
 `
 
 const SmallFont = styled.div`
@@ -30,7 +31,10 @@ export default function helpful({review}) {
 
   return (
     <SmallFont>
-      <span>Helpful? <Button onClick={handleClick}>Yes ({helpfulCount})</Button> <Button onClick={handleReport}>Report</Button></span>
+      <span>Helpful?
+        <Button onClick={handleClick}>Yes ({helpfulCount})</Button>
+        <Button onClick={handleReport}>Report</Button>
+      </span>
     </SmallFont>
   )
 }

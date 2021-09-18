@@ -28,16 +28,15 @@ const QuestionHelpful = ({ helpfulness, questionId }) => {
   const [isQsReported, setIsQsReported] = useState(false);
 
   const handleQHelpfulnessClicked = (e) => {
-    setIsHelpful(!isHelpful);
-    isHelpful ? setQHelpfulness(QHelpfulness - 1) : setQHelpfulness(QHelpfulness + 1);
     if (!isHelpful) {
       axios.put(`/qa/questions/${questionId}/helpful`)
-        .then(() => console.log('should add 1'))
-        .catch(console.log)
+      .then(setQHelpfulness(QHelpfulness + 1))
+      .catch(console.log)
     }
+    setIsHelpful(true);
   };
 
-  const handleIsQsReportedClicked = (e) => {
+  const handleQsReport = (e) => {
     setIsQsReported(true);
     axios.put(`/qa/questions/${questionId}/report`)
       .then((res) => {console.log('Question is reported with ID: ', questionId)})
@@ -52,7 +51,7 @@ const QuestionHelpful = ({ helpfulness, questionId }) => {
         <span> | </span>
         {
           isQsReported ? <span style={afterClickedStyle} className="question-not-report">  Reported  </span>
-                      : <span style={beforeClickedStyle} className = "question-reported" onClick = {handleIsQsReportedClicked}> Report </span>
+                      : <span style={beforeClickedStyle} className = "question-reported" onClick = {handleQsReport}> Report </span>
         }
     </Qhelpful>
   );

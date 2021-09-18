@@ -6,7 +6,7 @@ import QuestionList from './QuestionList';
 import AddQuestion from './AddQuestion';
 
 const QuestionAndAnswer = styled.div`
- background-color: #F7F6F2;
+ background-color: #FFFFFF;
 `;
 
 const Mdoal = styled.div`

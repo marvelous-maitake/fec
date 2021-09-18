@@ -19,6 +19,7 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
 
   const handleAnswerBodyChange = (e) => {
     setAnswerBody(e.target.value);
@@ -32,6 +33,10 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
     setEmail(e.target.value)
   }
 
+  const handlePhotoUrlChange = (e) => {
+    setPhotoUrl(e.target.value)
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validationCheck()) {
@@ -39,7 +44,7 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
         body: answerBody,
         name: nickname,
         email: email,
-        // photo: photo
+        photos: photoUrl.split(',').map(link => link.trim())
       };
       axios.post(`/qa/questions/${questionId}/answers`, newAnswer)
       .then((res) => {
@@ -103,6 +108,16 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
               vlaue={email}
               placeholder="Why did you like the product or not"
               onChange={handleEmailChange}
+            />
+          </p>
+          <p className="photo-text">
+            <strong>Your Photos</strong>
+            <textarea
+              className="photo-body"
+              type="text"
+              vlaue={photoUrl}
+              placeholder="Add photo links here and separate links with ','"
+              onChange={handlePhotoUrlChange}
             />
           </p>
           <button type="submit">Submit Answer</button>
