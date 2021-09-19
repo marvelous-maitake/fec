@@ -54,11 +54,14 @@ const OutfitCard = ({ product_id }) => {
   }
 
   const handleAdd = () => {
-    console.log('Clicked!');
     setCurrentOutfit((prevOutfit) => {
-      let newOutfit = prevOutfit.slice();
-      newOutfit.unshift(productId);
-      return newOutfit;
+      if (!prevOutfit.includes(productId)) {
+        let newOutfit = prevOutfit.slice();
+        newOutfit.unshift(productId);
+        return newOutfit;
+      } else {
+        return prevOutfit;
+      }
     })
   }
 
@@ -98,11 +101,14 @@ const OutfitCard = ({ product_id }) => {
   return (
     <>
       { isAddButton ? <StyledOutfitCard>
-        <StyledCardContainer>
+        <StyledCardContainer onClick={handleAdd}>
           <StyledThumbnail>
-            <span onClick={handleAdd}>Add to Outfit<br />
+            <span>Add to Outfit<br />
             +
             </span>
+            <p> </p>
+            <p> </p>
+            <p> </p>
           </StyledThumbnail>
         </StyledCardContainer>
       </StyledOutfitCard> :
