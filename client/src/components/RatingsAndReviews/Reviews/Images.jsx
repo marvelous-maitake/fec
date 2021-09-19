@@ -26,7 +26,9 @@ export default function Images({review}) {
           <img onClick={onClick} style={{margin: "5px"}} src={photo.url}  height="50" width="50" />
         </span>
       ))}
-      {viewer && <Modal src={image} width="100%"/>}
+      {viewer
+      ? <Modal src={image} width="100%"/>
+      : null}
     </>
   )
 }
