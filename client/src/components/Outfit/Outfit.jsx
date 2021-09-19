@@ -3,6 +3,7 @@ import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import OutfitCard from './OutfitCard';
+import Carousel from '../Carousel';
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
@@ -89,22 +90,12 @@ const Outfit = () => {
   return (
     <div>
       <h4>YOUR OUTFIT</h4>
-      {isLoaded ? <StyledCarouselContainer>
-        <StyledCarouselWrapper>
-          {currentIndex > 0 &&
-          <StyledLeftArrow onClick={prev}>&lt;</StyledLeftArrow>}
-            <StyledCarouselContentWrapper>
-              <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                <OutfitCard product_id='addToOutfit' />
-                {currentOutfit.map((product) => (
-                  <OutfitCard key={product} product_id={product} />
-                ))}
-              </StyledCarouselContent>
-            </StyledCarouselContentWrapper>
-          {currentIndex < (currentOutfit.length - 4) &&
-          <StyledRightArrow onClick={next}>&gt;</StyledRightArrow>}
-        </StyledCarouselWrapper>
-      </StyledCarouselContainer> : <div></div>}
+      {isLoaded ? <Carousel products={currentOutfit} mode='Outfit'>
+        <OutfitCard product_id='addToOutfit' />
+        {currentOutfit.map((product) => (
+          <OutfitCard key={product} product_id={product} />
+        ))}
+      </Carousel> : <div></div>}
     </div>
   )
 }

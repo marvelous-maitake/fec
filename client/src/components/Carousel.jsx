@@ -1,18 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { SharedContext } from '../../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
-import RelatedProductCard from './RelatedProductCard';
-import Carousel from '../Carousel';
-
-const StyledRelatedProducts = styled.div`
-  border: 1px solid gray;
-  padding: 20px;
-  margin: 20px;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-`
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
@@ -73,37 +61,38 @@ const StyledRightArrow = styled(Arrow)`
   right: 0px;
 `
 
-const RelatedProducts = () => {
-  const { productId } = useContext(SharedContext);
-
+const Carousel = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [relatedProducts, setRelatedProducts] = useState(() => {
-    return [];
-  });
+  const [currentIndex, setCurrentIndex] = useState(() => 0);
+  const isOutfit = props.mode === 'Outfit';
 
-  function getRelatedProducts(productId) {
-    return axios.get(`/products/${productId}/related`)
+  const next = () => {
+    if (currentIndex < (isOutfit ? props.products.length - 3 : props.products.length - 4)) {
+      setCurrentIndex(prevState => prevState + 1);
+    }
   }
 
-  useEffect(() => {
-    getRelatedProducts(productId)
-    .then(results => {
-      setRelatedProducts(results.data);
-      setIsLoaded(true);
-    })
-    .catch(err => console.error(err));
-  }, [productId]);
+  const prev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(prevState => prevState - 1);
+    }
+  }
 
   return (
-    <>
-      <h4>RELATED PRODUCTS</h4>
-      {isLoaded ? <Carousel products={relatedProducts} mode='RelatedProducts'>
-        {relatedProducts.map((product) => (
-          <RelatedProductCard key={product} product_id={product} />
-        ))}
-      </Carousel> : <div></div>}
-    </>
-  )
+    <StyledCarouselContainer>
+      <StyledCarouselWrapper>
+        {currentIndex > 0 &&
+        <StyledLeftArrow onClick={prev}>&lt;</StyledLeftArrow>}
+          <StyledCarouselContentWrapper>
+            <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {props.children}
+            </StyledCarouselContent>
+          </StyledCarouselContentWrapper>
+        {currentIndex < (isOutfit ? props.products.length + 1 : props.products.length) - 4 &&
+        <StyledRightArrow onClick={next}>&gt;</StyledRightArrow>}
+      </StyledCarouselWrapper>
+    </StyledCarouselContainer>
+  );
 }
 
-export default RelatedProducts;
+export default Carousel;
