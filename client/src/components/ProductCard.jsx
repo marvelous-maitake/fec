@@ -26,7 +26,6 @@ const StyledCardContainer = styled.div`
 `
 
 const StyledThumbnail = styled.div`
-  background-color: gray;
   height: 12vw;
   width: 12vw;
   overflow: hidden;
