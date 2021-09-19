@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import QAwidget from './components/Q&A/QAwidget';
+import Outfit from './components/Outfit/Outfit';
 
 import { SharedContext } from './contexts/SharedContext';
 
@@ -15,7 +16,7 @@ function App() {
   const [theme, setTheme] = useState(() => 'dark');
   const [productId, setProductId] = useState(() => 48445);
   const [currentSelection, setCurrentSelection] = useState(() => {});
-  const [currentOutfit, setCurrentOutfit] = useState(() => {});
+  const [currentOutfit, setCurrentOutfit] = useState(() => []);
 
   function changeProdId(product_id) {
     setProductId(product_id);
@@ -31,13 +32,11 @@ function App() {
       <>
         <GlobalStyles />
         <div className="App">
-          <SharedContext.Provider value={{ productId, setProductId }}>
+          <SharedContext.Provider value={{ productId, setProductId, currentOutfit, setCurrentOutfit }}>
           <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
           <RelatedProducts />
-            <div className='YourOutfit'>
-              <div data-testid="App">Your Outfit</div>
-            </div>
+          <Outfit />
           <div className='QandA'>
             <QAwidget
                 product_id={productId}
