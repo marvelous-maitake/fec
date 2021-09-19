@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Star from './Star';
 import Modal from './Modal';
+import ComparisonTable from './ComparisonTable';
 
 const StyledRelatedProductCard = styled.div`
   text-align: center;
@@ -104,8 +105,11 @@ const RelatedProductCard = ({ product_id }) => {
                 onClose={() => setIsModelOpen(false)}
                 modalClass="my-class"
                 modalSize="lg"
+                modalTitle="Compare Products"
               >
-                <div className="box-body">I am the content of the modal</div>
+                <div className="box-body">
+                  <ComparisonTable />
+                </div>
               </Modal>
             )}
           </StyledThumbnail>

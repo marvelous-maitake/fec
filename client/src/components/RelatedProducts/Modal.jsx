@@ -53,18 +53,10 @@ const Modal = (props) => {
       onTransitionEnd={transitionEnd}
     >
       <div className="box-dialog">
-        <div className="box-header">
-          <h4 className="box-title">Pure React Modal</h4>
-          <button onClick={handleClick} className="close">
-            ×
-          </button>
-        </div>
+        <button onClick={handleClick} className="close">
+          ×
+        </button>
         <div className="box-content">{props.children}</div>
-        <div className="box-footer">
-          <button onClick={handleClick} className="close">
-            Close
-          </button>
-        </div>
       </div>
       <div
         className={`background`}
