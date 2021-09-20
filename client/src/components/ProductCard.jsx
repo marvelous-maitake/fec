@@ -36,6 +36,15 @@ const StyledThumbnail = styled.div`
   position: relative;
 `
 
+const StyledButton = styled.button`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 1.5vw;
+  height: 1.5vw;
+  z-index: 1;
+`
+
 const ProductCard = ({ product_id, mode }) => {
   const isOutfit = mode === 'Outfit';
   const isAddButton = product_id === 'addToOutfit';
@@ -72,6 +81,16 @@ const ProductCard = ({ product_id, mode }) => {
       } else {
         return prevOutfit;
       }
+    })
+  }
+
+  const handleRemoval = (e) => {
+    e.stopPropagation();
+    setCurrentOutfit((prevOutfit) => {
+      let newOutfit = prevOutfit.slice();
+      let removalIndex = newOutfit.indexOf(product_id);
+      newOutfit.splice(removalIndex, 1);
+      return newOutfit;
     })
   }
 
@@ -123,7 +142,7 @@ const ProductCard = ({ product_id, mode }) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            {isOutfit ? <div></div> : <div onClick={handleStarClick}>
+            {isOutfit ? <StyledButton onClick={handleRemoval}>x</StyledButton> : <div onClick={handleStarClick}>
               <Star />
             </div>}
             {isModalOpen && (
