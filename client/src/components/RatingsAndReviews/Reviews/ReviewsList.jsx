@@ -22,7 +22,7 @@ const Recommend = styled.div`
 `
 
 const Response = styled.div`
-  background-color: #dedede;
+  background-color: #f5f5f5;
   padding: 3px 12px 3px 12px;
   margin: 5px 0px 20px 0px;
 `;
@@ -45,7 +45,7 @@ export default function ReviewsList({sortBy, setSortBy, reviews}) {
         {review.response
           ? <Response>
               <p><strong>Response:</strong></p>
-              <p>{review.response}</p>
+              <p><em>{review.response}</em></p>
           </Response>
           : null }
           <Helpful review={review} />

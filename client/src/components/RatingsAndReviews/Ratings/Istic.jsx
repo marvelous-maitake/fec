@@ -8,7 +8,7 @@ const Cont = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-image: linear-gradient(#dedede, white 50%);
+  background-image: linear-gradient(white 30%, #dedede, white 60%);
 `;
 
 const Arrow = styled.div`

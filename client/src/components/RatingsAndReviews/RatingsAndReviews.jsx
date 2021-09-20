@@ -9,17 +9,17 @@ const Wrapper = styled.div`
   padding: 20px;
 `
 
-const Title = styled.h2`
-  font-weight: normal;
+const Title = styled.h1`
+  font-weight: bold;
 `
 
 const RatingsDiv = styled.div`
-  width: 20%;
+  width: 25%;
   float: left;
 `;
 
 const ReviewsDiv = styled.div`
-  width: 80%;
+  width: 75%;
   float: right;
 `;
 

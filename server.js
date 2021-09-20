@@ -40,7 +40,6 @@ app.post('/*', (req, res) => {
 });
 
 app.put('/*', (req, res) => {
-  console.log(`${API_URL}${req.url}`)
   axios.put(`${API_URL}${req.url}`, {}, axiosConfig)
   .then((response) => {
     res.send(response.status);
