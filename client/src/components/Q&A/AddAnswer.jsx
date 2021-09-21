@@ -19,7 +19,7 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
   const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoUrl, setPhotoUrl] = useState([]);
 
   const handleAnswerBodyChange = (e) => {
     setAnswerBody(e.target.value);
