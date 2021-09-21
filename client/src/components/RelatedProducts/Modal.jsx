@@ -14,31 +14,32 @@ const Modal = (props) => {
 
   useEffect(() => {
     if (!isMounted.current) {
-      window.addEventListener("keydown", onEscKeyDown, false);
+      // window.addEventListener("keydown", onEscKeyDown, false);
       setTimeout(() => setFadeType("in"), 0);
     } else {
       if (!props.isOpen && prevProps.isOpen) {
         setFadeType("out");
       }
     }
-    return window.removeEventListener("keydown", onEscKeyDown, false);
+    // return window.removeEventListener("keydown", onEscKeyDown, false);
   });
 
   const transitionEnd = e => {
     if (e.propertyName !== "opacity" || fadeType === "in") return;
 
     if (fadeType === "out") {
+      e.stopPropagation();
       props.onClose();
     }
   };
 
-  const onEscKeyDown = e => {
-    if (e.key !== "Escape") return;
-    setFadeType("out");
-  };
+  // const onEscKeyDown = e => {
+  //   if (e.key !== "Escape") return;
+  //   setFadeType("out");
+  // };
 
   const handleClick = e => {
-    e.preventDefault();
+    e.stopPropagation();
     setFadeType("out");
   };
 
