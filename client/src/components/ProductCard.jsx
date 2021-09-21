@@ -67,11 +67,6 @@ const ProductCard = ({ product_id, mode }) => {
     return axios.get(`/products/${product_id}`);
   }
 
-  const handleStarClick = (e) => {
-    e.stopPropagation();
-    setIsModalOpen(true);
-  }
-
   const handleAdd = () => {
     setCurrentOutfit((prevOutfit) => {
       if (!prevOutfit.includes(productId)) {
@@ -92,6 +87,11 @@ const ProductCard = ({ product_id, mode }) => {
       newOutfit.splice(removalIndex, 1);
       return newOutfit;
     })
+  }
+
+  const toggleModal = (e) => {
+    e.stopPropagation();
+    setIsModalOpen(prevState => !prevState);
   }
 
   useEffect(() => {
@@ -142,17 +142,16 @@ const ProductCard = ({ product_id, mode }) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            {isOutfit ? <StyledButton onClick={handleRemoval}>x</StyledButton> : <div onClick={handleStarClick}>
+            {isOutfit ? <StyledButton onClick={handleRemoval}>x</StyledButton> : <div onClick={toggleModal}>
               <Star />
             </div>}
             {isModalOpen && (
               <Modal
                 id="comparisonModal"
                 isOpen={isModalOpen}
-                onClose={() => setIsModelOpen(false)}
+                onClose={toggleModal}
                 modalClass="my-class"
                 modalSize="lg"
-                modalTitle="Compare Products"
               >
                 <div className="box-body">
                   <ComparisonTable />
