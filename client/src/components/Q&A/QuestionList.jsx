@@ -17,21 +17,20 @@ const MoreAnswerBtn = styled.div`
 
 
 const QuestionList = ({ product_id, questions, searchInput, questionCounter}) => {
-
   const [answerCounter, setAnswserCounter] = useState(2)
 
   return (
     <div className="question-list">
       <div>
         {questions.slice(0, questionCounter)
-          .map((qObj, index) => (
-            <QuestionItem className="question-item">
+          .map((question, index) => (
+            <QuestionItem className="question-item" key={index}>
               <div>
                 <Question
-                product_id={product_id}
-                answerCounter={answerCounter}
-                question={qObj}
-                key={qObj.question_id}
+                  product_id={product_id}
+                  answerCounter={answerCounter}
+                  question={question}
+                  key={question.question_id}
                 />
               </div>
             </QuestionItem>

@@ -23,7 +23,7 @@ module.exports = {
                 {
                   "regenerator": true
                 }
-              ]
+              ], "babel-plugin-styled-components"
             ]
           }
         }
@@ -35,5 +35,5 @@ module.exports = {
     extensions: [".jsx", ".js", ".json", ".css"],
     alias: { react: path.resolve('./node_modules/react') }
   },
-  devtool: 'source-map'
+  devtool: 'eval-source-map'
 }

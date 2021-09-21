@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ImageGallery from './ImageGallery/ImageGallery.jsx';
-import Modal from './Modal.jsx';
-import ProductTile from './ProductTile/ProductTile.jsx';
+import React, { useState, useEffect, useContext } from 'react';
+import { SharedContext } from '../../contexts/SharedContext';
+import ImageGallery from './ImageGallery.jsx';
+import ProductInfo from './ProductInfo.jsx';
+import Selectors from './Selectors.jsx';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -10,7 +11,7 @@ const Wrapper = styled.div`
   grid-template-columns: 3fr 2fr;
   grid-template-rows: 80vh;
   grid-template-areas:
-    "ImageGallery ProductTile"
+    "ImageGallery ProductTile";
   height: 80vh;
   gap: 4%;
 
@@ -21,12 +22,12 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function Overview({ product_id }) {
+export default function Overview() {
+
+  const { productId } = useContext(SharedContext);
 
   const [styles, setStyles] = useState(null);
-  const [info, setInfo] = useState(null);
   const [currStyle, setCurrStyle] = useState(null);
-  const [show, setShow] = useState(false);
 
   const defaultStyle = (s) => {
     let styleIndex = 0;
@@ -39,36 +40,34 @@ export default function Overview({ product_id }) {
     return styleIndex;
   };
 
-  const showModal = (e) => {
-    setShow(!show);
-  };
-
   useEffect(() => {
-    Promise.all([
-      axios.get(
-      `/products/${product_id}`)
-        .then(res => (res.data))
-        .catch(err => console.error(err)),
-      axios.get(
-        `/products/${product_id}/styles`)
-        .then(res => (res.data))
-        .catch(err => console.error(err))
-    ])
-    .then(([info, styles]) => {
-      setInfo(info);
-      setStyles(styles.results);
-      setCurrStyle(defaultStyle(styles));
+    axios.get( `/products/${productId}/styles`)
+    .then(r => {
+      setStyles(r.data.results);
+      setCurrStyle(defaultStyle(r.data.results))
     })
-    .catch(err => console.log('Error in promises...', err));
-  }, [product_id]);
+    .catch(err => console.log('get info error, ', err));
+  }, [productId]);
 
   return (
-    <div className='Overview'>
-        {currStyle !== null ? (<Modal show={show} onClose={showModal}/>) : <div></div>}
-      <Wrapper>
-        {currStyle !== null ? (<ImageGallery photos={styles[currStyle].photos}/>) : <div></div>}
-        {currStyle !== null ? (<ProductTile info={info} styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle}/>) : <div></div>}
-      </Wrapper>
-    </div>
+    <Wrapper className='Overview'>
+      {currStyle !== null ?
+      (<>
+        <ImageGallery
+        photos={styles[currStyle].photos.map(x => x.url)}
+        />
+        <div className='ProductCard card'>
+          <ProductInfo />
+          <Selectors
+          thumbnails={styles.map(x => x.photos[0].thumbnail_url)}
+          setCurrStyle={setCurrStyle}
+          style={styles[currStyle]}
+          currStyle={currStyle}
+          />
+        </div>
+      </>) :
+      (<div></div>)
+      }
+    </Wrapper>
   );
 }

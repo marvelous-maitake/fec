@@ -97,7 +97,7 @@ const QAwidget = ( { product_id } ) => {
             className="load-more-questions-btn"
             onClick={() => {handleQuestionBtn()}}
           >
-            <strong>SHOW MORE QUESTIONS</strong>
+            <strong>MORE ANSWERED QUESTIONS</strong>
           </button>
       }
       <button
@@ -114,8 +114,6 @@ const QAwidget = ( { product_id } ) => {
         open={addQuestion}
         onClose={() => {setAddQuestion(false)}}
       />
-
-
     </QuestionAndAnswer>
 
   )
