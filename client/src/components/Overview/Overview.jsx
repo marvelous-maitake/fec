@@ -56,7 +56,7 @@ export default function Overview(props) {
     <Wrapper className='Overview'>
       {currStyle !== null ?
       (<>
-        <ImageGallery
+        <ImageGallery id='ImageGallery'
         photos={styles[currStyle].photos.map(x => x.url)}
         />
         <div className='ProductCard card'>
