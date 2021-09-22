@@ -19,7 +19,8 @@ const RelatedProducts = () => {
   useEffect(() => {
     getRelatedProducts(productId)
     .then(results => {
-      setRelatedProducts(results.data);
+      let unique = [...new Set(results.data)];
+      setRelatedProducts(unique);
       setIsLoaded(true);
     })
     .catch(err => console.error(err));

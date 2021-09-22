@@ -111,7 +111,6 @@ const ProductCard = ({ product_id, mode }) => {
 
   const toggleModal = (e) => {
     e.stopPropagation();
-    console.log(productId);
     setIsModalOpen(prevState => !prevState);
   }
 

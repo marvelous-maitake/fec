@@ -22,8 +22,8 @@ export default function ImageGallery({ photos }) {
   }
 
   return (
-    <Gallery src={photos[current]}>
-      <Carousel>
+    <Gallery src={photos[current]} id='Gallery'>
+      <Carousel id='Carousel'>
         {current !== 0 ? <Arrow onClick={(e) => prevPhoto(e)}>&#8592;</Arrow> : <Arrow/>}
         <Thumbnails>
           {photos.map((url, index) => (
