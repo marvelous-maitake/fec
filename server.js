@@ -25,7 +25,7 @@ app.get('/*', (req, res) => {
     res.send(response.data);
   })
   .catch((error) => {
-    res.send(`Error making GET request: ${error}`);
+    res.sendFile(__dirname + '/client/dist/404page.html');
   })
 });
 
@@ -40,7 +40,6 @@ app.post('/*', (req, res) => {
 });
 
 app.put('/*', (req, res) => {
-  console.log(`${API_URL}${req.url}`)
   axios.put(`${API_URL}${req.url}`, {}, axiosConfig)
   .then((response) => {
     res.send(response.status);

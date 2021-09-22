@@ -3,8 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search';
 import QuestionList from './QuestionList';
-import AddQuestion from './AddQuestion';
-import Overlay from './Overlay';
+import Modal from '../Modal';
+import AddQuestionModal from './AddQuestionModal';
 
 
 
@@ -39,8 +39,8 @@ const QAwidget = ( { product_id } ) => {
   const [searchInput, setSearchInput] = useState('');
   const [questionCounter, setQuestionCounter] = useState(2);
   const [questionsToView, setQuestionsToView] = useState([])
-  const [addQuestion, setAddQuestion] = useState(false);
-  // const [isOverlay, setIsOverlay] = useState(false);
+  const [isAddQModalOpen, setIsAddQModalOpen] = useState(false);
+
 
   useEffect(() => {
     axios.get(`/qa/questions?product_id=${product_id}&page=1&count=99`)
@@ -132,19 +132,22 @@ const QAwidget = ( { product_id } ) => {
         <button
           style={buttonStyle}
           className="add-question-btn"
-          onClick={() => setAddQuestion(true)}
+          onClick={(e) => setIsAddQModalOpen(true)}
         >
           <strong>
             ADD A QUESTION +
           </strong>
         </button>
       </Buttons>
-      <AddQuestion
-        product_id={product_id}
-        open={addQuestion}
-        onClose={() => {setAddQuestion(false)}}
-      />
-      {addQuestion ? <Overlay /> : null}
+      {isAddQModalOpen && (
+        <Modal isModalOpen={isAddQModalOpen} setIsModalOpen={setIsAddQModalOpen}>
+          <AddQuestionModal
+            product_id={product_id}
+            open={isAddQModalOpen}
+            onClose={() => {setIsAddQModalOpen(false)}}
+          />
+        </Modal>
+      )}
     </QuestionAndAnswer>
 
   )

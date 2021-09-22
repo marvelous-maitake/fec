@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
 import AddAnswer from './AddAnswer';
+import AddAnswerModal from './AddAnswerModal';
+import Modal from '../Modal';
 
 const MoreAnswerBtn = styled.div`
   text-decoration: underline;
@@ -29,7 +31,7 @@ const addAnswerStyle =  {
 
 
 const Question = ({ question }) => {
-  const [addAnswer, setAddAnswer] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [QHelpfulness, setQHelpfulness] = useState(question.question_helpfulness);
   const [answerCounter, setAnswserCounter] = useState(2)
 
@@ -44,46 +46,49 @@ const Question = ({ question }) => {
           questionId={question.question_id}
           helpfulness={QHelpfulness}
         />
-        <button style={addAnswerStyle} onClick={() => setAddAnswer(true)}>Add Answer</button>
+        <button style={addAnswerStyle} onClick={() => setIsModalOpen(true)}>Add Answer</button>
       </QContainer>
       <h3>
         Q: {question.question_body}
       </h3>
-      <AddAnswer
-        questionId={question.question_id}
-        isPopup={addAnswer}
-        onClose={() => {setAddAnswer(false)}}
-      />
       <div className="answer-list" data-testid="answer-list">
         {answerList
           .sort((a, b) => (b.helpfulness - a.helpfulness))
           .slice(0, answerCounter)
           .map(answer => (
-          <Answer
+            <Answer
             answerObj={answer}
             key={answer.id}
-          />
-        ))}
+            />
+            ))}
       </div>
       {answerList.length > 2 && answerList.length > answerCounter
-      ?
-        <MoreAnswerBtn
+      ? <MoreAnswerBtn
           role="more-answer-btn"
           className="load-more-answer-btn"
           onClick={() => {setAnswserCounter( answerCounter + 2)}}
-          >
-          <strong>SHOW MORE ANSWERS</strong>
-          </MoreAnswerBtn>
+        >
+        <strong>SHOW MORE ANSWERS</strong>
+        </MoreAnswerBtn>
       : answerList.length <= answerCounter && answerList.length > 2
-        ?
-          <MoreAnswerBtn
-          role="more-answer-btn"
-          className="load-more-answer-btn"
-          onClick={() => {setAnswserCounter(2)}}
-          >
+      ?
+        <MoreAnswerBtn
+        role="more-answer-btn"
+        className="load-more-answer-btn"
+        onClick={() => {setAnswserCounter(2)}}
+        >
           <strong>COLLAPSE ANSWERS</strong>
-          </MoreAnswerBtn>
+        </MoreAnswerBtn>
       : null }
+      {isModalOpen && (
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <AddAnswerModal
+            questionId={question.question_id}
+            isPopup={isModalOpen}
+            onClose={() => {setIsModalOpen(false)}}
+          />
+        </Modal>
+      )}
     </div>
 
   )

@@ -1,7 +1,12 @@
+/*
+  =======================  not used any more =================
+  ==================== will be deleted at some point =========
+*/
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Overlay from './Overlay';
 
 const Button = styled.button`
   display: block;
@@ -171,7 +176,6 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
           <Button onClick={onClose}>Close</Button>
         </div>
       </AddAnswerModal>
-      {isPopup ? <Overlay /> : null}
     </div>
   );
 }
