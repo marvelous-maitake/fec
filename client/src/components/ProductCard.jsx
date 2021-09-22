@@ -3,7 +3,7 @@ import { SharedContext } from '../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import Star from './RelatedProducts/Star';
-import Modal from './RelatedProducts/Modal';
+import Modal from './Modal';
 import ComparisonTable from './RelatedProducts/ComparisonTable';
 
 const Container = styled.div`
@@ -132,6 +132,11 @@ const ProductCard = ({ product_id, mode }) => {
 
   return (
     <>
+      {isModalOpen && (
+      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <ComparisonTable />
+      </Modal>
+      )}
       {isAddButton ?  <StyledProductCard>
         <StyledCardContainer onClick={handleAdd}>
           <StyledThumbnail>
@@ -153,11 +158,6 @@ const ProductCard = ({ product_id, mode }) => {
             {isOutfit ? <StyledButton onClick={handleRemoval}>x</StyledButton> : <div onClick={toggleModal}>
               <Star />
             </div>}
-            {isModalOpen && (
-            <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-              <ComparisonTable />
-            </Modal>
-            )}
           </StyledThumbnail>
           <br />
           {salePrice ? <SalePrice /> : <Price />}
