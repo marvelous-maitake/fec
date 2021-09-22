@@ -116,7 +116,7 @@ const QAwidget = ( { product_id } ) => {
               style={buttonStyle}
               data-testid="more-questions-btn"
               className="load-more-questions-btn"
-              onClick={() => {handleQuestionBtn()}}
+              onClick={() => {setQuestionCounter(2)}}
             >
               <strong>COLLAPSE QUESTIONS</strong>
             </button>

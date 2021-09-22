@@ -39,25 +39,21 @@ const Question = ({ question }) => {
 
   return (
     <div role="question-obj" className={question}>
-      <span className="question-item">
-        <h3>
-          Q: {question.question_body}
-        </h3>
-        <QContainer>
-          <span>
-          <QuestionHelpful
-            questionId={question.question_id}
-            helpfulness={QHelpfulness}
-          />
-          </span>
-          <button style={addAnswerStyle} onClick={() => setAddAnswer(true)}>Add Answer</button>
-        </QContainer>
-        <AddAnswer
+      <QContainer>
+        <QuestionHelpful
           questionId={question.question_id}
-          isPopup={addAnswer}
-          onClose={() => {setAddAnswer(false)}}
+          helpfulness={QHelpfulness}
         />
-      </span>
+        <button style={addAnswerStyle} onClick={() => setAddAnswer(true)}>Add Answer</button>
+      </QContainer>
+      <h3>
+        Q: {question.question_body}
+      </h3>
+      <AddAnswer
+        questionId={question.question_id}
+        isPopup={addAnswer}
+        onClose={() => {setAddAnswer(false)}}
+      />
       <div className="answer-list" data-testid="answer-list">
         {answerList
           .sort((a, b) => (b.helpfulness - a.helpfulness))

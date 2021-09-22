@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Question from './Question';
 
 const QuestionItem = styled.div`
-  padding: 15px;
+  padding: 30px;
   margin-top: 15px
   margin-bottom: 15x;
   box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);

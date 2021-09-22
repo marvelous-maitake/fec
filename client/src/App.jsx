@@ -13,7 +13,7 @@ import { SharedContext } from "./contexts/SharedContext";
 
 function App() {
   const [theme, setTheme] = useState(() => 'dark');
-  const [productId, setProductId] = useState(() => 48445);
+  const [productId, setProductId] = useState(() => 48432);
   const [currentSelection, setCurrentSelection] = useState(() => {});
   const [currentOutfit, setCurrentOutfit] = useState(() => {});
 

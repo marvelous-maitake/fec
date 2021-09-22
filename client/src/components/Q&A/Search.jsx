@@ -21,7 +21,7 @@ const Search = ({ searchInput, handleSearchInput }) => {
         <Input
           className="qa-search-bar"
           placeholder="Search Your Question Here"
-
+          results="0"
         />
       </form>
     </div>

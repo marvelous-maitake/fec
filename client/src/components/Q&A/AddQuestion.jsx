@@ -101,7 +101,7 @@ const AddQuestion = ({ open, onClose, product_id, handleQModalSubmit }) => {
   return (
     <AddQuestionModal>
       <div className="add-question-modal">
-        <h1 className="form-header">
+        <h1 className="form-header" style={{textAlign: "center"}}>
           Ask Your Question
         </h1>
         <form
