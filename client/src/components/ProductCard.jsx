@@ -6,6 +6,13 @@ import Star from './RelatedProducts/Star';
 import Modal from './RelatedProducts/Modal';
 import ComparisonTable from './RelatedProducts/ComparisonTable';
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
 const StyledProductCard = styled.div`
   text-align: center;
 `
@@ -146,16 +153,8 @@ const ProductCard = ({ product_id, mode }) => {
               <Star />
             </div>}
             {isModalOpen && (
-              <Modal
-                id="comparisonModal"
-                isOpen={isModalOpen}
-                onClose={toggleModal}
-                modalClass="my-class"
-                modalSize="lg"
-              >
-                <div className="box-body">
-                  <ComparisonTable />
-                </div>
+              <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+                <ComparisonTable />
               </Modal>
             )}
           </StyledThumbnail>
