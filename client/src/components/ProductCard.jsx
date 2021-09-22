@@ -3,6 +3,7 @@ import { SharedContext } from '../contexts/SharedContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import Star from './RelatedProducts/Star';
+import { MdClose } from 'react-icons/md';
 import Modal from './Modal';
 import ComparisonTable from './RelatedProducts/ComparisonTable';
 
@@ -53,6 +54,17 @@ const StyledButton = styled.button`
   z-index: 1;
 `
 
+const RemoveButton = styled(MdClose)`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 1.5vw;
+  height: 1.5vw;
+  z-index: 1;
+  cursor: pointer;
+  color: white;
+`;
+
 const ProductCard = ({ product_id, mode }) => {
   const isOutfit = mode === 'Outfit';
   const isAddButton = product_id === 'addToOutfit';
@@ -99,6 +111,7 @@ const ProductCard = ({ product_id, mode }) => {
 
   const toggleModal = (e) => {
     e.stopPropagation();
+    console.log(productId);
     setIsModalOpen(prevState => !prevState);
   }
 
@@ -134,18 +147,16 @@ const ProductCard = ({ product_id, mode }) => {
     <>
       {isModalOpen && (
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-        <ComparisonTable />
+        <ComparisonTable productId={productId} name={name} category={category} price={price} salePrice={salePrice} />
       </Modal>
       )}
       {isAddButton ?  <StyledProductCard>
-        <StyledCardContainer onClick={handleAdd}>
+        <StyledCardContainer onClick={handleAdd} style={{ cursor: 'pointer' }}>
           <StyledThumbnail>
-            <span>Add to Outfit<br />
+            <span style={{ position: 'relative', top: '30%' }}>Add to Outfit<br />
             +
+            <br />
             </span>
-            <p> </p>
-            <p> </p>
-            <p> </p>
           </StyledThumbnail>
         </StyledCardContainer>
       </StyledProductCard> :
@@ -155,8 +166,8 @@ const ProductCard = ({ product_id, mode }) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <StyledThumbnail style={{ backgroundImage: `url(${previewImage})` }}>
-            {isOutfit ? <StyledButton onClick={handleRemoval}>x</StyledButton> : <div onClick={toggleModal}>
-              <Star />
+            {isOutfit ? <RemoveButton aria-label='Close modal' onClick={handleRemoval} /> : <div onClick={toggleModal} style={{ cursor: 'pointer' }}>
+              <Star/>
             </div>}
           </StyledThumbnail>
           <br />
