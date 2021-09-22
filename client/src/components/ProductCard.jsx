@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const StyledProductCard = styled.div`
   text-align: center;
+  position: relative;
 `
 
 const StyledCardContainer = styled.div`
@@ -153,9 +154,9 @@ const ProductCard = ({ product_id, mode }) => {
               <Star />
             </div>}
             {isModalOpen && (
-              <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-                <ComparisonTable />
-              </Modal>
+            <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+              <ComparisonTable />
+            </Modal>
             )}
           </StyledThumbnail>
           <br />
