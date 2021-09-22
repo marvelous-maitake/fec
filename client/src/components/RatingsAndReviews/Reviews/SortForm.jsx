@@ -6,7 +6,7 @@ const Form = styled.form`
   font-size: 120%
 `
 
-export default function SortForm({reviews, setSortBy}) {
+export default function SortForm({setSortBy}) {
 
   function handleSortChange(e) {
     setSortBy(e.target.value);
@@ -14,7 +14,7 @@ export default function SortForm({reviews, setSortBy}) {
 
   return (
     <Form>
-    <label>{reviews.length} reviews, sorted by </label>
+    <label>Sorted by </label>
     <select onChange= {e => handleSortChange(e)}>
       <option value="relevant">relevance</option>
       <option value="newest">newest</option>

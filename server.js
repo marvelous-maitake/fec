@@ -25,7 +25,7 @@ app.get('/*', (req, res) => {
     res.send(response.data);
   })
   .catch((error) => {
-    res.send(`Error making GET request: ${error}`);
+    res.sendFile(__dirname + '/client/dist/404page.html');
   })
 });
 

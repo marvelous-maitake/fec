@@ -91,9 +91,9 @@ export default function NewReviewForm({id}) {
         <div style={{paddingBottom: '20px'}}>
           <Recommend >
             <span>Do you recommend this product? </span>
-            <label htmlFor="yes">Yes</label>
+            <label htmlFor="yes"> Yes</label>
             <input onChange={() => setRecommended(true)} id="yes" name="recommend" type="radio" defaultChecked />
-            <label htmlFor="no">No</label>
+            <label htmlFor="no"> No</label>
             <input onChange={() => setRecommended(false)}id="no" name="recommend" type="radio" />
           </Recommend>
           <Star >
