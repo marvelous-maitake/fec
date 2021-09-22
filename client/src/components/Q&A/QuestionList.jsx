@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Question from './Question';
-import MoreQuestion from './MoreQuestion';
 
 const QuestionItem = styled.div`
-  border-bottom: solid black 1px;
   padding: 15px;
-  margin-bottom: 10x
+  margin-top: 15px
+  margin-bottom: 15x;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
 `;
 
-const MoreAnswerBtn = styled.div`
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 15px;
-`;
-
-
-const QuestionList = ({ product_id, questions, searchInput, questionCounter}) => {
-  const [answerCounter, setAnswserCounter] = useState(2)
+const QuestionList = ({ product_id, questions, searchInput, questionCounter }) => {
+  // const [answerCounter, setAnswserCounter] = useState(2)
 
   return (
-    <div className="question-list">
+    <div className="question-list" role="question-list">
       <div>
         {questions.slice(0, questionCounter)
           .map((question, index) => (
@@ -28,7 +22,6 @@ const QuestionList = ({ product_id, questions, searchInput, questionCounter}) =>
               <div>
                 <Question
                   product_id={product_id}
-                  answerCounter={answerCounter}
                   question={question}
                   key={question.question_id}
                 />
@@ -37,12 +30,6 @@ const QuestionList = ({ product_id, questions, searchInput, questionCounter}) =>
           ))
         }
       </div>
-      <MoreAnswerBtn
-        className="load-more-answer-btn"
-        onClick={() => {setAnswserCounter(answerCounter + 2)}}
-      >
-        <strong>LOAD MORE ANSWERS</strong>
-      </MoreAnswerBtn>
     </div>
 
   );

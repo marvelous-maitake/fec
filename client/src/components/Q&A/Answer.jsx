@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import moment from 'moment';
 import AnswerPhotos from './AnswerPhotos';
@@ -12,6 +13,11 @@ const afterClickedStyle = {
   fontWeight: "bold",
   cursor: "pointer"
 }
+
+const AContainer = styled.div`
+  font-size: 14px;
+  color: #7F7C82
+`;
 
 const Answer = ({ answerObj }) => {
   const [aHelpfulness, setAHelpfulness] = useState(answerObj.helpfulness);
@@ -27,16 +33,18 @@ const Answer = ({ answerObj }) => {
   }
 
   return (
-    <div className="answer-item">
-      <p>
-        <span><strong>A: </strong>{answerObj.body}</span>
-      </p>
-      <span>by {answerObj.answerer_name},  {moment(answerObj.date).utc().format('MMMM D, YYYY')} <span> | </span></span>
-      <span>Helpful?</span>
+    <div  data-testid="answer" className="answer-item">
+      <h4>
+        <strong>A: </strong>{answerObj.body}
+      </h4>
+      <AContainer>
+      <span >by {answerObj.answerer_name},  {moment(answerObj.date).utc().format('MMMM D, YYYY')} <span> | </span></span>
+      <span> Helpful? </span>
       {helpfulSubmit
         ? <span className="answer-helpfulness" style={afterClickedStyle} onClick={handAHelpfulClick}> Yes({aHelpfulness})</span>
         : <span className="answer-helpfulness" style={beforeClickedStyle} onClick={handAHelpfulClick}> Yes({aHelpfulness}) </span>}
       {answerObj.photos.length ? <AnswerPhotos answer={answerObj}/> : null}
+      </AContainer>
     </div>
   );
 };

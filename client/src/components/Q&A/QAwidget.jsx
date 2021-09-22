@@ -4,22 +4,43 @@ import styled from 'styled-components';
 import Search from './Search';
 import QuestionList from './QuestionList';
 import AddQuestion from './AddQuestion';
+import Overlay from './Overlay';
+
+
+
+const buttonStyle = {
+  textAlign:"center",
+  color: "#000000",
+  backgroundColor: "#ffffff",
+  padding: "10px",
+  cursor: "pointer",
+  marginTop: "10px",
+  marginRight: "10px",
+  marginBottom: "15px",
+  borderRadius: "5px",
+}
 
 const QuestionAndAnswer = styled.div`
- background-color: #FFFFFF;
+
 `;
 
 const Mdoal = styled.div`
   background-color: #F9F9F9;
 `;
 
+const Buttons = styled.div`
+  padding-bottom: 10px;
+`;
+
+
 const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [questionCounter, setQuestionCounter] = useState(2);
-  const [addQuestion, setAddQuestion] = useState(false)
   const [questionsToView, setQuestionsToView] = useState([])
+  const [addQuestion, setAddQuestion] = useState(false);
+  // const [isOverlay, setIsOverlay] = useState(false);
 
   useEffect(() => {
     axios.get(`/qa/questions?product_id=${product_id}&page=1&count=99`)
@@ -53,6 +74,7 @@ const QAwidget = ( { product_id } ) => {
       setQuestionsToView(newQlist);
     } else {
       setQuestionsToView(questions)
+      setQuestionCounter(2)
     }
   }
 
@@ -71,9 +93,11 @@ const QAwidget = ( { product_id } ) => {
     console.log(questionCounter);
   }
 
+
+
   return (
     <QuestionAndAnswer>
-      <h4 className="qa-header">QUESTIONS & ANSWERS</h4>
+      <h3 className="qa-header">QUESTIONS & ANSWERS</h3>
       <div>
         <Search
           handleSearchInput={handleSearchInput}
@@ -86,34 +110,41 @@ const QAwidget = ( { product_id } ) => {
         questions={questionsToView}
         questionCounter={questionCounter}
       />
-      {questionCounter >= questions.length
-        ? <button
-            className="load-more-questions-btn"
-            onClick={() => {handleQuestionBtn()}}
-          >
-            <strong>COLLAPSE QUESTIONS</strong>
-          </button>
-        : <button
-            className="load-more-questions-btn"
-            onClick={() => {handleQuestionBtn()}}
-          >
-            <strong>MORE ANSWERED QUESTIONS</strong>
-          </button>
-      }
-      <button
-        style={{margin: 10}}
-        className="add-question-btn"
-        onClick={() => setAddQuestion(true)}
-      >
-        <strong>
-          ADD A QUESTION +
-        </strong>
-      </button>
+      <Buttons>
+        {questionCounter >= questions.length
+          ? <button
+              style={buttonStyle}
+              data-testid="more-questions-btn"
+              className="load-more-questions-btn"
+              onClick={() => {handleQuestionBtn()}}
+            >
+              <strong>COLLAPSE QUESTIONS</strong>
+            </button>
+          : <button
+              style={buttonStyle}
+              data-testid="more-questions-btn"
+              className="load-more-questions-btn"
+              onClick={() => {handleQuestionBtn()}}
+            >
+              <strong>MORE ANSWERED QUESTIONS</strong>
+            </button>
+        }
+        <button
+          style={buttonStyle}
+          className="add-question-btn"
+          onClick={() => setAddQuestion(true)}
+        >
+          <strong>
+            ADD A QUESTION +
+          </strong>
+        </button>
+      </Buttons>
       <AddQuestion
         product_id={product_id}
         open={addQuestion}
         onClose={() => {setAddQuestion(false)}}
       />
+      {addQuestion ? <Overlay /> : null}
     </QuestionAndAnswer>
 
   )

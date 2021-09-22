@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
+  font-size: 20px;
   box-sizing: border-box;
   width: 90%;
   border: solid #000000 2px;
-  padding: 5px;
-  margin: 5px;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
 `;
 
 const Search = ({ searchInput, handleSearchInput }) => {
@@ -18,7 +20,7 @@ const Search = ({ searchInput, handleSearchInput }) => {
       >
         <Input
           className="qa-search-bar"
-          placeholder="HAVE A  QUESTION? SEARCH FOR ANSWERS..."
+          placeholder="Search Your Question Here"
 
         />
       </form>
