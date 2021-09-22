@@ -33,7 +33,7 @@ function Selectors({thumbnails, setCurrStyle, style, currStyle}) {
   }
 
   return (
-    <div>
+    <div id='Selectors'>
       {style.sale_price !== null ?
       (<p><strong style={{color: 'red'}}>${style.sale_price}</strong> <strike>${style.original_price}</strike></p>) :
       (<p>${style.original_price}</p>) }

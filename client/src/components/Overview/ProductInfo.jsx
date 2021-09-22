@@ -4,16 +4,18 @@ import { SharedContext } from '../../contexts/SharedContext';
 
 function ProductInfo({}) {
 
-  const { productId } = useContext(SharedContext);
+  let { productId } = useContext(SharedContext);
 
   const [info, setInfo] = useState(null);
 
   useEffect(() => {
+    if (productId === undefined) {
+      productId = 48432
+    }
     axios.get( `/products/${productId}`)
     .then(results => {
       setInfo(results.data);
-    })
-    .catch(err => console.log('get info error, ', err));
+    });
   }, [productId]);
 
   return (

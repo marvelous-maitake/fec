@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -12,7 +13,12 @@ function Navbar({ toggleTheme, searchFunc }) {
 
   const [search, setSearch] = useState('');
 
-  const searchProduct = () => {
+  const searchProduct = async () => {
+    const prod = await axios.get(`/products/${search}`);
+    if (typeof prod.data === 'string') {
+      alert('Invalid Product_id!');
+      return;
+    }
     searchFunc(search);
   }
 
@@ -28,7 +34,10 @@ function Navbar({ toggleTheme, searchFunc }) {
           placeholder="Search by Product Id"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={searchProduct}>Search</button>
+        <button id='searchButton' onClick={() => {
+          document.getElementById('search').value = '';
+          searchProduct();
+        }}>Search</button>
       </div>
     </Nav>
   );
