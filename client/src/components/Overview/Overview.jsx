@@ -22,9 +22,9 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function Overview() {
+export default function Overview(props) {
 
-  const { productId } = useContext(SharedContext);
+  let { productId } = useContext(SharedContext);
 
   const [styles, setStyles] = useState(null);
   const [currStyle, setCurrStyle] = useState(null);
@@ -41,12 +41,15 @@ export default function Overview() {
   };
 
   useEffect(() => {
+    if (productId === undefined) {
+      productId = 48432
+    }
     axios.get( `/products/${productId}/styles`)
     .then(r => {
       setStyles(r.data.results);
       setCurrStyle(defaultStyle(r.data.results))
     })
-    .catch(err => console.log('get info error, ', err));
+    .catch(err => console.log('get info error, '));
   }, [productId]);
 
   return (
