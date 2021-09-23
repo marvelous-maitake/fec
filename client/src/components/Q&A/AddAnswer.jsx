@@ -78,9 +78,7 @@ const AddAnswer = ({ isPopup, onClose, questionId }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(photoUrl)
     const photolinks = photoUrl.split(',').map(link => link.trim()) || []
-    console.log(photolinks);
     if (validationCheck()) {
       const newAnswer = {
         body: answerBody,
