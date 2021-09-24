@@ -45,7 +45,9 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.15.0",
+    "@testing-library/dom": "^8.6.0",
     "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.1",
     "babel-plugin-styled-components": "^1.13.2",
     "css-loader": "^6.2.0",
     "file-loader": "^6.2.0",

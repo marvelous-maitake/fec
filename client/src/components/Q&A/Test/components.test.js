@@ -12,6 +12,14 @@ import Question from '../Question.jsx';
 import QuestionList from '../QuestionList.jsx';
 import 'regenerator-runtime/runtime';
 import '@testing-library/jest-dom';
+import { SharedContext } from '../../../contexts/SharedContext';
+
+const customRender = (ui, {providerProps, ...renderOptions}) => {
+  return render(
+    <NameContext.Provider {...providerProps}>{ui}</NameContext.Provider>,
+    renderOptions,
+  )
+}
 
 
 describe('Questions&Answers', () => {
