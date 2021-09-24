@@ -40,8 +40,6 @@ function App() {
           <div className='QandA'>
             <QAwidget
                 product_id={productId}
-                // getListAnswers={getListAnswers}
-                // getListQuestions={getListQuestions}
               />
           </div>
           <RatingsAndReviews id={productId} />

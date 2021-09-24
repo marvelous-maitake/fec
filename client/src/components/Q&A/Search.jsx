@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
+  font-size: 20px;
   box-sizing: border-box;
   width: 90%;
   border: solid #000000 2px;
-  padding: 5px;
-  margin: 5px;
+  border-radius: 5px;
+  padding: 12px;
+  margin-bottom: 10px;
 `;
 
 const Search = ({ searchInput, handleSearchInput }) => {
   return (
     <div className="qa-search">
-      <form className="qa-search-form">
+      <form
+        onChange={e => handleSearchInput(e.target.value)}
+        className="qa-search-form"
+      >
         <Input
           className="qa-search-bar"
-          placeholder="HAVE A  QUESTION? SEARCH FOR ANSWERS..."
-          onChange={e => handleSearchInput(e.target.value)}
+          placeholder="Search Your Question Here"
+          results="0"
         />
       </form>
     </div>

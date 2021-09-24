@@ -3,23 +3,51 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search';
 import QuestionList from './QuestionList';
+import Modal from '../Modal';
+import AddQuestionModal from './AddQuestionModal';
+
+
+
+const buttonStyle = {
+  textAlign:"center",
+  color: "#000000",
+  backgroundColor: "#ffffff",
+  padding: "10px",
+  cursor: "pointer",
+  marginTop: "10px",
+  marginRight: "10px",
+  marginBottom: "15px",
+  borderRadius: "5px",
+}
 
 const QuestionAndAnswer = styled.div`
- background-color: #F7F6F2;
+
 `;
+
+const Mdoal = styled.div`
+  background-color: #F9F9F9;
+`;
+
+const Buttons = styled.div`
+  padding-bottom: 10px;
+`;
+
 
 const QAwidget = ( { product_id } ) => {
 
   const [questions, setQuestions] = useState([]);
-  const [answerCounter, setAnswserCounter] = useState(1)
   const [searchInput, setSearchInput] = useState('');
-  const [counter, setCounter] = useState(2);
+  const [questionCounter, setQuestionCounter] = useState(2);
+  const [questionsToView, setQuestionsToView] = useState([])
+  const [isAddQModalOpen, setIsAddQModalOpen] = useState(false);
+
 
   useEffect(() => {
-    axios.get(`/qa/questions?product_id=${product_id}&page=1&count=5`)
+    axios.get(`/qa/questions?product_id=${product_id}&page=1&count=99`)
       .then((response) => {
         setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
-        // console.log('Here is the questions: ', response);
+        setQuestionsToView(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
+        // console.log('questions: ', response.data.results)
       })
       .catch(console.log)
   }, [product_id])
@@ -28,27 +56,48 @@ const QAwidget = ( { product_id } ) => {
   const handleSearchInput = (searchInput) => {
     if (searchInput.length >= 3) {
       setSearchInput(searchInput);
-      filterQList(searchInput);
+
     } else {
       setSearchInput('')
     }
+    filterQList(searchInput);
   }
 
   // filter qustion list
   const filterQList = (searchInput) => {
-    const newQlist = questions.filter( qObj => {
-      if (qObj.question_body.toLowerCase().includes(searchInput.toLowerCase())) {
-        return qObj
-      };
-    });
-    setQuestions(newQlist);
-    console.log('here is the new Q list: ', questions);
+    if (searchInput) {
+      const newQlist = questions.filter( qObj => {
+        if (qObj.question_body.toLowerCase().includes(searchInput.toLowerCase())) {
+          return qObj
+        };
+      });
+      setQuestionsToView(newQlist);
+    } else {
+      setQuestionsToView(questions)
+      setQuestionCounter(2)
+    }
   }
+
+  // Add-question modal on submit
+  const handleQModalSubmit = () => {
+    setAddQuestion(false)
+  }
+
+  // handle "SHOW MORE QUESTIONS" button
+  const handleQuestionBtn = (e) => {
+    if (questionCounter === questions.length) {
+      setQuestionCounter(2)
+    } else {
+      setQuestionCounter(questionCounter + 2)
+    }
+    console.log(questionCounter);
+  }
+
 
 
   return (
     <QuestionAndAnswer>
-      <h4 className="qa-header">QUESTIONS & ANSWERS</h4>
+      <h3 className="qa-header">QUESTIONS & ANSWERS</h3>
       <div>
         <Search
           handleSearchInput={handleSearchInput}
@@ -58,35 +107,49 @@ const QAwidget = ( { product_id } ) => {
       <QuestionList
         product_id={product_id}
         searchInput={searchInput}
-        questions={questions}
-        counter={counter}
-        answerCounter = {answerCounter}
+        questions={questionsToView}
+        questionCounter={questionCounter}
       />
-      <button
-        className="more-answer-btn"
-        onClick={() => setAnswserCounter(answerCounter + 1)}
-      ><strong>
-        LOAD MORE ANSWERS
-        </strong>
-      </button>
-      <button
-        className="load-more-questions-btn"
-        onClick={() => setCounter(counter + 1)}
-      >
-        <strong>
-          SHOW MORE QUESTIONS
-        </strong>
-      </button>
-      <button
-        className="add-question-btn"
-      >
-        <strong>
-          ADD A QUESTION +
-        </strong>
-      </button>
-
-
+      <Buttons>
+        {questionCounter >= questions.length
+          ? <button
+              style={buttonStyle}
+              data-testid="more-questions-btn"
+              className="load-more-questions-btn"
+              onClick={() => {setQuestionCounter(2)}}
+            >
+              <strong>COLLAPSE QUESTIONS</strong>
+            </button>
+          : <button
+              style={buttonStyle}
+              data-testid="more-questions-btn"
+              className="load-more-questions-btn"
+              onClick={() => {handleQuestionBtn()}}
+            >
+              <strong>MORE ANSWERED QUESTIONS</strong>
+            </button>
+        }
+        <button
+          style={buttonStyle}
+          className="add-question-btn"
+          onClick={(e) => setIsAddQModalOpen(true)}
+        >
+          <strong>
+            ADD A QUESTION +
+          </strong>
+        </button>
+      </Buttons>
+      {isAddQModalOpen && (
+        <Modal isModalOpen={isAddQModalOpen} setIsModalOpen={setIsAddQModalOpen}>
+          <AddQuestionModal
+            product_id={product_id}
+            open={isAddQModalOpen}
+            onClose={() => {setIsAddQModalOpen(false)}}
+          />
+        </Modal>
+      )}
     </QuestionAndAnswer>
+
   )
 }
 
