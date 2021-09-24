@@ -6,6 +6,7 @@ import Star from './RelatedProducts/Star';
 import { MdClose } from 'react-icons/md';
 import Modal from './Modal';
 import ComparisonTable from './RelatedProducts/ComparisonTable';
+import RatingStar from './RatingsAndReviews/Ratings/RatingStar';
 
 const Container = styled.div`
   display: flex;
@@ -78,6 +79,12 @@ const ProductCard = ({ product_id, mode }) => {
   const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
   const [isModalOpen, setIsModalOpen] = useState(() => false);
+  const [meta, setMeta] = useState(() => null);
+  const [reviews, setReviews] = useState(() => null);
+
+  const getMeta = (product_id) => {
+    return axios.get(`/reviews/meta?product_id=${product_id}`);
+  };
 
   const getStyles = (product_id) => {
     return axios.get(`/products/${product_id}/styles`);
@@ -85,6 +92,10 @@ const ProductCard = ({ product_id, mode }) => {
 
   const getProductInfo = (product_id) => {
     return axios.get(`/products/${product_id}`);
+  }
+
+  const getReviews = (product_id) => {
+    return axios.get(`/reviews?product_id=${product_id}`);
   }
 
   const handleAdd = () => {
@@ -118,14 +129,18 @@ const ProductCard = ({ product_id, mode }) => {
     if (!isAddButton) {
       Promise.all([
         getProductInfo(product_id),
-        getStyles(product_id)
+        getStyles(product_id),
+        getMeta(product_id),
+        getReviews(product_id)
       ])
-      .then(([info, styles]) => {
+      .then(([info, styles, meta, reviewsData]) => {
         setCategory(info.data.category);
         setName(info.data.name);
         setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
         setPrice(styles.data.results[0].original_price);
         setSalePrice(styles.data.results[0].sale_price);
+        setMeta(meta.data);
+        setReviews(reviewsData.data.results.length);
         setIsLoaded(true);
       })
       .catch((err) => console.error(err));
@@ -170,11 +185,13 @@ const ProductCard = ({ product_id, mode }) => {
             </div>}
           </StyledThumbnail>
           <br />
-          {salePrice ? <SalePrice /> : <Price />}
-          <br />
           {name}
           <br />
+          <RatingStar mode='ProductCard' ratings={meta.ratings} /> <span>({reviews})</span>
+          <br />
           {category}
+          <br />
+          {salePrice ? <SalePrice /> : <Price />}
         </StyledCardContainer>
       </StyledProductCard> : <div></div>}
     </>)

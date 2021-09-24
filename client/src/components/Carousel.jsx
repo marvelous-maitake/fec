@@ -51,6 +51,7 @@ const Arrow = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 48px;
+  cursor: pointer;
 `
 
 const StyledLeftArrow = styled(Arrow)`
