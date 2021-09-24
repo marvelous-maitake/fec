@@ -139,7 +139,7 @@ const ProductCard = ({ product_id, mode }) => {
         if (styles.data.results[0].photos[0].thumbnail_url) {
           setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
         } else {
-          setPreviewImage('/client/dist/unavailableImg.jpg');
+          setPreviewImage('https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg');
         }
         // setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
         setPrice(styles.data.results[0].original_price);
