@@ -136,7 +136,12 @@ const ProductCard = ({ product_id, mode }) => {
       .then(([info, styles, meta, reviewsData]) => {
         setCategory(info.data.category);
         setName(info.data.name);
-        setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
+        if (styles.data.results[0].photos[0].thumbnail_url) {
+          setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
+        } else {
+          setPreviewImage('/client/dist/unavailableImg.jpg');
+        }
+        // setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
         setPrice(styles.data.results[0].original_price);
         setSalePrice(styles.data.results[0].sale_price);
         setMeta(meta.data);
