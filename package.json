@@ -29,6 +29,7 @@
     "babel-jest": "^27.1.1",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.1.1",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "msw": "^0.35.0",
