@@ -6,10 +6,10 @@ import sample from './SampleData.js';
 import Search from '../Search.jsx';
 import QAwidget from '../QAwidget.jsx';
 import Answer from '../Answer.jsx';
-import AddQuestion from '../AddQuestion.jsx';
-import AddAnswer from '../AddAnswer.jsx';
 import Question from '../Question.jsx';
 import QuestionList from '../QuestionList.jsx';
+import AddQuestionModal from '../AddQuestionModal.jsx';
+import AddAnswerModal from '../AddAnswerModal.jsx';
 import 'regenerator-runtime/runtime';
 import '@testing-library/jest-dom';
 import { SharedContext } from '../../../contexts/SharedContext';
@@ -26,22 +26,27 @@ describe('Questions&Answers', () => {
 
   afterEach(cleanup);
 
-  it('should render Q&A component', async () => {
+  test('should render Q&A component', async () => {
     const div = document.createElement('div');
     ReactDOM.render(<QAwidget product_id={sample.questions.product_id}/>, div)
   });
 
-  it('should render Search component by placeholder text', async () => {
+  test('should render Search component by placeholder text', async () => {
     const { getByPlaceholderText } = render(<Search />);
     expect(getByPlaceholderText(/Search Your Question Here/i)).toBeInTheDocument();
   });
 
-  it('should render AddQuestion component with expected text', async () => {
-    const { getByText } = render(<AddQuestion open={true} />);
+  test('should render AddQuestionModal component with expected text', async () => {
+    const { getByText } = render(<AddQuestionModal open={true} />);
     expect(getByText(/Ask Your Question/i)).toBeInTheDocument();
   });
 
-  it('should render Question component with expected role', async () => {
+  test('should render AddAnswerModal component with expected text', async () => {
+    const { getByText } = render(<AddAnswerModal isPopup={true} />);
+    expect(getByText(/Submit Your Answer/i)).toBeInTheDocument();
+  });
+
+  test('should render Question component with expected role', async () => {
     const { getByRole } = render(<Question question={sample.questions.results[0]} />);
     expect(getByRole(/question-Obj/i)).toBeInTheDocument();
   });
@@ -54,13 +59,13 @@ describe('Questions&Answers', () => {
     expect(await screen.getByRole(/add-answer-btn/i)).toBeInTheDocument();
   });
 
-  it('should loads two answers for initializing render', async () => {
+  test('should loads two answers for initializing render', async () => {
     const { getAllByTestId } = render(<Question question={sample.questions.results[0]} />);
     const answers = getAllByTestId('answer');
     expect(answers.length).toBe(2);
   });
 
-  it('should loads additional questions when the MORE ANSWERED QUESTIONS button is clicked', async () => {
+  test('should loads additional questions when the MORE ANSWERED QUESTIONS button is clicked', async () => {
     const { getByText, getAllByTestId } = render((<Question question={sample.questions.results[0]} />));
     const loadMoreAnswerBtn = getByText(/SHOW MORE ANSWERS/i)
     fireEvent.click(loadMoreAnswerBtn);
