@@ -30,7 +30,6 @@ const StyledCardContainer = styled.div`
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 4%;
   // border-radius: 10px;
   margin-top: 10px;
@@ -186,7 +185,7 @@ const ProductCard = ({ product_id, mode }) => {
       </Modal>
       )}
       {isAddButton ?  <StyledProductCard>
-        <StyledCardContainer onClick={handleAdd} style={{ cursor: 'pointer' }}>
+        <StyledCardContainer className="card" onClick={handleAdd} style={{ cursor: 'pointer' }}>
           <StyledThumbnail>
             <span style={{ fontSize: '15vh' }}>+</span>
           </StyledThumbnail>
@@ -198,7 +197,7 @@ const ProductCard = ({ product_id, mode }) => {
         </StyledCardContainer>
       </StyledProductCard> :
       isLoaded ? <StyledProductCard>
-        <StyledCardContainer onClick={() => {
+        <StyledCardContainer className="card" onClick={() => {
           setProductId(product_id);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>

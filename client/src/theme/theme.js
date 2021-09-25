@@ -26,16 +26,21 @@ export const GlobalStyles = createGlobalStyle`
   a&:hover {
     opacity: 1;
   }
+  .card {
+    box-shadow: ${({ theme }) => theme.boxShadow};
+  }
 `;
 
 export const lightTheme = {
   body: "#f0f0f0",
   text: "#121212",
-  backgroundColor: "#f0f0f0"
+  backgroundColor: "#f0f0f0",
+  boxShadow: "0 0 10px rgba(0,0,0,0.4)",
 };
 
 export const darkTheme = {
   body: "#282c39",
   text: "#f1f1f1",
-  backgroundColor: "#282c39"
+  backgroundColor: "#282c39",
+  boxShadow: "0 0 10px rgba(255,255,255,0.5)"
 };
