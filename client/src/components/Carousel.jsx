@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { CSSTransition } from 'react-transition-group';
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
@@ -51,6 +52,7 @@ const Arrow = styled.div`
   text-align: center;
   vertical-align: middle;
   line-height: 48px;
+  cursor: pointer;
 `
 
 const StyledLeftArrow = styled(Arrow)`

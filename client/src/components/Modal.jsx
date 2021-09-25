@@ -26,12 +26,18 @@ const ModalWrapper = styled.div`
   overflow: scroll;
   padding: 60px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-  background: #fff;
+  background: #f0f0f0;
   color: #000;
   display: grid;
   position: relative;
   z-index: 10;
   border-radius: 10px;
+
+  background-image: url("https://i.imgur.com/z3S1BY4.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 10%;
 `;
 
 const ModalContent = styled.div`
@@ -63,6 +69,11 @@ const CloseModalButton = styled(MdClose)`
   height: 32px;
   padding: 0;
   z-index: 10;
+  transition: 0.3s;
+
+  &:hover {
+    color: pink;
+  }
 `;
 
 const Modal = ({ isModalOpen, setIsModalOpen, children }) => {

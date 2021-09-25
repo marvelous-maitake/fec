@@ -34,7 +34,6 @@ const ReviewsDiv = styled.div`
 export default function RatingsAndReviews({id}) {
   return (
     <>
-    <Title>RATINGS & REVIEWS</Title>
     <Wrapper id="RatingsAndReviews">
       <RatingsDiv>
         <Ratings id={id}/>

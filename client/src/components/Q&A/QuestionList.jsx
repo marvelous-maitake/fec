@@ -6,8 +6,8 @@ const QuestionItem = styled.div`
   padding: 30px;
   margin-top: 15px
   margin-bottom: 15x;
-  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
+  margin: 20px;
 `;
 
 const QuestionList = ({ product_id, questions, searchInput, questionCounter }) => {
@@ -18,7 +18,7 @@ const QuestionList = ({ product_id, questions, searchInput, questionCounter }) =
       <div>
         {questions.slice(0, questionCounter)
           .map((question, index) => (
-            <QuestionItem className="question-item" key={index}>
+            <QuestionItem className="question-item card" key={index}>
               <div>
                 <Question
                   product_id={product_id}

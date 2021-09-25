@@ -30,13 +30,12 @@ const Outfit = () => {
 
   return (
     <div>
-      <h4>YOUR OUTFIT</h4>
       {isLoaded ? <Carousel products={currentOutfit} mode='Outfit'>
         <ProductCard product_id='addToOutfit' mode='Outfit'/>
         {currentOutfit.map((product) => (
           <ProductCard key={product} product_id={product} mode='Outfit'/>
         ))}
-      </Carousel> : <div></div>}
+      </Carousel> : <img src='https://i.imgur.com/7sMnF66.gif' />}
     </div>
   )
 }

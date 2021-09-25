@@ -1,10 +1,12 @@
 const path = require('path')
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, 'client/src', 'index.jsx'),
   output: {
     path: path.resolve(__dirname, 'client/dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: path.resolve(__dirname, 'client/dist')
   },
   module: {
     rules: [
@@ -27,6 +29,10 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       }
     ]
   },

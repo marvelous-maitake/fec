@@ -6,7 +6,7 @@ import { SharedContext } from '../../contexts/SharedContext';
 
 const customRender = (ui, {providerProps, ...renderOptions}) => {
   return render(
-    <NameContext.Provider {...providerProps}>{ui}</NameContext.Provider>,
+    <SharedContext.Provider {...providerProps}>{ui}</SharedContext.Provider>,
     renderOptions,
   )
 }

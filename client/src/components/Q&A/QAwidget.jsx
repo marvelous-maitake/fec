@@ -6,8 +6,6 @@ import QuestionList from './QuestionList';
 import Modal from '../Modal';
 import AddQuestionModal from './AddQuestionModal';
 
-
-
 const buttonStyle = {
   textAlign:"center",
   color: "#000000",
@@ -21,11 +19,6 @@ const buttonStyle = {
 }
 
 const QuestionAndAnswer = styled.div`
-
-`;
-
-const Mdoal = styled.div`
-  background-color: #F9F9F9;
 `;
 
 const Buttons = styled.div`
@@ -95,7 +88,6 @@ const QAwidget = ( { product_id } ) => {
 
   return (
     <QuestionAndAnswer>
-      <h3 className="qa-header">QUESTIONS & ANSWERS</h3>
       <div>
         <Search
           handleSearchInput={handleSearchInput}
@@ -116,7 +108,7 @@ const QAwidget = ( { product_id } ) => {
               className="load-more-questions-btn"
               onClick={() => {setQuestionCounter(2)}}
             >
-              <strong>COLLAPSE QUESTIONS</strong>
+              <strong>collapse questions</strong>
             </button>
           : <button
               style={buttonStyle}
@@ -124,7 +116,7 @@ const QAwidget = ( { product_id } ) => {
               className="load-more-questions-btn"
               onClick={() => {handleQuestionBtn()}}
             >
-              <strong>MORE ANSWERED QUESTIONS</strong>
+              <strong>more questions</strong>
             </button>
         }
         <button
@@ -133,7 +125,7 @@ const QAwidget = ( { product_id } ) => {
           onClick={(e) => setIsAddQModalOpen(true)}
         >
           <strong>
-            ADD A QUESTION +
+            add a question +
           </strong>
         </button>
       </Buttons>

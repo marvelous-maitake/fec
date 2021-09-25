@@ -39,10 +39,10 @@ const Answer = ({ answerObj }) => {
       </h4>
       <AContainer>
       <span >by {answerObj.answerer_name},  {moment(answerObj.date).utc().format('MMMM D, YYYY')} <span> | </span></span>
-      <span> Helpful? </span>
+      <span> helpful? </span>
       {helpfulSubmit
-        ? <span className="answer-helpfulness" style={afterClickedStyle} onClick={handAHelpfulClick}> Yes({aHelpfulness})</span>
-        : <span className="answer-helpfulness" style={beforeClickedStyle} onClick={handAHelpfulClick}> Yes({aHelpfulness}) </span>}
+        ? <span className="answer-helpfulness" style={afterClickedStyle} onClick={handAHelpfulClick}> yes({aHelpfulness})</span>
+        : <span className="answer-helpfulness" style={beforeClickedStyle} onClick={handAHelpfulClick}> yes({aHelpfulness}) </span>}
       {answerObj.photos.length ? <AnswerPhotos answer={answerObj}/> : null}
       </AContainer>
     </div>

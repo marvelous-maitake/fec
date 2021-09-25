@@ -13,12 +13,22 @@ const Wrapper = styled.div`
   grid-template-areas: "ImageGallery ProductTile";
   height: 80vh;
   gap: 4%;
+  margin: 10px;
 
   .card {
     padding: 4%;
     border-radius: 10px;
   }
 `;
+
+const LoadingScreen =styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+`
 
 export default function Overview(props) {
   let { productId } = useContext(SharedContext);
@@ -51,27 +61,24 @@ export default function Overview(props) {
   }, [productId]);
 
   return (
-    <Wrapper className="Overview">
-      {currStyle !== null ? (
-        <>
-          <ImageGallery
-            className="card"
-            id="ImageGallery"
-            photos={styles[currStyle].photos.map((x) => x.url)}
+    <Wrapper className='Overview'>
+      {currStyle !== null ?
+      (<>
+        <ImageGallery id='ImageGallery'
+        photos={styles[currStyle].photos.map(x => x.url || 'https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg')}
+        />
+        <div className='ProductCard card'>
+          <ProductInfo />
+          <Selectors
+          thumbnails={styles.map(x => x.photos[0].thumbnail_url || 'https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg')}
+          setCurrStyle={setCurrStyle}
+          style={styles[currStyle]}
+          currStyle={currStyle}
           />
-          <div className="ProductCard card">
-            <ProductInfo />
-            <Selectors
-              thumbnails={styles.map((x) => x.photos[0].thumbnail_url)}
-              setCurrStyle={setCurrStyle}
-              style={styles[currStyle]}
-              currStyle={currStyle}
-            />
-          </div>
-        </>
-      ) : (
-        <div></div>
-      )}
+        </div>
+      </>) :
+      (<LoadingScreen><img src='https://i.imgur.com/7sMnF66.gif' /></LoadingScreen>)
+      }
     </Wrapper>
   );
 }

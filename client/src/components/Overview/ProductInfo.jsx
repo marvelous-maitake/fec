@@ -21,7 +21,7 @@ function ProductInfo({}) {
   return (
     info !== null ?
     (<div>
-      <p><a href='#RatingsAndReviews'>Read all Reviews</a></p>
+      <p><a href='#RatingsAndReviews'>read all reviews</a></p>
         <p>CATEGORY {'>'} <em>{info.category}</em></p>
         <h1>{info.name}</h1>
         <p>{info.description}</p>

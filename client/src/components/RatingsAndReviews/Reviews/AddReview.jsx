@@ -25,9 +25,9 @@ export default function({reviews, setReviews, moreReviews, sortBy, getMore, id})
   return (
     <Wrapper>
       {moreReviews
-      ? <Button onClick={moreReviewsClick}>More reviews</Button>
+      ? <Button onClick={moreReviewsClick}>more reviews</Button>
       : null}
-      <Button onClick={toggleForm} >Add review</Button>
+      <Button onClick={toggleForm} >add review</Button>
       {showForm
       ? <NewReviewForm id={id}/>
       : null}

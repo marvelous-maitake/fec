@@ -13,6 +13,7 @@ const Gallery = styled.div`
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
+  transition: 0.3s;
   cursor: zoom-in;
 `;
 
@@ -29,6 +30,7 @@ const Arrow = styled.span`
   font-size: 5vh;
   cursor: pointer;
   text-align: center;
+  transition: 0.3s;
 `;
 
 const Thumbnails = styled.div`
@@ -40,16 +42,19 @@ const Thumbnails = styled.div`
   justify-content: space-evenly;
   gap: 1%;
   z-index: 2;
+  transition: 0.3s;
 `;
 
 const ActiveThumbnail = styled.div`
   height: 7.5vw;
   border-radius: 1vw;
   width: 7.5vw;
-  border: solid green 4px;
+  border: solid pink 4px;
   cursor: pointer;
   background-image: url(${(props) => props.src});
   background-size: cover;
+  transition: 0.3s;
+  opacity: 1;
 `;
 
 const Thumbnail = styled.div`
@@ -60,6 +65,12 @@ const Thumbnail = styled.div`
   border: solid 2px;
   background-image: url(${(props) => props.src});
   background-size: cover;
+  transition: 0.3s;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export { Gallery, Carousel, Arrow, Thumbnails, ActiveThumbnail, Thumbnail };
