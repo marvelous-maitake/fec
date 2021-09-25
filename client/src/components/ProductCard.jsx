@@ -13,11 +13,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  transition: 0.3s;
 `
 
 const StyledProductCard = styled.div`
   text-align: center;
   position: relative;
+  transition: 0.3s;
 `
 
 const StyledCardContainer = styled.div`
@@ -30,9 +32,18 @@ const StyledCardContainer = styled.div`
   margin-right: auto;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 4%;
-  border-radius: 10px;
+  // border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  opacity: 0.8;
+  transition: 0.3s;
+  border: 2px solid rgba(255,192,203,0);
+
+  &:hover {
+    border: 2px solid rgba(255,192,203,1);
+    opacity: 1;
+  }
+
 `
 
 const StyledThumbnail = styled.div`
@@ -44,6 +55,7 @@ const StyledThumbnail = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   position: relative;
+  transition: 0.3s;
 `
 
 const StyledButton = styled.button`
@@ -63,7 +75,12 @@ const RemoveButton = styled(MdClose)`
   height: 1.5vw;
   z-index: 1;
   cursor: pointer;
-  color: white;
+  transition: 0.3s;
+  color: red;
+
+  &:hover {
+    color: pink;
+  }
 `;
 
 const ProductCard = ({ product_id, mode }) => {
@@ -141,7 +158,6 @@ const ProductCard = ({ product_id, mode }) => {
         } else {
           setPreviewImage('https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg');
         }
-        // setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
         setPrice(styles.data.results[0].original_price);
         setSalePrice(styles.data.results[0].sale_price);
         setMeta(meta.data);
@@ -172,11 +188,14 @@ const ProductCard = ({ product_id, mode }) => {
       {isAddButton ?  <StyledProductCard>
         <StyledCardContainer onClick={handleAdd} style={{ cursor: 'pointer' }}>
           <StyledThumbnail>
-            <span style={{ position: 'relative', top: '30%' }}>Add to Outfit<br />
-            +
-            <br />
-            </span>
+            <span style={{ fontSize: '10em' }}>+</span>
           </StyledThumbnail>
+            <span>Add To Outfit</span>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </StyledCardContainer>
       </StyledProductCard> :
       isLoaded ? <StyledProductCard>
@@ -190,7 +209,7 @@ const ProductCard = ({ product_id, mode }) => {
             </div>}
           </StyledThumbnail>
           <br />
-          {name}
+          <strong>{name}</strong>
           <br />
           <RatingStar mode='ProductCard' ratings={meta.ratings} /> <span>({reviews})</span>
           <br />

@@ -14,7 +14,7 @@ const ActiveThumbnail = styled.div`
   cursor: pointer;
   background-image: url(${props => props.src});
   background-size: cover;
-  border: solid green 4px;
+  border: solid pink 4px;
 `;
 
 const Thumbnail = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from 'axios';;
 
 const StyledCarouselContainer = styled.div`
   width: 100%;

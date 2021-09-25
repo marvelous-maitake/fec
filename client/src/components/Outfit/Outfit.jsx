@@ -36,7 +36,7 @@ const Outfit = () => {
         {currentOutfit.map((product) => (
           <ProductCard key={product} product_id={product} mode='Outfit'/>
         ))}
-      </Carousel> : <div></div>}
+      </Carousel> : <img src='https://i.imgur.com/7sMnF66.gif' />}
     </div>
   )
 }

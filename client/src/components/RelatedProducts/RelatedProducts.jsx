@@ -33,7 +33,7 @@ const RelatedProducts = () => {
         {relatedProducts.map((product) => (
           <ProductCard key={product} product_id={product} mode='RelatedProducts'/>
         ))}
-      </Carousel> : <div></div>}
+      </Carousel> : <img src='https://i.imgur.com/7sMnF66.gif' />}
     </>
   )
 }

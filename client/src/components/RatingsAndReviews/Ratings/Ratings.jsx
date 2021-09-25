@@ -37,5 +37,5 @@ export default function Ratings({id}) {
           <ChartRating ratings={meta.ratings}/>
           <Characteristics characteristics={meta.characteristics}/>
         </Wrapper>
-      : <h1>No Ratings Yet</h1>;
+      : null;
 }

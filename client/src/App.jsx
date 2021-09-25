@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { lightTheme, darkTheme, GlobalStyles } from "./theme/theme";
 
@@ -33,7 +33,7 @@ function App() {
         <GlobalStyles />
         <div className="App">
           <SharedContext.Provider value={{ productId, setProductId, currentOutfit, setCurrentOutfit }}>
-          <Navbar toggleTheme={toggleTheme} searchFunc={changeProdId}/>
+          <Navbar theme={theme} toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
           <RelatedProducts />
           <Outfit />

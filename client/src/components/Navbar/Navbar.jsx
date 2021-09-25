@@ -1,15 +1,31 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Title from './Title';
+import Logo from './Logo';
+import Toggle from "react-toggle";
 
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 2%;
   z-index: 12;
+  align-items: center;
+  padding: 1%;
 `;
 
-function Navbar({ toggleTheme, searchFunc }) {
+const StyledMonkey = styled.div`
+  font-size: 2em;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: right;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+`
+
+function Navbar({ theme, toggleTheme, searchFunc }) {
 
   const [search, setSearch] = useState('');
 
@@ -22,16 +38,22 @@ function Navbar({ toggleTheme, searchFunc }) {
     searchFunc(search);
   }
 
+  const isDarkTheme = theme === 'dark';
+
   return (
     <Nav>
       <div>
-        Logo <button onClick={() => toggleTheme()}>Toggle Theme</button>
+        <Logo />
       </div>
+      <Title />
       <div>
+      <div>
+      {isDarkTheme ? <StyledMonkey onClick={toggleTheme}>🐵</StyledMonkey> : <StyledMonkey onClick={toggleTheme}>🙈</StyledMonkey>}
+      </div>
         <input
           type="text"
           id="search"
-          placeholder="Search by Product Id"
+          placeholder="Enter ID..."
           onChange={(e) => setSearch(e.target.value)}
         />
         <button id='searchButton' onClick={() => {

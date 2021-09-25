@@ -22,6 +22,15 @@ const Wrapper = styled.div`
   }
 `;
 
+const LoadingScreen =styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+`
+
 export default function Overview(props) {
 
   let { productId } = useContext(SharedContext);
@@ -69,7 +78,7 @@ export default function Overview(props) {
           />
         </div>
       </>) :
-      (<div></div>)
+      (<LoadingScreen><img src='https://i.imgur.com/7sMnF66.gif' /></LoadingScreen>)
       }
     </Wrapper>
   );

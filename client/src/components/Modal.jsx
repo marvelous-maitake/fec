@@ -26,7 +26,7 @@ const ModalWrapper = styled.div`
   overflow: scroll;
   padding: 60px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-  background: #fff;
+  background: #f0f0f0;
   color: #000;
   display: grid;
   position: relative;
@@ -63,6 +63,11 @@ const CloseModalButton = styled(MdClose)`
   height: 32px;
   padding: 0;
   z-index: 10;
+  transition: 0.3s;
+
+  &:hover {
+    color: pink;
+  }
 `;
 
 const Modal = ({ isModalOpen, setIsModalOpen, children }) => {
