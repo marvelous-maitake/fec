@@ -11,7 +11,6 @@ import ChartRating from './Ratings/ChartRating'
 import 'regenerator-runtime/runtime';
 import '@testing-library/jest-dom';
 
-
 describe('Ratings And Reviews', () => {
 
   afterEach(cleanup);

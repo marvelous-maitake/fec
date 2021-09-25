@@ -26,11 +26,8 @@ const QContainer = styled.div`
 `;
 
 const addAnswerStyle =  {
-  color: "#7F7C82",
   margin: "5px",
-  backgroundColor: "#fff",
   cursor: "pointer",
-  borderColor: "#F8F0DF",
   float: "right",
 }
 

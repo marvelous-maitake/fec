@@ -45,7 +45,7 @@ const ComparisonTable = ({ productId, name, category, price, salePrice }) => {
   return (
     <>
     {isLoaded ? <>
-      <h4>COMPARING</h4>
+      <h3>COMPARING</h3>
       <StyledTable>
         <tbody>
           <tr>
