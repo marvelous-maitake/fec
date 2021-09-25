@@ -45,7 +45,7 @@ const Button = styled.button`
   margin-bottom: 15px;
 `;
 
-const AddQuestionModal = ({ open, onClose, product_id, handleQModalSubmit }) => {
+const AddQuestionModal = ({ open, onClose, product_id }) => {
   const [questionBody, setQuestionBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');

@@ -29,6 +29,7 @@
     "babel-jest": "^27.1.1",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.1.1",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "msw": "^0.35.0",
@@ -45,7 +46,9 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.15.0",
+    "@testing-library/dom": "^8.6.0",
     "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.1",
     "babel-plugin-styled-components": "^1.13.2",
     "css-loader": "^6.2.0",
     "file-loader": "^6.2.0",

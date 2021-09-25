@@ -2,7 +2,6 @@ import React, { useState }from 'react';
 import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
-import AddAnswer from './AddAnswer';
 import AddAnswerModal from './AddAnswerModal';
 import Modal from '../Modal';
 
