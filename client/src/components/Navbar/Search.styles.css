@@ -1,21 +1,21 @@
 .box {
-    position: fixed;
-    top: 10%;
-    right: 2%;
-    transform: translate(-50%,-50%);
+  position: fixed;
+  top: 10%;
+  right: 4%;
+  transform: translate(-50%, -50%);
 }
 
 .input {
-    padding: 10px;
-    width: 80px;
-    height: 80px;
-    background: none;
-    border: 4px solid pink;
-    border-radius: 50px;
-    box-sizing: border-box;
-    font-size: 26px;
-    outline: none;
-    transition: .5s;
+  padding: 10px;
+  width: 80px;
+  height: 80px;
+  background: none;
+  border: 4px solid pink;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 26px;
+  outline: none;
+  transition: 0.5s;
 }
 
 input::placeholder {
@@ -23,8 +23,8 @@ input::placeholder {
 }
 
 .box:hover input {
-    width: 200px;
-    border-radius: 10px;
+  width: 200px;
+  border-radius: 10px;
 }
 
 .box:hover input::placeholder {
@@ -32,16 +32,16 @@ input::placeholder {
 }
 
 i {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translate(-50%,-50%);
-    font-size: 26px;
-    color: pink;
-    transition: .2s;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(-50%, -50%);
+  font-size: 26px;
+  color: pink;
+  transition: 0.2s;
 }
 
 .box:hover i {
-    opacity: 0;
-    z-index: -1;
+  opacity: 0;
+  z-index: -1;
 }
