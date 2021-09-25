@@ -15,6 +15,7 @@ const Gallery = styled.div`
   background-position-x: center;
   background-position-y: center;
   transition: 0.3s;
+  cursor: zoom-in;
 `;
 
 const Carousel = styled.div`

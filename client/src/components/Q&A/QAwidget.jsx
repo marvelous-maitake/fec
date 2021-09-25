@@ -54,7 +54,6 @@ const QAwidget = ( { product_id } ) => {
       .then((response) => {
         setQuestions(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
         setQuestionsToView(response.data.results.sort((a, b) => (a.helpness - b.helpness)))
-        // console.log('questions: ', response.data.results)
       })
       .catch(console.log)
   }, [product_id])
@@ -97,7 +96,6 @@ const QAwidget = ( { product_id } ) => {
     } else {
       setQuestionCounter(questionCounter + 2)
     }
-    console.log(questionCounter);
   }
 
 

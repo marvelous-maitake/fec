@@ -3,3 +3,4 @@ client/dist/bundle.js
 client/dist/bundle.js.map
 server/config.js
 coverage
+aws-demo.pem

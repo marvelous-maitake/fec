@@ -56,9 +56,7 @@ const AddAnswerModal = ({ isPopup, onClose, questionId }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(photoUrl)
     const photolinks = photoUrl.split(',').map(link => link.trim()) || []
-    console.log(photolinks);
     if (validationCheck()) {
       const newAnswer = {
         body: answerBody,
@@ -66,8 +64,6 @@ const AddAnswerModal = ({ isPopup, onClose, questionId }) => {
         email: email,
         photos: photolinks
       };
-
-      console.log('new A: ', newAnswer)
       axios.post(`/qa/questions/${questionId}/answers`, newAnswer)
       .then((res) => {
         console.log('new answer was sent to API:', res.data)
