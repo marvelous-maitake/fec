@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.backgroundColor};
     transition: background 0.2s ease-in, color 0.2s ease-in;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -29,10 +30,12 @@ export const GlobalStyles = createGlobalStyle`
 
 export const lightTheme = {
   body: "#f0f0f0",
-  text: "#121212"
+  text: "#121212",
+  backgroundColor: "#f0f0f0"
 };
 
 export const darkTheme = {
   body: "#282c39",
-  text: "#f1f1f1"
+  text: "#f1f1f1",
+  backgroundColor: "#282c39"
 };

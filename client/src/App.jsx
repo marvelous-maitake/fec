@@ -32,16 +32,28 @@ function App() {
       <>
         <GlobalStyles />
         <div className="App">
-          <SharedContext.Provider value={{ productId, setProductId, currentOutfit, setCurrentOutfit }}>
+          <SharedContext.Provider value={{ productId, setProductId, currentOutfit, setCurrentOutfit, theme }}>
           <Navbar theme={theme} toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>
+          <br />
+          <br />
+          <br />
           <RelatedProducts />
+          <br />
+          <br />
+          <br />
           <Outfit />
+          <br />
+          <br />
+          <br />
           <div className='QandA'>
             <QAwidget
                 product_id={productId}
               />
           </div>
+          <br />
+          <br />
+          <br />
           <RatingsAndReviews id={productId} />
           </SharedContext.Provider>
         </div>

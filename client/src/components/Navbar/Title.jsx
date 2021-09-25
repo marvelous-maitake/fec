@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import Logo from './Logo';
+
 const StyledWrapper = styled.div`
   height: 100%;
   display: flex;
@@ -39,7 +41,7 @@ const StyledTyping = styled.div`
 const Title = () => {
   return (
     <StyledWrapper>
-      <span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>[</span> <StyledTyping> Project Catwalk </StyledTyping><span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>]</span>
+      <span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>[</span> <StyledTyping> Project Catwalk </StyledTyping><span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>]</span><Logo />
     </StyledWrapper>
   )
 }

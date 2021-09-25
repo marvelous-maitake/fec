@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 const StyledLogo = styled.img`
   height: 15vh;
-  opacity: 0.7;
+  opacity: 1;
   transition: 0.3s;
 
   &:hover {

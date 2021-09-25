@@ -6,7 +6,14 @@ import QuestionList from './QuestionList';
 import Modal from '../Modal';
 import AddQuestionModal from './AddQuestionModal';
 
+const StyledDivider = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
+const StyledImg = styled.img`
+  width: 25vw;
+`
 
 const buttonStyle = {
   textAlign:"center",
@@ -97,7 +104,9 @@ const QAwidget = ( { product_id } ) => {
 
   return (
     <QuestionAndAnswer>
-      <h3 className="qa-header">QUESTIONS & ANSWERS</h3>
+      <h2 style={{ textAlign: 'center' }}>have any questions?</h2>
+      <StyledDivider><StyledImg src='https://i.imgur.com/ZC0BXZY.png' /></StyledDivider>
+      <br />
       <div>
         <Search
           handleSearchInput={handleSearchInput}

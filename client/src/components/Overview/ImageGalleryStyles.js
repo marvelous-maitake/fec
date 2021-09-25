@@ -54,6 +54,7 @@ const ActiveThumbnail = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   transition: 0.3s;
+  opacity: 1;
 `;
 
 const Thumbnail = styled.div`
@@ -65,6 +66,11 @@ const Thumbnail = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   transition: 0.3s;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export { Gallery, Carousel, Arrow, Thumbnails, ActiveThumbnail, Thumbnail };

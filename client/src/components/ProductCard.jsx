@@ -37,10 +37,10 @@ const StyledCardContainer = styled.div`
   margin-bottom: 10px;
   opacity: 0.8;
   transition: 0.3s;
-  border: 2px solid rgba(255,192,203,0);
+  border: 3px solid rgba(255,192,203,0);
 
   &:hover {
-    border: 2px solid rgba(255,192,203,1);
+    border: 3px solid rgba(255,192,203,1);
     opacity: 1;
   }
 
@@ -188,10 +188,9 @@ const ProductCard = ({ product_id, mode }) => {
       {isAddButton ?  <StyledProductCard>
         <StyledCardContainer onClick={handleAdd} style={{ cursor: 'pointer' }}>
           <StyledThumbnail>
-            <span style={{ fontSize: '10em' }}>+</span>
+            <span style={{ fontSize: '15vh' }}>+</span>
           </StyledThumbnail>
-            <span>Add To Outfit</span>
-            <br />
+            <span>add to outfit</span>
             <br />
             <br />
             <br />

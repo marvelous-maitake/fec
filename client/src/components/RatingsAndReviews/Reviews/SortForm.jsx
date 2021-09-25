@@ -14,7 +14,7 @@ export default function SortForm({setSortBy}) {
 
   return (
     <Form>
-    <label>Sorted by </label>
+    <label>sort by </label>
     <select onChange= {e => handleSortChange(e)}>
       <option value="relevant">relevance</option>
       <option value="newest">newest</option>

@@ -66,12 +66,12 @@ export default function Overview(props) {
       {currStyle !== null ?
       (<>
         <ImageGallery id='ImageGallery'
-        photos={styles[currStyle].photos.map(x => x.url)}
+        photos={styles[currStyle].photos.map(x => x.url || 'https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg')}
         />
         <div className='ProductCard card'>
           <ProductInfo />
           <Selectors
-          thumbnails={styles.map(x => x.photos[0].thumbnail_url)}
+          thumbnails={styles.map(x => x.photos[0].thumbnail_url || 'https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg')}
           setCurrStyle={setCurrStyle}
           style={styles[currStyle]}
           currStyle={currStyle}

@@ -15,6 +15,8 @@ const ActiveThumbnail = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   border: solid pink 4px;
+  opacity: 1;
+  transition: 0.3s;
 `;
 
 const Thumbnail = styled.div`
@@ -25,6 +27,11 @@ const Thumbnail = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   border: solid 2px;
+  opacity: 0.7;
+  transition: 0.3s;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const CartForm = styled.div`
