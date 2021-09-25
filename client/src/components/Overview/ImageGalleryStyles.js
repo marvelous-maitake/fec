@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Gallery = styled.div`
   flex: 3;
-  box-shadow: 0 4px 8px 0;
   padding: 2%;
   border-radius: 10px;
   max-height: 80vh;

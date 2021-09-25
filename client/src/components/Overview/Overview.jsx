@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   gap: 4%;
 
   .card {
-    box-shadow: 0 4px 8px 0;
     padding: 4%;
     border-radius: 10px;
   }
@@ -56,6 +55,7 @@ export default function Overview(props) {
       {currStyle !== null ? (
         <>
           <ImageGallery
+            className="card"
             id="ImageGallery"
             photos={styles[currStyle].photos.map((x) => x.url)}
           />
