@@ -14,6 +14,7 @@ const Gallery = styled.div`
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
+  cursor: zoom-in;
 `;
 
 const Carousel = styled.div`
