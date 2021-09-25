@@ -45,13 +45,13 @@ const QuestionHelpful = ({ helpfulness, questionId }) => {
 
   return (
     <Qhelpful className="question-helpfulness">
-        <span>Helpful?</span>
+        <span>helpful?</span>
         <span> | </span>
-        <span className="q-helpfulness" style={helpfulnessStyle} onClick={handleQHelpfulnessClicked}> Yes({QHelpfulness})</span>
+        <span className="q-helpfulness" style={helpfulnessStyle} onClick={handleQHelpfulnessClicked}> yes({QHelpfulness})</span>
         <span> | </span>
         {
-          isQsReported ? <span style={afterClickedStyle} className="question-not-report">  Reported  </span>
-                      : <span style={beforeClickedStyle} className = "question-reported" onClick = {handleQsReport}> Report </span>
+          isQsReported ? <span style={afterClickedStyle} className="question-not-report">  reported  </span>
+                      : <span style={beforeClickedStyle} className = "question-reported" onClick = {handleQsReport}> report </span>
         }
     </Qhelpful>
   );

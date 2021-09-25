@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';;
+import axios from 'axios';
+import { CSSTransition } from 'react-transition-group';
 
 const StyledCarouselContainer = styled.div`
   width: 100%;

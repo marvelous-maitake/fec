@@ -32,6 +32,12 @@ const ModalWrapper = styled.div`
   position: relative;
   z-index: 10;
   border-radius: 10px;
+
+  background-image: url("https://i.imgur.com/z3S1BY4.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 10%;
 `;
 
 const ModalContent = styled.div`

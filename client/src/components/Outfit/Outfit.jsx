@@ -5,15 +5,6 @@ import axios from 'axios';
 import Carousel from '../Carousel';
 import ProductCard from '../ProductCard';
 
-const StyledDivider = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const StyledImg = styled.img`
-  width: 25vw;
-`
-
 const Outfit = () => {
   const { productId, setProductId, currentOutfit, setCurrentOutfit } = useContext(SharedContext);
 
@@ -39,8 +30,6 @@ const Outfit = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>your outfit</h2>
-      <StyledDivider><StyledImg src='https://i.imgur.com/ZC0BXZY.png' /></StyledDivider>
       {isLoaded ? <Carousel products={currentOutfit} mode='Outfit'>
         <ProductCard product_id='addToOutfit' mode='Outfit'/>
         {currentOutfit.map((product) => (

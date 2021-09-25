@@ -23,8 +23,8 @@ const blink = keyframes`
 `
 
 const StyledTyping = styled.div`
-  width: 15ch;
-  animation: ${typing} 2s steps(15), ${blink} .5s step-end infinite alternate;
+  width: 16ch;
+  animation: ${typing} 2s steps(16), ${blink} .5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid;
@@ -41,7 +41,7 @@ const StyledTyping = styled.div`
 const Title = () => {
   return (
     <StyledWrapper>
-      <span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>[</span> <StyledTyping> Project Catwalk </StyledTyping><span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>]</span><Logo />
+      <span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>[</span> <StyledTyping> project catwalk. </StyledTyping><span style={{ color: 'pink', fontFamily: 'monospace', fontSize: '4vh' }}>]</span><Logo /><br/>
     </StyledWrapper>
   )
 }
