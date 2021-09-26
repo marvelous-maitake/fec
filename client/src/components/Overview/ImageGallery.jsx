@@ -10,6 +10,7 @@ import {
 } from "./ImageGalleryStyles";
 import Modal from "../Modal.jsx";
 import ExpandedView from "./ExpandedView";
+import './Arrows.styles.css';
 
 export default function ImageGallery({ photos }) {
   const [current, setCurrent] = useState(0);
@@ -53,7 +54,7 @@ export default function ImageGallery({ photos }) {
       ) : null}
       <Carousel id="Carousel">
         {current !== 0 ? (
-          <Arrow onClick={(e) => prevPhoto(e)}>&#8592;</Arrow>
+          <span className="arrowbtn arrowbtn-left" onClick={(e) => prevPhoto(e)} />
         ) : (
           <Arrow />
         )}
@@ -72,7 +73,7 @@ export default function ImageGallery({ photos }) {
           )}
         </Thumbnails>
         {current !== photos.length - 1 ? (
-          <Arrow onClick={(e) => nextPhoto(e)}>&#8594;</Arrow>
+          <span className="arrowbtn arrowbtn-right" onClick={(e) => nextPhoto(e)} />
         ) : (
           <Arrow />
         )}

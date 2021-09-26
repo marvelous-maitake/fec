@@ -9,7 +9,7 @@ const Input = styled.input`
   border-radius: 5px;
   padding: 12px;
   margin-bottom: 10px;
-  opacity: 0.5;
+  opacity: 0.8;
 
   &:hover {
     opacity: 1;

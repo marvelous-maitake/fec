@@ -24,7 +24,7 @@ const StyledImg = styled.img`
 
 function App() {
   const [theme, setTheme] = useState(() => 'dark');
-  const [productId, setProductId] = useState(() => 48449);
+  const [productId, setProductId] = useState(() => 48432);
   const [currentSelection, setCurrentSelection] = useState(() => {});
   const [currentOutfit, setCurrentOutfit] = useState(() => []);
 
