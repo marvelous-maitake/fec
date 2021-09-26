@@ -22,7 +22,6 @@ const Recommend = styled.div`
 `
 
 const Response = styled.div`
-  background-color: #f5f5f5;
   padding: 3px 12px 3px 12px;
   margin: 5px 0px 20px 0px;
 `;
