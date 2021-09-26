@@ -22,11 +22,54 @@ const StyledImg = styled.img`
   width: 25vw;
 `
 
-function App() {
+const ScrollButton = styled.a`
+  transition: all .25s ease-in-out;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3em 3em 0;
+  border-radius: 50%;
+  padding: .25em;
+  width: 80px;
+  height: 80px;
+  background-color: pink;
+  z-index: 100;
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  svg {
+    fill: #000;
+    width: 24px;
+    height: 12px;
+  }
+
+  &:hover {
+    background-color: #E8E8E8;
+
+    svg {
+      fill: #000000;
+    }
+  }
+`
+
+const App = () => {
   const [theme, setTheme] = useState(() => 'dark');
-  const [productId, setProductId] = useState(() => 48449);
+  const [productId, setProductId] = useState(() => 48432);
   const [currentSelection, setCurrentSelection] = useState(() => {});
   const [currentOutfit, setCurrentOutfit] = useState(() => []);
+  const [show, setShow] = useState(() => 'hide');
 
   function changeProdId(product_id) {
     setProductId(product_id);
@@ -39,11 +82,32 @@ function App() {
 
   const isDarkTheme = theme === 'dark';
 
+  const scrollFunc = () => {
+    let y = window.scrollY;
+    if (y > 0) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollFunc);
+  }, []);
+
   return (
     <ThemeProvider theme={theme === 'light' ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
         <div className="App">
+        <ScrollButton href="" className={show ? "show" : "hide"} onClick={(e) => scrollToTop(e)}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="pink" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
+        </ScrollButton>
           <SharedContext.Provider value={{ productId, setProductId, currentOutfit, setCurrentOutfit, theme }}>
           <Navbar theme={theme} toggleTheme={toggleTheme} searchFunc={changeProdId}/>
           <Overview product_id={productId}/>

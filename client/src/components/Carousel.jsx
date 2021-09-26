@@ -13,6 +13,8 @@ const StyledCarouselWrapper = styled.div`
   display: flex;
   width: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
 `
 
 const StyledCarouselContentWrapper = styled.div`
@@ -39,29 +41,11 @@ const StyledCarouselContent = styled.div`
   }
 `
 
-const Arrow = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: white;
-  border: 1px solid #ddd;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 48px;
-  cursor: pointer;
-`
-
-const StyledLeftArrow = styled(Arrow)`
-  left: 0px;
-`
-
-const StyledRightArrow = styled(Arrow)`
-  right: 0px;
-`
+const arrowStyle = {
+  width: '40px',
+  height: '40px',
+  cursor: 'pointer'
+};
 
 const Carousel = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -84,14 +68,14 @@ const Carousel = (props) => {
     <StyledCarouselContainer>
       <StyledCarouselWrapper>
         {currentIndex > 0 &&
-        <StyledLeftArrow onClick={prev}>&lt;</StyledLeftArrow>}
+        <span className="arrowbtn arrowbtn-left" style={arrowStyle} onClick={prev} />}
           <StyledCarouselContentWrapper>
             <StyledCarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
               {props.children}
             </StyledCarouselContent>
           </StyledCarouselContentWrapper>
         {currentIndex < (isOutfit ? props.products.length + 1 : props.products.length) - 4 &&
-        <StyledRightArrow onClick={next}>&gt;</StyledRightArrow>}
+        <span className="arrowbtn arrowbtn-right" style={arrowStyle} onClick={next} />}
       </StyledCarouselWrapper>
     </StyledCarouselContainer>
   );

@@ -29,6 +29,13 @@ export const GlobalStyles = createGlobalStyle`
   .card {
     box-shadow: ${({ theme }) => theme.boxShadow};
   }
+
+  .arrowbtn {
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.body};
+    border: ${({ theme }) => theme.border};
+  }
+
 `;
 
 export const lightTheme = {
@@ -36,11 +43,13 @@ export const lightTheme = {
   text: "#121212",
   backgroundColor: "#f0f0f0",
   boxShadow: "0 0 10px rgba(0,0,0,0.4)",
+  border: "2px solid pink"
 };
 
 export const darkTheme = {
   body: "#282c39",
   text: "#f1f1f1",
   backgroundColor: "#282c39",
-  boxShadow: "0 0 10px rgba(255,255,255,0.5)"
+  boxShadow: "0 0 10px rgba(255,255,255,0.5)",
+  border: "2px solid pink"
 };

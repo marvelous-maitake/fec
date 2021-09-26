@@ -47,7 +47,7 @@ function Selectors({thumbnails, setCurrStyle, style, currStyle}) {
       </Thumbnails>
       <CartForm onSubmit={(e) => handleSubmit(e)}>
         <Select id='sizeSelect' onChange={(e) => handleSize(e)} required>
-          <option value="">Select Size</option>
+          <option value="">select size</option>
           {Object.entries(style.skus).map(([k, sku]) =>
             <option value={sku.size + ' ' + sku.quantity} key={k}>{sku.size}</option>
           )}
@@ -60,7 +60,7 @@ function Selectors({thumbnails, setCurrStyle, style, currStyle}) {
           })}
         </Select>
         }
-        <CartBtn type='submit'>Add to Cart</CartBtn>
+        <CartBtn type='submit'><strong>add to cart +</strong></CartBtn>
       </CartForm>
     </div>
   )

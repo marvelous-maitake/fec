@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   span {
     font-weight: bold;
   }
+
 `
 
 const Recommend = styled.div`

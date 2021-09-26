@@ -73,7 +73,6 @@ const AddAnswerModal = ({ isPopup, onClose, questionId }) => {
     }
   }
 
-
   // check validation before submit
   const validationCheck = () => {
     if (!answerBody) {
@@ -95,7 +94,7 @@ const AddAnswerModal = ({ isPopup, onClose, questionId }) => {
     <div>
       <div className="add-answer-modal">
         <h1 className="form-header" style={{textAlign: "center"}}>
-          Submit Your Answer
+          submit your answer
         </h1>
         <form
           className="add-answer-form"
