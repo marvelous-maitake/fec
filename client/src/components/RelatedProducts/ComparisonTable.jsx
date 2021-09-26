@@ -70,7 +70,7 @@ const ComparisonTable = ({ productId, name, category, price, salePrice }) => {
           </tr>
         </tbody>
       </StyledTable>
-      </> : null}
+      </> : <img src='https://i.imgur.com/7sMnF66.gif' />}
     </>
   );
 };

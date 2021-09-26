@@ -2,7 +2,6 @@ import React, { useState }from 'react';
 import styled from 'styled-components';
 import QuestionHelpful from './QuestionHelpful';
 import Answer from './Answer';
-import AddAnswer from './AddAnswer';
 import AddAnswerModal from './AddAnswerModal';
 import Modal from '../Modal';
 
@@ -11,6 +10,12 @@ const MoreAnswerBtn = styled.div`
   cursor: pointer;
   padding-left: 10px;
   margin: 10px;
+  opacity: 0.7;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const QContainer = styled.div`
@@ -35,7 +40,6 @@ const Question = ({ question }) => {
   const [QHelpfulness, setQHelpfulness] = useState(question.question_helpfulness);
   const [answerCounter, setAnswserCounter] = useState(2)
 
-  // create an answer array
   const answerKey = Object.keys(question.answers);
   const answerList = answerKey.map(key => question.answers[key]);
 
@@ -46,7 +50,7 @@ const Question = ({ question }) => {
           questionId={question.question_id}
           helpfulness={QHelpfulness}
         />
-        <button style={addAnswerStyle} onClick={() => setIsModalOpen(true)}>Add Answer</button>
+        <button style={addAnswerStyle} onClick={() => setIsModalOpen(true)}>add answer</button>
       </QContainer>
       <h3>
         Q: {question.question_body}
@@ -68,7 +72,7 @@ const Question = ({ question }) => {
           className="load-more-answer-btn"
           onClick={() => {setAnswserCounter( answerCounter + 2)}}
         >
-        <strong>SHOW MORE ANSWERS</strong>
+        <strong>more answers</strong>
         </MoreAnswerBtn>
       : answerList.length <= answerCounter && answerList.length > 2
       ?
@@ -77,7 +81,7 @@ const Question = ({ question }) => {
         className="load-more-answer-btn"
         onClick={() => {setAnswserCounter(2)}}
         >
-          <strong>COLLAPSE ANSWERS</strong>
+          <strong>collapse answers</strong>
         </MoreAnswerBtn>
       : null }
       {isModalOpen && (

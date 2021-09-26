@@ -1,19 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Gallery = styled.div`
   flex: 3;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 2%;
   border-radius: 10px;
   max-height: 80vh;
   width: 65vw;
   height: 80 vw;
   object-fit: scale-down;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: contain;
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
+  transition: 0.3s;
   cursor: zoom-in;
 `;
 
@@ -30,6 +30,7 @@ const Arrow = styled.span`
   font-size: 5vh;
   cursor: pointer;
   text-align: center;
+  transition: 0.3s;
 `;
 
 const Thumbnails = styled.div`
@@ -41,16 +42,19 @@ const Thumbnails = styled.div`
   justify-content: space-evenly;
   gap: 1%;
   z-index: 2;
+  transition: 0.3s;
 `;
 
 const ActiveThumbnail = styled.div`
   height: 7.5vw;
   border-radius: 1vw;
   width: 7.5vw;
-  border: solid green 4px;
+  border: solid pink 4px;
   cursor: pointer;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: cover;
+  transition: 0.3s;
+  opacity: 1;
 `;
 
 const Thumbnail = styled.div`
@@ -59,8 +63,14 @@ const Thumbnail = styled.div`
   width: 5vw;
   cursor: pointer;
   border: solid 2px;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: cover;
+  transition: 0.3s;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export { Gallery, Carousel, Arrow, Thumbnails, ActiveThumbnail, Thumbnail };

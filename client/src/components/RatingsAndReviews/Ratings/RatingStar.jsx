@@ -19,7 +19,7 @@ const Empty = styled.span`
   color: #dedede;
 `
 
-export default function RatingStar({ratings}) {
+export default function RatingStar({ratings, mode}) {
   function getAverage(ratings) {
     let total = 0;
     let count = 0;
@@ -32,12 +32,20 @@ export default function RatingStar({ratings}) {
 
   const [total, average] = getAverage(ratings);
 
+  let isProductCard = mode === 'ProductCard';
+
   return (
-    <div>
-      <Rating>{Math.round(average * 10) / 10}  </Rating>
-      <span><Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
-      <Total><strong>{total}</strong> ratings</Total>
-      </span>
-    </div>
+    <>
+      {isProductCard ?
+        <span>
+          <Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
+        </span>
+      : <div>
+        <Rating>{Math.round(average * 10) / 10}  </Rating>
+        <span><Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
+        <Total><strong>{total}</strong> ratings</Total>
+        </span>
+      </div>}
+    </>
   )
 }

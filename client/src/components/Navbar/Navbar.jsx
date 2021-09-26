@@ -1,15 +1,35 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Title from './Title';
+import Logo from './Logo';
+import Toggle from "react-toggle";
+
+import './Search.styles.css';
 
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 2%;
   z-index: 12;
+  align-items: center;
+  padding: 1%;
+  position: sticky;
+	top: 0;
 `;
 
-function Navbar({ toggleTheme, searchFunc }) {
+const StyledMonkey = styled.div`
+  font-size: 5vh;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: right;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+`
+
+function Navbar({ theme, toggleTheme, searchFunc }) {
 
   const [search, setSearch] = useState('');
 
@@ -22,23 +42,25 @@ function Navbar({ toggleTheme, searchFunc }) {
     searchFunc(search);
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('search').value = '';
+      searchProduct();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  const isDarkTheme = theme === 'dark';
+
   return (
     <Nav>
-      <div>
-        Logo <button onClick={() => toggleTheme()}>Toggle Theme</button>
-      </div>
-      <div>
-        <input
-          type="text"
-          id="search"
-          placeholder="Search by Product Id"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button id='searchButton' onClick={() => {
-          document.getElementById('search').value = '';
-          searchProduct();
-        }}>Search</button>
-      </div>
+      <Title />
+      {isDarkTheme ? <StyledMonkey onClick={toggleTheme}>🐵</StyledMonkey> : <StyledMonkey onClick={toggleTheme}>🙈</StyledMonkey>}
+        <div className="box">
+          <input type="text" className="input" name="txt" id="search" placeholder="enter id..."
+          onMouseOut={() => document.getElementById('search').value = ''} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
+          <i className="fas fa-search"></i>
+        </div>
     </Nav>
   );
 }

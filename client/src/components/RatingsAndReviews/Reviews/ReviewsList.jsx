@@ -6,8 +6,11 @@ import StarsGraphic from './StarsGraphic';
 import Images from './Images';
 
 const Review = styled.div`
-  border-bottom: solid black 1px;
-  padding-top: 15px
+  // border-bottom: solid black 1px;
+  padding-top: 15px;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
 `;
 
 const PostInfo = styled.span`
@@ -30,7 +33,7 @@ export default function ReviewsList({sortBy, setSortBy, reviews}) {
   return (
     <>
     {reviews.map(review => (
-      <Review key={review.review_id}>
+      <Review className="card" key={review.review_id}>
         <div>
           <StarsGraphic review={review}/>
           <PostInfo>{review.reviewer_name}, {moment(review.date).utc().format('MMMM D, YYYY')}</PostInfo>

@@ -3,9 +3,10 @@ import { SharedContext } from '../../contexts/SharedContext';
 import axios from 'axios';
 import Carousel from '../Carousel';
 import ProductCard from '../ProductCard';
+import styled from 'styled-components';
 
 const RelatedProducts = () => {
-  const { productId } = useContext(SharedContext);
+  const { productId, theme } = useContext(SharedContext);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState(() => {
@@ -26,14 +27,15 @@ const RelatedProducts = () => {
     .catch(err => console.error(err));
   }, [productId]);
 
+  const isDarkTheme = theme === 'dark';
+
   return (
     <>
-      <h4>RELATED PRODUCTS</h4>
       {isLoaded ? <Carousel products={relatedProducts} mode='RelatedProducts'>
         {relatedProducts.map((product) => (
           <ProductCard key={product} product_id={product} mode='RelatedProducts'/>
         ))}
-      </Carousel> : <div></div>}
+      </Carousel> : <img src='https://i.imgur.com/7sMnF66.gif' />}
     </>
   )
 }

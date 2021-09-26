@@ -6,17 +6,20 @@ import Star from './RelatedProducts/Star';
 import { MdClose } from 'react-icons/md';
 import Modal from './Modal';
 import ComparisonTable from './RelatedProducts/ComparisonTable';
+import RatingStar from './RatingsAndReviews/Ratings/RatingStar';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  transition: 0.3s;
 `
 
 const StyledProductCard = styled.div`
   text-align: center;
   position: relative;
+  transition: 0.3s;
 `
 
 const StyledCardContainer = styled.div`
@@ -27,11 +30,19 @@ const StyledCardContainer = styled.div`
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 4%;
-  border-radius: 10px;
+  // border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  opacity: 0.8;
+  transition: 0.3s;
+  border: 3px solid rgba(255,192,203,0);
+
+  &:hover {
+    border: 3px solid rgba(255,192,203,1);
+    opacity: 1;
+  }
+
 `
 
 const StyledThumbnail = styled.div`
@@ -43,6 +54,7 @@ const StyledThumbnail = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   position: relative;
+  transition: 0.3s;
 `
 
 const StyledButton = styled.button`
@@ -62,7 +74,12 @@ const RemoveButton = styled(MdClose)`
   height: 1.5vw;
   z-index: 1;
   cursor: pointer;
-  color: white;
+  transition: 0.3s;
+  color: red;
+
+  &:hover {
+    color: pink;
+  }
 `;
 
 const ProductCard = ({ product_id, mode }) => {
@@ -78,6 +95,12 @@ const ProductCard = ({ product_id, mode }) => {
   const [salePrice, setSalePrice] = useState(() => null);
   const [isLoaded, setIsLoaded] = useState(() => false);
   const [isModalOpen, setIsModalOpen] = useState(() => false);
+  const [meta, setMeta] = useState(() => null);
+  const [reviews, setReviews] = useState(() => null);
+
+  const getMeta = (product_id) => {
+    return axios.get(`/reviews/meta?product_id=${product_id}`);
+  };
 
   const getStyles = (product_id) => {
     return axios.get(`/products/${product_id}/styles`);
@@ -85,6 +108,10 @@ const ProductCard = ({ product_id, mode }) => {
 
   const getProductInfo = (product_id) => {
     return axios.get(`/products/${product_id}`);
+  }
+
+  const getReviews = (product_id) => {
+    return axios.get(`/reviews?product_id=${product_id}`);
   }
 
   const handleAdd = () => {
@@ -118,14 +145,22 @@ const ProductCard = ({ product_id, mode }) => {
     if (!isAddButton) {
       Promise.all([
         getProductInfo(product_id),
-        getStyles(product_id)
+        getStyles(product_id),
+        getMeta(product_id),
+        getReviews(product_id)
       ])
-      .then(([info, styles]) => {
+      .then(([info, styles, meta, reviewsData]) => {
         setCategory(info.data.category);
         setName(info.data.name);
-        setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
+        if (styles.data.results[0].photos[0].thumbnail_url) {
+          setPreviewImage(styles.data.results[0].photos[0].thumbnail_url);
+        } else {
+          setPreviewImage('https://eagle-sensors.com/wp-content/uploads/unavailable-image.jpg');
+        }
         setPrice(styles.data.results[0].original_price);
         setSalePrice(styles.data.results[0].sale_price);
+        setMeta(meta.data);
+        setReviews(reviewsData.data.results.length);
         setIsLoaded(true);
       })
       .catch((err) => console.error(err));
@@ -150,17 +185,19 @@ const ProductCard = ({ product_id, mode }) => {
       </Modal>
       )}
       {isAddButton ?  <StyledProductCard>
-        <StyledCardContainer onClick={handleAdd} style={{ cursor: 'pointer' }}>
+        <StyledCardContainer className="card" onClick={handleAdd} style={{ cursor: 'pointer' }}>
           <StyledThumbnail>
-            <span style={{ position: 'relative', top: '30%' }}>Add to Outfit<br />
-            +
-            <br />
-            </span>
+            <span style={{ fontSize: '15vh' }}>+</span>
           </StyledThumbnail>
+            <span>add to outfit</span>
+            <br />
+            <br />
+            <br />
+            <br />
         </StyledCardContainer>
       </StyledProductCard> :
       isLoaded ? <StyledProductCard>
-        <StyledCardContainer onClick={() => {
+        <StyledCardContainer className="card" onClick={() => {
           setProductId(product_id);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
@@ -170,11 +207,13 @@ const ProductCard = ({ product_id, mode }) => {
             </div>}
           </StyledThumbnail>
           <br />
-          {salePrice ? <SalePrice /> : <Price />}
+          <strong>{name}</strong>
           <br />
-          {name}
+          <RatingStar mode='ProductCard' ratings={meta.ratings} /> <span>({reviews})</span>
           <br />
           {category}
+          <br />
+          {salePrice ? <SalePrice /> : <Price />}
         </StyledCardContainer>
       </StyledProductCard> : <div></div>}
     </>)
