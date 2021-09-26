@@ -30,12 +30,26 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: ${({ theme }) => theme.boxShadow};
   }
 
+  .filled {
+    color: ${({ theme }) => theme.fillColor};
+  }
+
+  .empty {
+    color: ${({ theme }) => theme.emptyColor};
+  }
+
+  .inner {
+    background-color: ${({ theme }) => theme.fillColor}
+  }
+
+  .outer {
+    background-color: ${({ theme }) => theme.emptyColor}
+  }
   .arrowbtn {
     color: ${({ theme }) => theme.text};
     background: ${({ theme }) => theme.body};
     border: ${({ theme }) => theme.border};
   }
-
 `;
 
 export const lightTheme = {
@@ -43,6 +57,8 @@ export const lightTheme = {
   text: "#121212",
   backgroundColor: "#f0f0f0",
   boxShadow: "0 0 10px rgba(0,0,0,0.4)",
+  emptyColor: '#dedede',
+  fillColor: 'black',
   border: "2px solid pink"
 };
 
@@ -51,5 +67,7 @@ export const darkTheme = {
   text: "#f1f1f1",
   backgroundColor: "#282c39",
   boxShadow: "0 0 10px rgba(255,255,255,0.5)",
+  emptyColor: 'black',
+  fillColor: '#dedede',
   border: "2px solid pink"
 };

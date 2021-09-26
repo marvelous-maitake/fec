@@ -7,14 +7,14 @@ const Container = styled.div`
 
 const OuterBar = styled.div`
   width: 100%;
-  background-color: #dedede;
+  /* background-color: #dedede; */
 `;
 
 const InnerBar = styled.div`
   padding-top: 3px;
   padding-bottom: 3px;
   width: ${props => props.size};
-  background-color: black;
+  /* background-color: black; */
 `;
 
 export default function ChartRating({ratings}) {
@@ -34,8 +34,8 @@ export default function ChartRating({ratings}) {
       ['5', '4', '3', '2', '1'].map(star => (
         <Container key={star}>
         {star} Stars
-          <OuterBar>
-            <InnerBar size={getPercent(ratings, star)}></InnerBar>
+          <OuterBar className= 'outer'>
+            <InnerBar className='inner' size={getPercent(ratings, star)}></InnerBar>
           </OuterBar>
         </Container>
       ))

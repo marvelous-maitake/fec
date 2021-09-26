@@ -2,19 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Filled = styled.span`
-  color: black;
+  /* color: black; */
 `
 
 const Empty = styled.span`
-  color: #dedede;
+  /* color: #dedede; */
 `
 
 export default function StarsGraphic({review}) {
   return (
     <>
       <span>
-        <Filled>{'★'.repeat(review.rating)}</Filled>
-        <Empty>{'★'.repeat(5 - review.rating)}</Empty>
+        <Filled className='filled'>{'★'.repeat(review.rating)}</Filled>
+        <Empty className='empty'>{'★'.repeat(5 - review.rating)}</Empty>
       </span>
     </>
   )

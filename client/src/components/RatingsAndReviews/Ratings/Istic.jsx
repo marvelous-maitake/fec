@@ -8,13 +8,14 @@ const Cont = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-image: linear-gradient(white 30%, #dedede, white 60%);
+  background: linear-gradient(transparent 0, transparent 30%, #dedede 30%, #dedede 60%, transparent 60%, transparent 100%);
 `;
 
 const Arrow = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   padding: 0px;
   margin-left: ${props => props.rating};
+  color: black;
 `;
 
 const Right = styled.div`
@@ -52,7 +53,7 @@ export default function Istic({type, value}) {
       <div>
         <strong>{type}</strong>
       </div>
-      <Container>
+      <Container className='specBar'>
         <Arrow rating={String(Number(value) / 5 * 100 - 3) + '%'}>▼</Arrow>
       </Container>
       <div>
