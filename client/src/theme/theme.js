@@ -29,6 +29,22 @@ export const GlobalStyles = createGlobalStyle`
   .card {
     box-shadow: ${({ theme }) => theme.boxShadow};
   }
+
+  .filled {
+    color: ${({ theme }) => theme.fillColor};
+  }
+
+  .empty {
+    color: ${({ theme }) => theme.emptyColor};
+  }
+
+  .inner {
+    background-color: ${({ theme }) => theme.fillColor}
+  }
+
+  .outer {
+    background-color: ${({ theme }) => theme.emptyColor}
+  }
 `;
 
 export const lightTheme = {
@@ -36,11 +52,15 @@ export const lightTheme = {
   text: "#121212",
   backgroundColor: "#f0f0f0",
   boxShadow: "0 0 10px rgba(0,0,0,0.4)",
+  emptyColor: '#dedede',
+  fillColor: 'black',
 };
 
 export const darkTheme = {
   body: "#282c39",
   text: "#f1f1f1",
   backgroundColor: "#282c39",
-  boxShadow: "0 0 10px rgba(255,255,255,0.5)"
+  boxShadow: "0 0 10px rgba(255,255,255,0.5)",
+  emptyColor: 'black',
+  fillColor: '#dedede',
 };

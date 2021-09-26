@@ -12,11 +12,9 @@ const Total = styled.div`
 `
 
 const Filled = styled.span`
-  color: black;
 `
 
 const Empty = styled.span`
-  color: #dedede;
 `
 
 export default function RatingStar({ratings, mode}) {
@@ -38,11 +36,11 @@ export default function RatingStar({ratings, mode}) {
     <>
       {isProductCard ?
         <span>
-          <Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
+          <span className='filled'>{'★'.repeat(Math.round(average))}</span><span className='empty'>{'★'.repeat(5 - Math.round(average))}</span>
         </span>
       : <div>
         <Rating>{Math.round(average * 10) / 10}  </Rating>
-        <span><Filled>{'★'.repeat(Math.round(average))}</Filled><Empty>{'★'.repeat(5 - Math.round(average))}</Empty>
+        <span><span className='filled'>{'★'.repeat(Math.round(average))}</span><span className='empty'>{'★'.repeat(5 - Math.round(average))}</span>
         <Total><strong>{total}</strong> ratings</Total>
         </span>
       </div>}

@@ -15,6 +15,7 @@ const Arrow = styled.div`
   font-size: 13px;
   padding: 0px;
   margin-left: ${props => props.rating};
+  color: black;
 `;
 
 const Right = styled.div`
@@ -52,7 +53,7 @@ export default function Istic({type, value}) {
       <div>
         <strong>{type}</strong>
       </div>
-      <Container>
+      <Container className='specBar'>
         <Arrow rating={String(Number(value) / 5 * 100 - 3) + '%'}>▼</Arrow>
       </Container>
       <div>
