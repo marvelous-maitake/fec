@@ -37,7 +37,6 @@ const Thumbnail = styled.div`
 const CartForm = styled.div`
   display: flex;
   gap: 2%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   justify-content: center;
   align-items: center;
   margin-top: 10%;
@@ -52,7 +51,10 @@ const Select = styled.select`
 `;
 
 const CartBtn = styled.button`
-  margin: auto;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 10px;
 `;
 
 export { Thumbnails, ActiveThumbnail, Thumbnail, CartForm, Select, CartBtn };

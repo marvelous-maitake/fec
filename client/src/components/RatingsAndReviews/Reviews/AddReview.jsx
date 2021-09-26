@@ -3,11 +3,22 @@ import styled from 'styled-components';
 import NewReviewForm from './NewReviewForm'
 
 const Wrapper = styled.div`
-padding-top: 15px;
-padding-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 33.5%;
 `
+
 const Button = styled.button`
-  margin: 2px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+`
+
+const ReviewWrapper = styled.div`
+  padding: 30px;
 `
 
 export default function({reviews, setReviews, moreReviews, sortBy, getMore, id}) {
@@ -23,14 +34,16 @@ export default function({reviews, setReviews, moreReviews, sortBy, getMore, id})
   }
 
   return (
+    <>
     <Wrapper>
       {moreReviews
-      ? <Button onClick={moreReviewsClick}>more reviews</Button>
+      ? <Button onClick={moreReviewsClick}><strong>more reviews</strong></Button>
       : null}
-      <Button onClick={toggleForm} >add review</Button>
+      <Button onClick={toggleForm} ><strong>add review +</strong></Button>
       {showForm
       ? <NewReviewForm id={id}/>
       : null}
     </Wrapper>
+    </>
   )
 }

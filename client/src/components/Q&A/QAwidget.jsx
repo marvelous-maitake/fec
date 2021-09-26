@@ -8,14 +8,11 @@ import AddQuestionModal from './AddQuestionModal';
 
 const buttonStyle = {
   textAlign:"center",
-  color: "#000000",
-  backgroundColor: "#ffffff",
   padding: "10px",
   cursor: "pointer",
   marginTop: "10px",
   marginRight: "10px",
   marginBottom: "15px",
-  borderRadius: "5px",
 }
 
 const QuestionAndAnswer = styled.div`
@@ -100,7 +97,7 @@ const QAwidget = ( { product_id } ) => {
         questions={questionsToView}
         questionCounter={questionCounter}
       />
-      <Buttons>
+      <Buttons style={{ textAlign: 'center' }}>
         {questionCounter >= questions.length
           ? <button
               style={buttonStyle}

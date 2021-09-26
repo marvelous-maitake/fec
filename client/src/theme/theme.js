@@ -45,6 +45,11 @@ export const GlobalStyles = createGlobalStyle`
   .outer {
     background-color: ${({ theme }) => theme.emptyColor}
   }
+  .arrowbtn {
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.body};
+    border: ${({ theme }) => theme.border};
+  }
 `;
 
 export const lightTheme = {
@@ -54,6 +59,7 @@ export const lightTheme = {
   boxShadow: "0 0 10px rgba(0,0,0,0.4)",
   emptyColor: '#dedede',
   fillColor: 'black',
+  border: "2px solid pink"
 };
 
 export const darkTheme = {
@@ -63,4 +69,5 @@ export const darkTheme = {
   boxShadow: "0 0 10px rgba(255,255,255,0.5)",
   emptyColor: 'black',
   fillColor: '#dedede',
+  border: "2px solid pink"
 };
