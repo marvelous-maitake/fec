@@ -1,3 +1,11 @@
+# SDC
+
+SDC is our Systems Design Capstone Project. This project was created with a team of three.
+
+
+
+The front end for this repo was forked from Marvelous Maitake. Thanks!
+
 # FEC
 
 FEC is our Front End Capstone Project for Hack Reactor. This project was created as a team of four.
