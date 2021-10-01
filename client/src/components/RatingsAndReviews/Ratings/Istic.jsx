@@ -46,7 +46,7 @@ export default function Istic({type, value}) {
     Comfort: ['Poor', 'Okay', 'Perfect'],
     Quality: ['Poor', 'Okay', 'Perfect'],
     Size: ['Too small', 'Perfect', 'Too large'],
-    Width: ['Too narrow', 'Perfect', 'Too wide']
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
   }
   return (
     <Cont>
