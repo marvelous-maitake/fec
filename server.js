@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const config = require('./server/config.js');
-const router = require('./reviews/server/router');
+const runReviewRte = require('./reviews/server/router');
 
 const app = express();
 const port = 3000;
@@ -21,20 +21,68 @@ const axiosConfig = {
   },
 };
 
+const products = () => {};
+const productInfo = () => {};
+const productStyles = () => {};
+const relatedProduct = () => {};
+
 app.get('/*', (req, res) => {
   const { url } = req;
-  router('please work', req, res);
+  const splitURL = url.split('/').filter((char) => char !== '');
+  const firstRoute = splitURL[0];
+  const id = splitURL[1];
 
-  // const splitURL = url.split('/').filter((char) => char !== '');
-  // const firstRoute = splitURL[0];
+  switch (id) {
+    case 'products':
+      if (splitURL.length === 1) {
+        products((err, data) => {
+          if (err) {
+            res.status(404).send(err);
+          } else {
+            res.status(200).send(data);
+          }
+        });
+      }
+      if (splitURL[2] === 'styles') {
+        productStyles(id, (err, data) => {
+          if (err) {
+            res.status(404).send(err);
+          } else {
+            res.status(200).send(data);
+          }
+        });
+      } else if (splitURL[2] === 'related') {
+        relatedProduct(id, (err, data) => {
+          if (err) {
+            res.status(404).send(err);
+          } else {
+            res.status(200).send(data);
+          }
+        });
+      } else {
+        productInfo(id, (err, data) => {
+          if (err) {
+            res.status(404).send(err);
+          } else {
+            res.status(200).send(data);
+          }
+        });
+      }
+      break;
+    case 'reviews':
+      runReviewRte(url, req, res);
+      break;
+    default:
+      res.status(404).send('Error');
+  }
 
-  // axios.get(`${API_URL}${req.url}`, axiosConfig)
-  //   .then((response) => {
-  //     res.send(response.data);
-  //   })
-  //   .catch((error) => {
-  //     res.sendFile(path.join(__dirname, '/client/dist/404page.html'));
-  //   });
+//  axios.get(`${API_URL}${req.url}`, axiosConfig)
+//   .then((response) => {
+//     res.send(response.data);
+//   })
+//   .catch((error) => {
+//     res.sendFile(__dirname + '/client/dist/404page.html');
+//   })
 });
 
 app.post('/*', (req, res) => {

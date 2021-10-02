@@ -1,13 +1,14 @@
 const controller = require('../controller');
 
 const router = (url, req, res) => {
-  const option = 'time';
+  console.log(req.query);
+  const option = url;
   switch (option) {
     case 'reviews/meta':
       // run function
       break;
     default:
-      controller.run10Reviews(req, res);
+      controller.runSelect10Reviews(req, res);
   }
 };
 
