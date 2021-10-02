@@ -16,7 +16,7 @@ CREATE TABLE reviews (
   id SERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL REFERENCES products(id),
   rating INT,
-  createdAt BIGINT NOT NULL,
+  created_at BIGINT NOT NULL,
   summary VARCHAR(150) NOT NULL,
   body VARCHAR(500) NOT NULL,
   recommend VARCHAR(5),
@@ -51,7 +51,7 @@ FROM '/Users/timjordan/HackReactor/SDC/databases/reviews/data/product.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY reviews(id, product_id, rating, createdAt, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
+COPY reviews(id, product_id, rating, created_at, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
 FROM '/Users/timjordan/HackReactor/SDC/databases/reviews/data/reviews.csv'
 DELIMITER ','
 CSV HEADER;
