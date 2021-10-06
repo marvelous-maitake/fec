@@ -6,7 +6,7 @@ const connection = new Client({
   user: USER,
   port: 5432,
   // password: PASSWORD,
-  database: 'reviews',
+  database: 'sdc_reviews_ratings',
 });
 
 connection.connect((err) => {

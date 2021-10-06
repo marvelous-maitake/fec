@@ -1,12 +1,22 @@
 const model = require('../model');
 
 module.exports = {
-  runSelect10Reviews: (req, res) => {
-    model.select10Reviews((err, data) => {
+  runSelectReviewsData: (id, req, res) => {
+    model.selectReviewsData(id, (err, data) => {
       if (err) {
-        res.send(err);
+        res.status(404).send(err);
       } else {
-        res.send(data);
+        res.status(200).send(data);
+      }
+    });
+  },
+
+  runSelectMetaData: (id, req, res) => {
+    model.selectMetaData(id, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
       }
     });
   },

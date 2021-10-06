@@ -21,11 +21,6 @@ const axiosConfig = {
   },
 };
 
-const products = () => {};
-const productInfo = () => {};
-const productStyles = () => {};
-const relatedProduct = () => {};
-
 app.get('/*', (req, res) => {
   const { url } = req;
   const splitURL = url.split('/').filter((char) => char !== '');
@@ -33,42 +28,6 @@ app.get('/*', (req, res) => {
   const id = splitURL[1];
 
   switch (id) {
-    case 'products':
-      if (splitURL.length === 1) {
-        products((err, data) => {
-          if (err) {
-            res.status(404).send(err);
-          } else {
-            res.status(200).send(data);
-          }
-        });
-      }
-      if (splitURL[2] === 'styles') {
-        productStyles(id, (err, data) => {
-          if (err) {
-            res.status(404).send(err);
-          } else {
-            res.status(200).send(data);
-          }
-        });
-      } else if (splitURL[2] === 'related') {
-        relatedProduct(id, (err, data) => {
-          if (err) {
-            res.status(404).send(err);
-          } else {
-            res.status(200).send(data);
-          }
-        });
-      } else {
-        productInfo(id, (err, data) => {
-          if (err) {
-            res.status(404).send(err);
-          } else {
-            res.status(200).send(data);
-          }
-        });
-      }
-      break;
     case 'reviews':
       runReviewRte(url, req, res);
       break;

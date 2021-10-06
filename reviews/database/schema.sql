@@ -1,24 +1,15 @@
-DROP DATABASE IF EXISTS test;
-CREATE DATABASE test;
+DROP DATABASE IF EXISTS sdc_reviews_ratings;
+CREATE DATABASE sdc_reviews_ratings;
 
-\c test
-
-CREATE TABLE products (
-  id SERIAL NOT NULL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  slogan VARCHAR(150) NOT NULL,
-  description VARCHAR(500) NOT NULL,
-  category VARCHAR(50) NOT NULL,
-  default_price INT NOT NULL
-);
+\c sdc_reviews_ratings
 
 CREATE TABLE reviews (
   id SERIAL NOT NULL PRIMARY KEY,
-  product_id INT NOT NULL, -- REFERENCES products(id),
+  product_id INT NOT NULL,
   rating INT,
   created_at BIGINT NOT NULL,
   summary VARCHAR(150) NOT NULL,
-  body VARCHAR(500) NOT NULL,
+  body VARCHAR(1000) NOT NULL,
   recommend VARCHAR(5),
   reported VARCHAR(5) DEFAULT false,
   reviewer_name VARCHAR(50),
@@ -35,7 +26,7 @@ CREATE TABLE photos (
 
 CREATE TABLE characteristics (
   id SERIAL NOT NULL PRIMARY KEY,
-  product_id INT NOT NULL REFERENCES products(id),
+  product_id INT NOT NULL,
   name VARCHAR(10) NOT NULL
 );
 
@@ -45,11 +36,6 @@ CREATE TABLE characteristics_reviews (
   characteristic_id INT NOT NULL REFERENCES characteristics(id),
   value INT
 );
-
-COPY products(id, name, slogan, description, category, default_price)
-FROM '/Users/timjordan/HackReactor/SDC/reviews/data/product.csv'
-DELIMITER ','
-CSV HEADER;
 
 COPY reviews(id, product_id, rating, created_at, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
 FROM '/Users/timjordan/HackReactor/SDC/reviews/data/reviews.csv'
@@ -71,9 +57,12 @@ FROM '/Users/timjordan/HackReactor/SDC/reviews/data/characteristic_reviews.csv'
 DELIMITER ','
 CSV HEADER;
 
-CREATE INDEX idx_products_id ON products(id);
-CREATE INDEX idx_reviews_product_id ON reviews(product_id);
 CREATE INDEX idx_photos_review_id ON photos(review_id);
+CREATE INDEX idx_reviews_product_id ON reviews(product_id);
+
+
+
 CREATE INDEX idx_characteristics_product_id ON characteristics(product_id);
 CREATE INDEX idx_characteristics_reviews_review_id ON characteristics_reviews(review_id);
 CREATE INDEX idx_characteristics_reviews_characteristic_id ON characteristics_reviews(characteristic_id);
+
