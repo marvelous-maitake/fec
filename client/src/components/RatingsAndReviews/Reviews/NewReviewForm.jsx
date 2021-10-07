@@ -40,7 +40,7 @@ export default function NewReviewForm({id}) {
 
 
   useEffect(() => {
-    axios.get(`/reviews/meta?product_id=${id}`)
+    axios.get(`/reviews/meta/?product_id=${id}`)
       .then(res => setIstics(res.data.characteristics))
       .catch(err => console.log(err));
   }, [])
@@ -80,7 +80,7 @@ export default function NewReviewForm({id}) {
       photos: images,
       characteristics: chars
     }
-    axios.post('/reviews', params)
+    axios.post('/reviews/', params)
       .then(res => console.log('response from review post', res))
       .catch(err => console.log('error from review post', err))
   }

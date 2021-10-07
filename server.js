@@ -21,12 +21,47 @@ const axiosConfig = {
   },
 };
 
+// app.get('/*', (req, res) => {
+//   const { url } = req;
+//   const splitURL = url.split('/').filter((char) => char !== '');
+//   const firstRoute = splitURL[0];
+
+//   const id = splitURL[1];
+//   switch (id) {
+//     case 'reviews':
+//       runReviewRte(url, req, res);
+//       break;
+//     default:
+//       res.status(404).send('Error');
+//   }
+// });
 app.get('/*', (req, res) => {
+  // console.log(url); // DELETE
+  axios.get(`${API_URL}${req.url}`, axiosConfig)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      res.sendFile(__dirname + '/client/dist/404page.html');
+    });
+});
+
+// app.post('/*', (req, res) => {
+//   console.log(req.url);
+//   axios.post(`${API_URL}${req.url}`, req.body, axiosConfig)
+//     .then((response) => {
+//       res.send(response.status);
+//     })
+//     .catch((error) => {
+//       res.send(`Error making POST request: ${error}`);
+//     });
+// });
+app.post('/*', (req, res) => {
   const { url } = req;
   const splitURL = url.split('/').filter((char) => char !== '');
   const firstRoute = splitURL[0];
-  const id = splitURL[1];
 
+  const id = splitURL[1];
   switch (id) {
     case 'reviews':
       runReviewRte(url, req, res);
@@ -34,34 +69,32 @@ app.get('/*', (req, res) => {
     default:
       res.status(404).send('Error');
   }
-
-//  axios.get(`${API_URL}${req.url}`, axiosConfig)
-//   .then((response) => {
-//     res.send(response.data);
-//   })
-//   .catch((error) => {
-//     res.sendFile(__dirname + '/client/dist/404page.html');
-//   })
 });
 
-app.post('/*', (req, res) => {
-  axios.post(`${API_URL}${req.url}`, req.body, axiosConfig)
-    .then((response) => {
-      res.send(response.status);
-    })
-    .catch((error) => {
-      res.send(`Error making POST request: ${error}`);
-    });
-});
-
+// app.put('/*', (req, res) => {
+//   console.log(req.url);
+//   console.log(req.body);
+//   axios.put(`${API_URL}${req.url}`, {}, axiosConfig)
+//     .then((response) => {
+//       res.send(response.status);
+//     })
+//     .catch((error) => {
+//       res.send(`Error making PUT request: ${error}`);
+//     });
+// });
 app.put('/*', (req, res) => {
-  axios.put(`${API_URL}${req.url}`, {}, axiosConfig)
-    .then((response) => {
-      res.send(response.status);
-    })
-    .catch((error) => {
-      res.send(`Error making PUT request: ${error}`);
-    });
+  const { url } = req;
+  const splitURL = url.split('/').filter((char) => char !== '');
+  const firstRoute = splitURL[0];
+
+  const id = splitURL[1];
+  switch (id) {
+    case 'reviews':
+      runReviewRte(url, req, res);
+      break;
+    default:
+      res.status(404).send('Error');
+  }
 });
 
 app.listen(port, () => {

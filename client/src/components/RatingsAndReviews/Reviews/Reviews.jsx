@@ -20,12 +20,12 @@ export default function Reviews({id}) {
 
   useEffect(() => {
     axios.get(
-      `/reviews?sort=${sortBy}&count=2&page=1&product_id=${id}`)
+      `/reviews/?sort=${sortBy}&count=2&page=1&product_id=${id}`)
         .then(res => setReviews(res.data.results))
         .catch(err => console.error(err));
     setIsMoreReviews(true);
     axios.get(
-      `/reviews?sort=${sortBy}&count=1000&page=1&product_id=${id}`)
+      `/reviews/?sort=${sortBy}&count=1000&page=1&product_id=${id}`)
         .then(res => setAllReviews(res.data.results))
         .catch(err => console.error(err));
   }, [sortBy, id])
