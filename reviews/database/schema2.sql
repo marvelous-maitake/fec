@@ -1,4 +1,4 @@
--- psql postgres -U timjordan < reviews/database/schema.sql;
+-- sudo -u postgres psql
 DROP DATABASE IF EXISTS sdc_reviews_ratings;
 CREATE DATABASE sdc_reviews_ratings;
 
@@ -39,22 +39,22 @@ CREATE TABLE characteristics_reviews (
 );
 
 COPY reviews(id, product_id, rating, created_at, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
-FROM '/Users/timjordan/HackReactor/SDC/reviews/data/reviews.csv'
+FROM '/home/ubuntu/reviews.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY photos(id, review_id, url)
-FROM '/Users/timjordan/HackReactor/SDC/reviews/data/reviews_photos.csv'
+FROM '/home/ubuntu/reviews_photos.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY characteristics(id, product_id, name)
-FROM '/Users/timjordan/HackReactor/SDC/reviews/data/characteristics.csv'
+FROM '/home/ubuntu/characteristics.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY characteristics_reviews(id, characteristic_id, review_id, value)
-FROM '/Users/timjordan/HackReactor/SDC/reviews/data/characteristic_reviews.csv'
+FROM '/home/ubuntu/characteristic_reviews.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -73,7 +73,6 @@ SELECT setval('characteristics_reviews_id_seq', (SELECT max(id) from characteris
 
 ALTER TABLE reviews ADD date TIMESTAMP NULL;
 UPDATE reviews SET date = to_timestamp(created_at/1000) WHERE created_at IS NOT NULL;
-
 ALTER TABLE reviews DROP COLUMN created_at;
 
 CREATE INDEX idx_reviews_date ON reviews(date);
